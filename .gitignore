@@ -1,0 +1,6 @@
+.idea/
+A3C/__pycache__/
+A3C/envs/__pycache__/
+A3C/venv/
+Training/
+gym_media.egg-info/
