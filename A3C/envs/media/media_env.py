@@ -9,34 +9,23 @@ from random import randint
 import math
 import time
 import gym
+# gym.logger.set_level(40)
 import numpy as np
 import requests
 
 
-class EnergyEnv(gym.Env):
+class MediaEnv(gym.Env):
     """
-    Environment for Energy projects, following Gym interface
+    Environment for Media projects involving virtual compressor and Kafka server, following Gym interface
     """
 
     metadata = {'render.modes': ['human']}
 
     def __init__(self):
 
-        # self.mos = 0
-        # self.bitrate_in = 0.0
-        # self.bitrate_out = 0.0
-        self.cpu_usage_system = 0.0  # Actual consumption of CPUs of the whole system
-        self.cpu_usage = 0.0  # Actual consumption of CPUs by virtual machines
-        self.mem_usage_system = 0.0  # Actual memory consumption of the whole system
-        self.mem_usage = 0.0  # Actual memory consumption by virtual machines
-        self.device_temp = 0.0  # Device temperature
-        self.hw_pwr_consumption = 0.0  # Power Consumption
-        self.curr_pwr = 0.0  # Current Power
-        self.rated_power = 0.0  # Rated Power
-        self.hw_pwr_consumption_delta = 0.0  # Power Consumption in last period
-        self.net_out_speed = 0.0  # VM Network Outbound Rate
-        self.net_int_speed = 0.0  # VM Network Inbound Rate
-        self.vm_disk_usage = 0.0  # VM Disk usage
+        self.mos = 0
+        self.bitrate_in = 0.0
+        self.bitrate_out = 0.0
 
         self.consumer = KafkaConsumer(
             config.kafka['topic'],
@@ -45,17 +34,17 @@ class EnergyEnv(gym.Env):
             enable_auto_commit=True,
             value_deserializer=lambda x: loads(x.decode('utf-8')))
 
-        # self.max_br = max(list(x.values())[0] for x in list(PROFILES.values()))
+        self.max_br = max(list(x.values())[0] for x in list(PROFILES.values()))
         self.ep_steps = 0
 
         self.metrics_logs = open(config.save['path'] + 'metrics_training', 'w')
+        # TODO: Check correct behaviour of directories
+        # self.metrics_logs = open('./Training/' + 'metrics_training', 'w')
 
         # Define action and observation spaces
         # Discrete actions relative to network profiles
-        # TODO: Define it
         self.action_space = spaces.Discrete(len(PROFILES))
 
-        # TODO: Define it
         # True observation range. Increase observation space values in order to have failing observations within bounds
         bitrate_ratio = np.array([0, self.max_br + 5]) / self.max_br
         loss_rate = np.array([0, self.max_br + 5]) / config.traffic_manager['max_capacity']
@@ -65,7 +54,7 @@ class EnergyEnv(gym.Env):
 
         low = np.array([bitrate_ratio[0], loss_rate[0], encoding_qual[0], ram_usage[0]])
         high = np.array([bitrate_ratio[1], loss_rate[1], encoding_qual[1], ram_usage[1]])
-        self.observation_space = spaces.Box(low, high, dtype=np.float32)
+        self.observation_space = spaces.Box(low, high)
 
         # Initialize states and actions
         self.state = None
@@ -100,7 +89,6 @@ class EnergyEnv(gym.Env):
         # info = {}
         done = False
 
-        # TODO: Modify logs based on created rewards
         self.metrics_logs.write(str(self.action) + '\t' +
                                 str(action) + '\t' +
                                 str(rewards[0]) + '\t' +
@@ -127,9 +115,9 @@ class EnergyEnv(gym.Env):
         # requests.get('http://' + config.probe['address'] + ':' + config.probe['port'] + '/refresh/')
         # time.sleep(5)
 
-        self.state = [np.zeros(self.observation_space.shape[0])]
+        self.state = np.zeros(self.observation_space.shape[0])
         self.ep_steps = 0
-        return self.state
+        return np.array(self.state)
 
     def render(self, mode='human', close=False):
         """
@@ -139,7 +127,6 @@ class EnergyEnv(gym.Env):
         :param close:
         :return: None
         """
-        # TODO: Initial information of the training
         if not self.ep_steps == 0:
             print('MOS: '.format(self.mos))
             print('Bitrate from vCE: '.format(self.bitrate_in))
@@ -152,11 +139,9 @@ class EnergyEnv(gym.Env):
         :return: None
         """
 
-        # TODo: Define new states
         states = {'bitrate_in': 0, 'max_bitrate': 0, 'ram_in': 0, 'encoding_quality': 0, 'resolution': 0,
                   'frame_rate': 0, 'bitrate_out': 0, 'duration': 0, 'mos': 0, 'timestamp': None}
 
-        # TODO: Think if useful for this environment
         for i in range(3):
             states = self.get_data(states)
 
@@ -187,7 +172,6 @@ class EnergyEnv(gym.Env):
                                 str(encoding_quality) + '\t' +
                                 str(self.mos) + '\t')
 
-    # TODO: Modify
     def take_action(self, action):
         """
         Perform the action to the vCE in order to change the streaming bitrate
@@ -282,11 +266,11 @@ class EnergyEnv(gym.Env):
 
 
 # Network profiles of the environment. They are composed by the resolution and the bitrate
-# PROFILES = {
-#     0: {1080: 10},
-#     1: {1080: 7.5},
-#     2: {1080: 5},
-#     3: {720: 4},
-#     4: {720: 2.5},
-#     5: {720: 1},
-# }
+PROFILES = {
+    0: {1080: 10},
+    1: {1080: 7.5},
+    2: {1080: 5},
+    3: {720: 4},
+    4: {720: 2.5},
+    5: {720: 1},
+}

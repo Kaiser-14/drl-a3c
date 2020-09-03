@@ -1,7 +1,8 @@
 training = dict(
-    env_name='CartPole-v0',
-    # env_name='Media-v0',
-    max_eps=1000,  # Maximum number of episodes of training
+    # env_name='CartPole-v0',
+    env_name='A3C.envs.media:Media-v0',
+    # env_name='A3C.envs.energy:Energy-v0',
+    max_eps=500,  # Maximum number of episodes of training
     report=25,  # Steps to report to the global model
     # render=True,  # Set to True to render the environment (e.g. Cartpole)
 )

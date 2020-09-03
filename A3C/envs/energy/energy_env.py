@@ -13,18 +13,30 @@ import numpy as np
 import requests
 
 
-class MediaEnv(gym.Env):
+class EnergyEnv(gym.Env):
     """
-    Environment for Media projects involving virtual compressor and Kafka server, following Gym interface
+    Environment for Energy projects, following Gym interface
     """
 
     metadata = {'render.modes': ['human']}
 
     def __init__(self):
 
-        self.mos = 0
-        self.bitrate_in = 0.0
-        self.bitrate_out = 0.0
+        # self.mos = 0
+        # self.bitrate_in = 0.0
+        # self.bitrate_out = 0.0
+        self.cpu_usage_system = 0.0  # Actual consumption of CPUs of the whole system
+        self.cpu_usage = 0.0  # Actual consumption of CPUs by virtual machines
+        self.mem_usage_system = 0.0  # Actual memory consumption of the whole system
+        self.mem_usage = 0.0  # Actual memory consumption by virtual machines
+        self.device_temp = 0.0  # Device temperature
+        self.hw_pwr_consumption = 0.0  # Power Consumption
+        self.curr_pwr = 0.0  # Current Power
+        self.rated_power = 0.0  # Rated Power
+        self.hw_pwr_consumption_delta = 0.0  # Power Consumption in last period
+        self.net_out_speed = 0.0  # VM Network Outbound Rate
+        self.net_int_speed = 0.0  # VM Network Inbound Rate
+        self.vm_disk_usage = 0.0  # VM Disk usage
 
         self.consumer = KafkaConsumer(
             config.kafka['topic'],
@@ -33,15 +45,17 @@ class MediaEnv(gym.Env):
             enable_auto_commit=True,
             value_deserializer=lambda x: loads(x.decode('utf-8')))
 
-        self.max_br = max(list(x.values())[0] for x in list(PROFILES.values()))
+        # self.max_br = max(list(x.values())[0] for x in list(PROFILES.values()))
         self.ep_steps = 0
 
         self.metrics_logs = open(config.save['path'] + 'metrics_training', 'w')
 
         # Define action and observation spaces
         # Discrete actions relative to network profiles
+        # TODO: Define it
         self.action_space = spaces.Discrete(len(PROFILES))
 
+        # TODO: Define it
         # True observation range. Increase observation space values in order to have failing observations within bounds
         bitrate_ratio = np.array([0, self.max_br + 5]) / self.max_br
         loss_rate = np.array([0, self.max_br + 5]) / config.traffic_manager['max_capacity']
@@ -86,6 +100,7 @@ class MediaEnv(gym.Env):
         # info = {}
         done = False
 
+        # TODO: Modify logs based on created rewards
         self.metrics_logs.write(str(self.action) + '\t' +
                                 str(action) + '\t' +
                                 str(rewards[0]) + '\t' +
@@ -124,6 +139,7 @@ class MediaEnv(gym.Env):
         :param close:
         :return: None
         """
+        # TODO: Initial information of the training
         if not self.ep_steps == 0:
             print('MOS: '.format(self.mos))
             print('Bitrate from vCE: '.format(self.bitrate_in))
@@ -136,9 +152,11 @@ class MediaEnv(gym.Env):
         :return: None
         """
 
+        # TODo: Define new states
         states = {'bitrate_in': 0, 'max_bitrate': 0, 'ram_in': 0, 'encoding_quality': 0, 'resolution': 0,
                   'frame_rate': 0, 'bitrate_out': 0, 'duration': 0, 'mos': 0, 'timestamp': None}
 
+        # TODO: Think if useful for this environment
         for i in range(3):
             states = self.get_data(states)
 
@@ -169,6 +187,7 @@ class MediaEnv(gym.Env):
                                 str(encoding_quality) + '\t' +
                                 str(self.mos) + '\t')
 
+    # TODO: Modify
     def take_action(self, action):
         """
         Perform the action to the vCE in order to change the streaming bitrate
