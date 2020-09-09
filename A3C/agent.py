@@ -43,6 +43,7 @@ def train(env, global_model):
     res_queue = Queue()
 
     opt = tf.compat.v1.train.AdamOptimizer(args.lr, use_locking=True)
+    os.system('rm ' + config.save['path'] +'events.*')
     writer = tf.summary.create_file_writer(config.save['path'])
 
     workers = [Worker(env,
@@ -91,6 +92,7 @@ def play(env, global_model):
             policy, value = model(tf.convert_to_tensor(state[None, :], dtype=tf.float32))
             policy = tf.nn.softmax(policy)
             action = np.argmax(policy)
+            # print('Selected action', action)
             state, reward, done, _ = env.step(action)
             reward_sum += reward
             print("{}. Reward: {}, action: {}".format(step_counter, reward_sum, action))
@@ -182,7 +184,10 @@ class Worker(threading.Thread):
                 # entropy = self.compute_entropy(probs)  # TODO: Use entropy
                 entropy = 0
 
+                print('Logits', logits)
+                print('Probs', probs)
                 action = np.random.choice(self.action_size, p=probs.numpy()[0])
+                print('Selected action', action)
                 new_state, reward, done, info = self.env.step(action)
                 # if done:
                 #     reward = -1
@@ -310,7 +315,7 @@ def main():
     global_model(tf.convert_to_tensor(np.random.random((1, state_size)), dtype=tf.float32))
 
     if args.train:
-        time.sleep(3)
+        time.sleep(1)
         train(env, global_model)
         print("------------TRAINING DONE------------")
     else:

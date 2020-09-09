@@ -180,12 +180,13 @@ class MediaEnv(gym.Env):
         :return: None
         """
         # Send API requests to change vCE
+        print(action)
         br_predicted = list(PROFILES[action].values())[0]
         while True:
             vce_req_post = requests.post('http://' + config.vce['address'] + ':' + config.vce['port'] +
                                          '/bitrate/' + str(br_predicted * 1000))
             # print('Successful bitrate change on vCE') if vce_req_post == 200 else print('Report to the vCE not found')
-            if vce_req_post.status_code == 200:  # if response:
+            if vce_req_post.status_code:  # if response:
                 # print('Successful bitrate change on vCE.')
                 break
             else:  # elif vce_req_post.status_code == 404:
@@ -193,9 +194,10 @@ class MediaEnv(gym.Env):
 
         # Change randomly the traffic background
         br_background = randint(1, config.traffic_manager['max_capacity'] / 1000 - 2)
-        requests.post('http://' + config.bg_tf['address'] + ':' + config.bg_tf['port'] +
-                      '/bitrate/' + str(br_background * 1000))
-        time.sleep(4)
+        # print('Background bitrate: ', br_background)
+        # requests.post('http://' + config.bg_tf['address'] + ':' + config.bg_tf['port'] +
+        #               '/bitrate/' + str(br_background * 1000))
+        time.sleep(3)
 
     def get_reward(self, action):
         """
@@ -225,6 +227,7 @@ class MediaEnv(gym.Env):
         reward = rew_mos + rew_br + rew_smooth + rew_profile
 
         rewards.extend((rew_mos, rew_br, rew_smooth, rew_profile, reward))
+        print(rewards)
 
         return rewards
 
@@ -240,7 +243,7 @@ class MediaEnv(gym.Env):
         while True:
             vce_req_get = requests.get('http://' + config.vce['address'] + ':' + config.vce['port']).json()
 
-            if vce_req_get.status_code == 200:  # if response:
+            if vce_req_get['status']:  # if response:
                 states['bitrate_in'] += vce_req_get['stats']['act_bitrate']['value']
                 states['max_bitrate'] = vce_req_get['stats']['max_bitrate']['value']
                 states['ram_in'] += vce_req_get['stats']['pid_ram']['value']
@@ -255,10 +258,10 @@ class MediaEnv(gym.Env):
         for message in self.consumer:
             content = message.value
             states['resolution'] = content['value']['resolution']
-            states['frame_rate'] += content['value']['frame_rate']
-            states['bitrate_out'] += content['value']['bitrate']
-            states['duration'] += content['value']['duration']
-            states['mos'] += content['value']['mos']
+            states['frame_rate'] += float(content['value']['frame_rate'])
+            states['bitrate_out'] += float(content['value']['bitrate'])
+            states['duration'] += float(content['value']['duration'])
+            states['mos'] += float(content['value']['mos'])
             states['timestamp'] = content['timestamp']
             break
 

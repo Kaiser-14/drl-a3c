@@ -11,10 +11,10 @@ save = dict(
     path='./Training/',  # Save path for the model
 )
 traffic_manager = dict(
-    max_capacity=20
+    max_capacity=20000
 )
 vce = dict(
-    address='localhost',  # IP Address of the virtual Compression Engine
+    address='172.17.0.2',  # IP Address of the virtual Compression Engine
     port='3000',  # Port of the virtual Compression Engine
 )
 bg_tf = dict(
@@ -23,5 +23,5 @@ bg_tf = dict(
 )
 kafka = dict(
     address='192.168.0.55:9092',  # IP address + port of the Kafka server
-    topic='tfm.probe.out',  # Topic associated of the Kafka Server
+    topic='eve.a3c',  # Topic associated of the Kafka Server
 )
