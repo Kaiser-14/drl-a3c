@@ -38,8 +38,6 @@ class MediaEnv(gym.Env):
         self.ep_steps = 0
 
         self.metrics_logs = open(config.save['path'] + 'metrics_training', 'w')
-        # TODO: Check correct behaviour of directories
-        # self.metrics_logs = open('./Training/' + 'metrics_training', 'w')
 
         # Define action and observation spaces
         # Discrete actions relative to network profiles
@@ -164,12 +162,11 @@ class MediaEnv(gym.Env):
         self.state[3] = float(ram_in) / 800000000.0  # Ram usage
         # self.state[4] =  br_background / (MAX_CAPACITY/1000) # Background traffic
 
-        self.metrics_logs.write(str(timestamp) + '\t' +
-                                str(limiting_bitrate) + '\t' +
+        self.metrics_logs.write(str(limiting_bitrate) + '\t' +
                                 str(self.bitrate_in) + '\t' +
                                 str(self.bitrate_out) + '\t' +
-                                str(ram_in) + '\t' +
-                                str(encoding_quality) + '\t' +
+                                # str(ram_in) + '\t' +
+                                # str(encoding_quality) + '\t' +
                                 str(self.mos) + '\t')
 
     def take_action(self, action):

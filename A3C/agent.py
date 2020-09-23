@@ -157,9 +157,9 @@ class Worker(threading.Thread):
         self.local_model = a3c.ActorCriticModel(self.state_size, self.action_size)
         self.worker_idx = idx
         self.env = gym.make(
-            config.training['env_name']).unwrapped  # TODO: Check unwrapped in own environments
-        self.ep_loss = 0.0
-        self.ep_entropy = 0.0
+            config.training['env_name']).unwrapped
+        # self.ep_loss = 0.0
+        # self.ep_entropy = 0.0
         self.writer = writer
 
     def run(self):
@@ -182,9 +182,6 @@ class Worker(threading.Thread):
                                          dtype=tf.float32))
                 probs = tf.nn.softmax(logits)
 
-                # entropy = self.compute_entropy(probs)  # TODO: Use entropy
-                entropy = 0
-
                 print('Logits', logits)
                 print('Probs', probs)
                 action = np.random.choice(self.action_size, p=probs.numpy()[0])
@@ -204,9 +201,8 @@ class Worker(threading.Thread):
                                                                       new_state,
                                                                       mem,
                                                                       args.gamma)
-                    self.ep_loss += total_loss
-                    # FIXME: Check behaviour based on 5g media training
-                    self.ep_entropy += self.compute_entropy(total_entropy)
+                    # self.ep_loss += total_loss
+                    # self.ep_entropy += self.compute_entropy(total_entropy)
 
                     # Calculate local gradients
                     grads = tape.gradient(total_loss, self.local_model.trainable_weights)
@@ -227,8 +223,8 @@ class Worker(threading.Thread):
 
                         with self.writer.as_default():
                             tf.summary.scalar("Total_Reward", ep_reward, step=Worker.global_episode)
-                            tf.summary.scalar("TD_Loss", self.ep_loss, step=Worker.global_episode)
-                            tf.summary.scalar("Entropy", self.ep_entropy, step=Worker.global_episode)
+                            # tf.summary.scalar("TD_Loss", self.ep_loss, step=Worker.global_episode)
+                            # tf.summary.scalar("Entropy", self.ep_entropy, step=Worker.global_episode)
 
                         self.writer.flush()
 
@@ -288,13 +284,6 @@ class Worker(threading.Thread):
         policy_loss -= 0.01 * entropy
         total_loss = tf.reduce_mean((0.5 * value_loss + policy_loss))
         return total_loss, entropy
-
-    def compute_entropy(self, probs):  # FIXME: Adjust these values
-        entropy = 0.0
-        for i in range(len(probs)):
-            if 0 < probs[i] < 1:
-                entropy -= probs[i] * np.log(probs[i])
-        return entropy
 
 
 def main():
