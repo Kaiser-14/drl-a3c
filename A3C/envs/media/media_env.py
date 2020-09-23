@@ -49,7 +49,7 @@ class MediaEnv(gym.Env):
         bitrate_ratio = np.array([0, self.max_br + 5]) / self.max_br
         loss_rate = np.array([0, self.max_br + 5]) / config.traffic_manager['max_capacity']
         encoding_qual = np.array([0, 69]) / 69
-        ram_usage = np.array([0, 5000]) / 5.000
+        ram_usage = np.array([0, 5000]) / 8.000
         # tf_bg = np.array([0, config.traffic_manager['max_capacity']]) / config.traffic_manager['max_capacity']
 
         low = np.array([bitrate_ratio[0], loss_rate[0], encoding_qual[0], ram_usage[0]])
@@ -157,11 +157,11 @@ class MediaEnv(gym.Env):
         self.mos = states['mos'] / 3
         timestamp = states['timestamp']
 
-        self.state[0] = float(self.bitrate_out) / self.max_br  # Bitrate ratio
+        self.state[0] = float(self.bitrate_out) / (self.max_br * 1000) # Bitrate ratio
         self.state[1] = abs((float(limiting_bitrate) - float(self.bitrate_out))) / \
             config.traffic_manager['max_capacity']  # Loss rate
         self.state[2] = float(encoding_quality) / 69  # Encoding quality
-        self.state[3] = float(ram_in) / 5000.0  # Ram usage
+        self.state[3] = float(ram_in) / 800000000.0  # Ram usage
         # self.state[4] =  br_background / (MAX_CAPACITY/1000) # Background traffic
 
         self.metrics_logs.write(str(timestamp) + '\t' +

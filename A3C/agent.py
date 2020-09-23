@@ -176,6 +176,7 @@ class Worker(threading.Thread):
             time_count = 0
             done = False
             while not done:
+                # print('Current State', current_state[None, :])
                 logits, _ = self.local_model(
                     tf.convert_to_tensor(current_state[None, :],
                                          dtype=tf.float32))
@@ -187,8 +188,9 @@ class Worker(threading.Thread):
                 print('Logits', logits)
                 print('Probs', probs)
                 action = np.random.choice(self.action_size, p=probs.numpy()[0])
-                print('Selected action', action)
+                # print('Selected action', action)
                 new_state, reward, done, info = self.env.step(action)
+                # print('Reward', reward)
                 # if done:
                 #     reward = -1
                 ep_reward += reward
