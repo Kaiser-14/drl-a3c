@@ -21,17 +21,17 @@ parser = argparse.ArgumentParser(description='Run A3C algorithm.')
 #                     help='Choose between \'a3c\' and \'random\'.')
 # parser.add_argument('--environment', default='media', type=str,
 #                     help='Choose between \'a2c\' and \'random\'.')
-parser.add_argument('--train', dest='train', action='store_true',
+parser.add_argument('-t', '--train', dest='train', action='store_true',
                     help='Train the model.')
 parser.add_argument('--lr', default=0.001,
                     help='Learning rate for the shared optimizer.')
-parser.add_argument('--update-freq', default=20, type=int,
+parser.add_argument('-u', '--update-freq', default=20, type=int,
                     help='How often to update the global model.')
-parser.add_argument('--num-workers', default=multiprocessing.cpu_count(), type=int,
+parser.add_argument('-n', '--num-workers', default=multiprocessing.cpu_count(), type=int,
                     help='Number of parallel workers to train the model.')
-parser.add_argument('--max-eps', default=500, type=int,
+parser.add_argument('-m', '--max-eps', default=400, type=int,
                     help='Global maximum number of episodes to run.')
-parser.add_argument('--gamma', default=0.99,
+parser.add_argument('-g', '--gamma', default=0.99,
                     help='Discount factor of rewards.')
 # parser.add_argument('--save-dir', default='./', type=str,
 #                     help='Directory in which you desire to save the model.')
@@ -73,6 +73,7 @@ def train(env, global_model):
     plt.savefig(os.path.join(config.save['path'],
                              'Reward Average.png'))
     # plt.show()
+    plt.close()
 
 
 def play(global_model):
@@ -214,7 +215,7 @@ class Worker(threading.Thread):
                      done,
                      new_state,
                      memory,
-                     gamma=0.99):
+                     gamma=args.gamma):
         if done:
             reward_sum = 0.  # terminal
         else:
@@ -338,9 +339,11 @@ def main():
     if args.train:
         time.sleep(1)
         train(env, global_model)
+        # time.sleep(2)
         print("------------TRAINING DONE------------")
     else:
         play(global_model)
+        # time.sleep(1)
         print("------------PLAY MODE DONE-----------")
 
 

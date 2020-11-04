@@ -8,7 +8,7 @@ save = dict(
     path='./Training/',  # Save path for the model
 )
 api = dict(
-    enable=True,  # Save path for the model
+    enable=False,  # Save path for the model
     address='192.168.1.44',  # IP Address of the REST API
     port='5000',  # Port of the REST API
 )
