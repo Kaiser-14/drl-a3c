@@ -1,12 +1,5 @@
-from A3C import config
-
+import config
 from gym import spaces
-from scipy.spatial import distance
-from kafka import KafkaConsumer
-from json import loads
-from random import randint
-
-import math
 import time
 import gym
 import numpy as np
@@ -17,55 +10,72 @@ class EnergyEnv(gym.Env):
     """
     Environment for Energy projects, following Gym interface
     """
-
     metadata = {'render.modes': ['human']}
 
     def __init__(self):
+        # eSight data  # TODO: Remove Data once set the state
+        # Network devices
+        self.cpuUsage = 0.0  # NE average CPU usage
+        self.memUsage = 0.0  # NE average Memory usage
+        self.DeviceTemperature = 0.0  # Device Temperature
+        self.neContrlableRate = 0.0  # Unreachable percentage in a day
+        self.nePingRespTime = 0.0  # Responding duration
+        self.diskUsage = 0.0  # NE Disk usage
+        self.hwPowerConsumption = 0.0  # Power Consumption
+        self.hwCurrentPower = 0.0 # Current Power
+        self.hwRatedPower = 0.0  # Rated Power
+        self.hwPowerConsumptionDelta = 0.0  # Power Consumption in Last Pe
+        self.hwSecStatUsage = 0.0  # CPU usage
+        self.hwSecStatMemUsage = 0.0  # Memory usage
+        self.hwSecStatSessCount = 0.0  # Current CPU session count
+        self.hwSecStatSessSpeed = 0.0  # Current CPU session setup rate
+        self.cpuUsage = 0.0  # AC average CPU usage
+        self.memUsage = 0.0  # AC average Memory usage
+        self.diskUsage = 0.0  # AC Disk usage
+        self.CpuUsage = 0.0  # Average CPU Usage
+        self.ServerBytesIn = 0.0  # Server Inbound Rate
+        self.ClientCurConns = 0.0  # Client Concurrent Connection
+        self.ClientBytesIn = 0.0  # Client Inbound Rate
+        self.ClientTotConns = 0.0  # Client Connection Rate
+        self.ClientBytesOut = 0.0  # Client Outbound Rate
+        self.ServerBytesOut = 0.0  # Server Outbound Rate
+        self.MemUsage = 0.0  # Average Memory Usage
 
-        # self.mos = 0
-        # self.bitrate_in = 0.0
-        # self.bitrate_out = 0.0
-        self.cpu_usage_system = 0.0  # Actual consumption of CPUs of the whole system
-        self.cpu_usage = 0.0  # Actual consumption of CPUs by virtual machines
-        self.mem_usage_system = 0.0  # Actual memory consumption of the whole system
-        self.mem_usage = 0.0  # Actual memory consumption by virtual machines
-        self.device_temp = 0.0  # Device temperature
-        self.hw_pwr_consumption = 0.0  # Power Consumption
-        self.curr_pwr = 0.0  # Current Power
-        self.rated_power = 0.0  # Rated Power
-        self.hw_pwr_consumption_delta = 0.0  # Power Consumption in last period
-        self.net_out_speed = 0.0  # VM Network Outbound Rate
-        self.net_int_speed = 0.0  # VM Network Inbound Rate
-        self.vm_disk_usage = 0.0  # VM Disk usage
 
-        self.consumer = KafkaConsumer(
-            config.kafka['topic'],
-            bootstrap_servers=[config.kafka['address']],
-            auto_offset_reset='latest',  # Collect at the end of the log. To collect every message: 'earliest'
-            enable_auto_commit=True,
-            value_deserializer=lambda x: loads(x.decode('utf-8')))
+        # Virtual Resources
+        self.CpuUsage = 0.0  # Average usage of the VM CPU in a collection period
+        self.MemUsage = 0.0  # Average  usage  of  the  VM memory in a collection period
+        self.NetOutputSpeed = 0.0  # Outbound network traffic of the VM in a collection period
+        self.NetInputSpeed = 0.0  # Inbound network traffic of the VM in a collection period
+        self.DiskIoInputSpeed = 0.0  # Total traffic written in the VM disk in a collection period
+        self.DiskIoOutputSpeed = 0.0  # Total traffic read from the VM disk in a collection period
+        self.DiskUsage = 0.0  # Average usage of the VM disk in a collection period
+        self.DiskIoInputDelay = 0.0  # Delay  in  reading  data  from  a VM  disk  within  a  collection period
+        self.DiskIoOutputDelay = 0.0  # Delay in writing data to a VM disk within a collection period
+        self.DiskIoWriteFrequency = 0.0  # Number of times for the VM to write  data  in  the  disk  in  a collection period
+        self.DiskIoReadFrequency = 0.0  # Number of times for the VM to read  data  from  the  disk  in  a collection period
+        self.UsedMemorySize = 0.0  # Memory used by the VM
+        self.FreeMemorySize = 0.0  # Memory not used by the VM
 
-        # self.max_br = max(list(x.values())[0] for x in list(PROFILES.values()))
+        # Probe
+        self.voltage = 0.0  # Network voltage
+        self.current = 0.0  # Current consumption (A)
+        self.active_power = 0.0  # Power consumption (W)
+        self.power_factor = 0.0  # Power factor
+
         self.ep_steps = 0
 
         self.metrics_logs = open(config.save['path'] + 'metrics_training', 'w')
 
-        # Define action and observation spaces
+        # # Observation range for the set of states
+        high = np.array([np.inf] * 24)
+        self.observation_space = spaces.Box(-high, high, dtype=np.float32)
+
+        # TODO: Define it. # Maybe include in terms of matrix. For example, (1,1) -> Increase first Phoronix.
+        # (2, 0) -> Decrease power in second Phoronix. Example in
+        # https://github.com/openai/gym/blob/master/gym/envs/box2d/bipedal_walker.py
         # Discrete actions relative to network profiles
-        # TODO: Define it
         self.action_space = spaces.Discrete(len(PROFILES))
-
-        # TODO: Define it
-        # True observation range. Increase observation space values in order to have failing observations within bounds
-        bitrate_ratio = np.array([0, self.max_br + 5]) / self.max_br
-        loss_rate = np.array([0, self.max_br + 5]) / config.traffic_manager['max_capacity']
-        encoding_qual = np.array([0, 69]) / 69
-        ram_usage = np.array([0, 5000]) / 5.000
-        # tf_bg = np.array([0, config.traffic_manager['max_capacity']]) / config.traffic_manager['max_capacity']
-
-        low = np.array([bitrate_ratio[0], loss_rate[0], encoding_qual[0], ram_usage[0]])
-        high = np.array([bitrate_ratio[1], loss_rate[1], encoding_qual[1], ram_usage[1]])
-        self.observation_space = spaces.Box(low, high, dtype=np.float32)
 
         # Initialize states and actions
         self.state = None
@@ -88,17 +98,97 @@ class EnergyEnv(gym.Env):
             info = True
             self.ep_steps = 0
 
-        # Execute action
-        self.take_action(action)
+        # TODO: Execute action to Phoronix
+        # self.take_action(action)
+        # requests.post()
+        # time.sleep(6)  # Think about not having every sensor data in next steps
 
         # Update states
-        self.update_states()
+        # self.update_states()
+
+        # Get data from sources
+        while True:
+            api_req_get = requests.get('http://' + config.api['address'] + ':' + config.api['port'] + '/api/probe').json()
+            # TODO: Enable request
+            # esight_req_get = requests.get('http://' + config.esight['address'] + ':' + config.esight['port'],
+            #                               auth=(config.esight['user'], config.esight['passw'])).json()
+
+            # if esight_req_get.status_code and api_req_get['sensor6'] is not None:
+            # while True:
+            # for _, sensor in api_req_get.json().items():
+            # for sensor in api_req_get.json().values():
+            #     print(sensor)
+            #     for key in sensor.keys():
+            #         print(key)
+            #         print(sensor[key])
+            # if any(sensor[key] is None for key in sensor.keys() for sensor in api_req_get.json().values()):
+            # TODO: Check in the same way with eSight request. Loop until every data sensor is filled
+            if all(sensor[key] is not None for sensor in api_req_get.values() for key in sensor.keys()):
+                break
+            # if api_req_get.status_code == 200 and api_req_get.json()['sensor6']['voltage'] is not None:  # if response:
+            #     break
+            # elif api_req_get.json()['sensor6']['voltage'] is None:
+            #     time.sleep(2.5)
+            else:  # elif esight_req_get.status_code == 404:
+                # print('Retrying to collect data...')
+                time.sleep(2.5)  # Adjustment done based on physical probe
+
+        # TODO: Adapt observation space based on state dimensions
+        self.state = [
+            float(api_req_get['sensor1']['voltage']),
+            float(api_req_get['sensor1']['current']),
+            float(api_req_get['sensor1']['active_power']),
+            float(api_req_get['sensor1']['power_factor']),
+            float(api_req_get['sensor2']['voltage']),
+            float(api_req_get['sensor2']['current']),
+            float(api_req_get['sensor2']['active_power']),
+            float(api_req_get['sensor2']['power_factor']),
+            float(api_req_get['sensor3']['voltage']),
+            float(api_req_get['sensor3']['current']),
+            float(api_req_get['sensor3']['active_power']),
+            float(api_req_get['sensor3']['power_factor']),
+            float(api_req_get['sensor4']['voltage']),
+            float(api_req_get['sensor4']['current']),
+            float(api_req_get['sensor4']['active_power']),
+            float(api_req_get['sensor4']['power_factor']),
+            float(api_req_get['sensor5']['voltage']),
+            float(api_req_get['sensor5']['current']),
+            float(api_req_get['sensor5']['active_power']),
+            float(api_req_get['sensor5']['power_factor']),
+            float(api_req_get['sensor6']['voltage']),
+            float(api_req_get['sensor6']['current']),
+            float(api_req_get['sensor6']['active_power']),
+            float(api_req_get['sensor6']['power_factor']),
+        ]
+
+        # time.sleep(10)  # TODO: Think about sleep
+
+        # TODO: Enable Free resources from API
+        requests.delete('http://' + config.api['address'] + ':' + config.api['port'] + '/api/probe')
+
+        # self.metrics_logs.write(str(self.cpu_usage) + '\t' +
+        #                         str(self.curr_pwr) + '\t' +
+        #                         str(self.rated_power) + '\t' +
+        #                         str(self.mem_usage))
 
         # Reward functions
-        rewards = self.get_reward(action)
+        rewards = []
+
+        # Reward based on MOS
+        rew_cpu = float(api_req_get['sensor1']['voltage'])
+        rew_pwr = float(api_req_get['sensor2']['current'])
+        rew_rat = float(api_req_get['sensor3']['active_power'])
+        rew_mem = float(api_req_get['sensor4']['power_factor'])
+
+        reward = rew_cpu + rew_pwr + rew_rat + rew_mem
+
+        rewards.extend((rew_cpu, rew_pwr, rew_rat, rew_mem, reward))
 
         # info = {}
         done = False
+        if self.ep_steps == config.training['report']:
+            done = True
+            self.ep_steps = 0
 
         # TODO: Modify logs based on created rewards
         self.metrics_logs.write(str(self.action) + '\t' +
@@ -112,7 +202,7 @@ class EnergyEnv(gym.Env):
 
         self.action = action
 
-        return self.state, rewards[0], done, info
+        return np.array(self.state), rewards[0], done, info
 
     def reset(self):
         """
@@ -121,15 +211,10 @@ class EnergyEnv(gym.Env):
         :return: self.state: Default state of the environment
         """
 
-        # Sending refresh each time will increase training time, as we have continuous training in this environment
-        # requests.get('http://' + config.vce['address'] + ':' + config.vce['port'] + '/refresh/')
-        # requests.get('http://' + config.bg_tf['address'] + ':' + config.bg_tf['port'] + '/refresh/')
-        # requests.get('http://' + config.probe['address'] + ':' + config.probe['port'] + '/refresh/')
-        # time.sleep(5)
-
-        self.state = [np.zeros(self.observation_space.shape[0])]
+        # TODO: Define it. As continuos environment, it is not needed to clear states
+        self.state = np.zeros(self.observation_space.shape[0])
         self.ep_steps = 0
-        return self.state
+        return np.array(self.state)
 
     def render(self, mode='human', close=False):
         """
@@ -139,149 +224,15 @@ class EnergyEnv(gym.Env):
         :param close:
         :return: None
         """
-        # TODO: Initial information of the training
-        if not self.ep_steps == 0:
-            print('MOS: '.format(self.mos))
-            print('Bitrate from vCE: '.format(self.bitrate_in))
-            print('Bitrate from probe: '.format(self.bitrate_out))
-
-    def update_states(self):
-        """
-        Update the states of the model, making request to different components to obtain data
-
-        :return: None
-        """
-
-        # TODo: Define new states
-        states = {'bitrate_in': 0, 'max_bitrate': 0, 'ram_in': 0, 'encoding_quality': 0, 'resolution': 0,
-                  'frame_rate': 0, 'bitrate_out': 0, 'duration': 0, 'mos': 0, 'timestamp': None}
-
-        # TODO: Think if useful for this environment
-        for i in range(3):
-            states = self.get_data(states)
-
-        self.bitrate_in = states['bitrate_in'] / 3
-        limiting_bitrate = states['max_bitrate']
-        ram_in = states['ram_in'] / 3
-        encoding_quality = states['encoding_quality'] / 3
-        # self.resolution = states['resolution']
-        # self.frame_rate = states['frame_rate'] / 3
-        # frame_rate = self.frame_rate = states['frame_rate'] / 3
-        self.bitrate_out = states['bitrate_out'] / 3
-        # self.duration = states['duration'] / 3
-        self.mos = states['mos'] / 3
-        timestamp = states['timestamp']
-
-        self.state[0] = float(self.bitrate_out) / self.max_br  # Bitrate ratio
-        self.state[1] = abs((float(limiting_bitrate) - float(self.bitrate_out))) / \
-            config.traffic_manager['max_capacity']  # Loss rate
-        self.state[2] = float(encoding_quality) / 69  # Encoding quality
-        self.state[3] = float(ram_in) / 5000.0  # Ram usage
-        # self.state[4] =  br_background / (MAX_CAPACITY/1000) # Background traffic
-
-        self.metrics_logs.write(str(timestamp) + '\t' +
-                                str(limiting_bitrate) + '\t' +
-                                str(self.bitrate_in) + '\t' +
-                                str(self.bitrate_out) + '\t' +
-                                str(ram_in) + '\t' +
-                                str(encoding_quality) + '\t' +
-                                str(self.mos) + '\t')
-
-    # TODO: Modify
-    def take_action(self, action):
-        """
-        Perform the action to the vCE in order to change the streaming bitrate
-
-        :param action: Predicted action by the model
-        :return: None
-        """
-        # Send API requests to change vCE
-        br_predicted = list(PROFILES[action].values())[0]
-        while True:
-            vce_req_post = requests.post('http://' + config.vce['address'] + ':' + config.vce['port'] +
-                                         '/bitrate/' + str(br_predicted * 1000))
-            # print('Successful bitrate change on vCE') if vce_req_post == 200 else print('Report to the vCE not found')
-            if vce_req_post.status_code == 200:  # if response:
-                # print('Successful bitrate change on vCE.')
-                break
-            else:  # elif vce_req_post.status_code == 404:
-                print('vCE not reachable. Not possible to change bitrate.')
-
-        # Change randomly the traffic background
-        br_background = randint(1, config.traffic_manager['max_capacity'] / 1000 - 2)
-        requests.post('http://' + config.bg_tf['address'] + ':' + config.bg_tf['port'] +
-                      '/bitrate/' + str(br_background * 1000))
-        time.sleep(4)
-
-    def get_reward(self, action):
-        """
-        Function to obtain the matrix composed of the defined reward functions
-
-        :param action: Predicted action by the model
-        :return: rewards: matrix composed by the values obtained in the reward functions
-        """
-
-        rewards = []
-
-        # Reward based on MOS
-        if float(self.mos) > 2.5:
-            mos_th = float(self.mos) - 2.5
-            aux = 2.0
-        else:
-            mos_th = 2.5 - float(self.mos)
-            aux = -2.0
-        rew_mos = aux * math.exp(1.5 * mos_th)
-        # Reward based on BR
-        rew_br = -math.exp(2 * (1 + distance.canberra(float(self.bitrate_in) / 1000, float(self.bitrate_out) / 1000)))
-        # Reward smooth
-        rew_smooth = 12 * np.log(1 - distance.canberra(action + 1, action + 1))
-        # Reward profile
-        rew_profile = math.pow(2, (4 - action))
-
-        reward = rew_mos + rew_br + rew_smooth + rew_profile
-
-        rewards.extend((rew_mos, rew_br, rew_smooth, rew_profile, reward))
-
-        return rewards
-
-    def get_data(self, states):
-        """
-        Function to gather data from components of the system: vCE and Kafka server respectively
-
-        :param states: Matrix of actual states to accumulate 3 iterations of information
-        :return: states : Same states input parameter but filled with new data
-        """
-
-        # API request to the vCE to gather data
-        while True:
-            vce_req_get = requests.get('http://' + config.vce['address'] + ':' + config.vce['port']).json()
-
-            if vce_req_get.status_code == 200:  # if response:
-                states['bitrate_in'] += vce_req_get['stats']['act_bitrate']['value']
-                states['max_bitrate'] = vce_req_get['stats']['max_bitrate']['value']
-                states['ram_in'] += vce_req_get['stats']['pid_ram']['value']
-                states['encoding_quality'] += vce_req_get['stats']['enc_quality']['value']
-                break
-            else:  # elif vce_req_get.status_code == 404:
-                print('vCE not reachable. Not possible to get data.')
-
-        time.sleep(2)  # Delay due to streaming buffer
-
-        # Consume messages from Kafka server
-        for message in self.consumer:
-            content = message.value
-            states['resolution'] = content['value']['resolution']
-            states['frame_rate'] += content['value']['frame_rate']
-            states['bitrate_out'] += content['value']['bitrate']
-            states['duration'] += content['value']['duration']
-            states['mos'] += content['value']['mos']
-            states['timestamp'] = content['timestamp']
-            break
-
-        return states
+        # TODO: Think about to render some graphics
+        # if not self.ep_steps == 0:
+            # print('hw_pwr_consumption: '.format(self.hw_pwr_consumption))
+            # print('cpu_usage: '.format(self.cpu_usage))
+            # print('curr_pwr: '.format(self.curr_pwr))
+        return None
 
 
-# Network profiles of the environment. They are composed by the resolution and the bitrate
+# TODO: Define actions profile. Network profiles of the environment. They are composed by the resolution and the bitrate
 PROFILES = {
     0: {1080: 10},
     1: {1080: 7.5},

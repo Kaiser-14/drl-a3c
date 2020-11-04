@@ -1,8 +1,8 @@
 from gym.envs.registration import register
 
 register(
-    id='Media-v0',
-    entry_point='A3C.envs.media:MediaEnv'
+    id='Eve-v0',
+    entry_point='A3C.envs.eve:MediaEnv'
 )
 
 register(

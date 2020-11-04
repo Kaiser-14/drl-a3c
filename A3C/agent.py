@@ -1,5 +1,6 @@
-from A3C import config
-from A3C import a3c
+import config
+import a3c
+from api_server import start_api_server
 
 import os
 import threading
@@ -10,28 +11,26 @@ from queue import Queue
 import argparse
 import matplotlib.pyplot as plt
 import time
-
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # or any {'0', '1', '2'}
+# os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # or any {'0', '1', '2'}
 import tensorflow as tf
 
 os.environ["CUDA_VISIBLE_DEVICES"] = ""
 
-parser = argparse.ArgumentParser(description='Run A3C algorithm on the game '
-                                             'Cartpole.')
-parser.add_argument('--algorithm', default='a3c', type=str,
-                    help='Choose between \'a3c\' and \'random\'.')
+parser = argparse.ArgumentParser(description='Run A3C algorithm.')
+# parser.add_argument('--algorithm', default='a3c', type=str,
+#                     help='Choose between \'a3c\' and \'random\'.')
 # parser.add_argument('--environment', default='media', type=str,
 #                     help='Choose between \'a2c\' and \'random\'.')
 parser.add_argument('--train', dest='train', action='store_true',
-                    help='Train our model.')
+                    help='Train the model.')
 parser.add_argument('--lr', default=0.001,
                     help='Learning rate for the shared optimizer.')
-parser.add_argument('--update-freq', default=10, type=int,
+parser.add_argument('--update-freq', default=20, type=int,
                     help='How often to update the global model.')
 parser.add_argument('--num-workers', default=multiprocessing.cpu_count(), type=int,
                     help='Number of parallel workers to train the model.')
-# parser.add_argument('--max-eps', default=1000, type=int,
-#                     help='Global maximum number of episodes to run.')
+parser.add_argument('--max-eps', default=500, type=int,
+                    help='Global maximum number of episodes to run.')
 parser.add_argument('--gamma', default=0.99,
                     help='Discount factor of rewards.')
 # parser.add_argument('--save-dir', default='./', type=str,
@@ -43,7 +42,10 @@ def train(env, global_model):
     res_queue = Queue()
 
     opt = tf.compat.v1.train.AdamOptimizer(args.lr, use_locking=True)
-    os.system('rm ' + config.save['path'] +'events.*')
+
+    if os.path.isdir(config.save['path']):
+        os.system('rm ' + config.save['path'] +'events.*')
+
     writer = tf.summary.create_file_writer(config.save['path'])
 
     workers = [Worker(env,
@@ -64,55 +66,25 @@ def train(env, global_model):
             break
     [w.join() for w in workers]
 
+    # Plot Reward Average over steps
     plt.plot(average_rewards)
     plt.ylabel('Episode Reward')
     plt.xlabel('Step')
     plt.savefig(os.path.join(config.save['path'],
                              'Reward Average.png'))
-    plt.show()
+    # plt.show()
 
 
-def play(env, global_model):
-    # env = gym.make(self.game_name).unwrapped
-    env = env.unwrapped
-    state = env.reset()
-    model = global_model
+def play(global_model):
+    workers = [WorkerPlay(global_model,
+                      i) for i in range(args.num_workers)]
 
-    done = False
-    step_counter = 0
-    reward_sum = 0
+    for i, worker in enumerate(workers):
+        print("Starting worker {}".format(i))
+        worker.start()
 
-    try:
-        model_path = os.path.join(config.save['path'], 'A3C_model.h5')
-        print('Trying to load model from: {}'.format(model_path))
-        model.load_weights(model_path)
-
-        while not done:
-            env.render()
-            policy, value = model(tf.convert_to_tensor(state[None, :], dtype=tf.float32))
-            policy = tf.nn.softmax(policy)
-            action = np.argmax(policy)
-            # print('Selected action', action)
-            state, reward, done, _ = env.step(action)
-            reward_sum += reward
-            print("{}. Reward: {}, action: {}".format(step_counter, reward_sum, action))
-            step_counter += 1
-
-            # Prepare Play mode to Media environment (infinite play)
-            # if done:
-            #     state = env.reset()
-            #     done = False
-            #     step_counter = 0
-            #     reward_sum = 0
-
-    except KeyboardInterrupt:
-        print("Received Keyboard Interrupt. Shutting down.")
-    # except:
-    #     print("Unable to load model. Check correct directories. Shutting down.")
-    except OSError:
-        print("Unable to load model. Check correct directories. Shutting down.")
-    finally:
-        env.close()
+    time.sleep(1)
+    [w.join() for w in workers]
 
 
 class Memory:
@@ -142,8 +114,6 @@ class Worker(threading.Thread):
 
     def __init__(self,
                  env,
-                 # state_size,
-                 # action_size,
                  global_model,
                  opt,
                  result_queue,
@@ -156,17 +126,15 @@ class Worker(threading.Thread):
         self.opt = opt
         self.local_model = a3c.ActorCriticModel(self.state_size, self.action_size)
         self.worker_idx = idx
-        self.env = gym.make(
-            config.training['env_name']).unwrapped
-        # self.ep_loss = 0.0
-        # self.ep_entropy = 0.0
+        self.env = gym.make(config.training['env_name']).unwrapped
         self.writer = writer
+        self.ep_loss = 0.0
 
     def run(self):
         total_step = 1
         mem = Memory()
 
-        while Worker.global_episode < config.training['max_eps']:
+        while Worker.global_episode < args.max_eps:
             current_state = self.env.reset()
             mem.clear()
             ep_reward = 0.
@@ -176,24 +144,23 @@ class Worker(threading.Thread):
             time_count = 0
             done = False
             while not done:
+            # while ep_steps < config.training['report']:  # TODO: Think it
                 # print('Current State', current_state[None, :])
                 logits, _ = self.local_model(
                     tf.convert_to_tensor(current_state[None, :],
                                          dtype=tf.float32))
                 probs = tf.nn.softmax(logits)
 
-                print('Logits', logits)
-                print('Probs', probs)
+                # print('Logits', logits)
+                # print('Probs', probs)
                 action = np.random.choice(self.action_size, p=probs.numpy()[0])
                 # print('Selected action', action)
                 new_state, reward, done, info = self.env.step(action)
                 # print('Reward', reward)
-                # if done:
-                #     reward = -1
                 ep_reward += reward
                 mem.store(current_state, action, reward)
 
-                if time_count == args.update_freq or done or info:
+                if time_count == args.update_freq or done:
                     # Calculate gradient wrt to local model. We do so by tracking the
                     # variables involved in computing the loss by using tf.GradientTape
                     with tf.GradientTape() as tape:
@@ -201,9 +168,8 @@ class Worker(threading.Thread):
                                                                       new_state,
                                                                       mem,
                                                                       args.gamma)
-                    # self.ep_loss += total_loss
-                    # self.ep_entropy += self.compute_entropy(total_entropy)
 
+                    self.ep_loss += total_loss
                     # Calculate local gradients
                     grads = tape.gradient(total_loss, self.local_model.trainable_weights)
                     # Push local gradients to global model
@@ -215,7 +181,7 @@ class Worker(threading.Thread):
                     mem.clear()
                     time_count = 0
 
-                    if done or info:  # done and print information
+                    if done:  # done and print information
                         Worker.global_average_reward = \
                             a3c.record(Worker.global_episode, ep_reward, self.worker_idx,
                                          Worker.global_average_reward, self.result_queue,
@@ -223,8 +189,6 @@ class Worker(threading.Thread):
 
                         with self.writer.as_default():
                             tf.summary.scalar("Total_Reward", ep_reward, step=Worker.global_episode)
-                            # tf.summary.scalar("TD_Loss", self.ep_loss, step=Worker.global_episode)
-                            # tf.summary.scalar("Entropy", self.ep_entropy, step=Worker.global_episode)
 
                         self.writer.flush()
 
@@ -286,6 +250,64 @@ class Worker(threading.Thread):
         return total_loss, entropy
 
 
+class WorkerPlay(threading.Thread):
+    def __init__(self, global_model, idx):
+        super(WorkerPlay, self).__init__()
+        self.env = gym.make(config.training['env_name']).unwrapped
+        self.global_model = global_model
+        self.idx = idx
+        self.step_counter = 0
+        self.action = None
+
+    def run(self):
+        state = self.env.reset()
+        done = False
+        reward_sum = 0
+
+        try:
+            model_path = os.path.join(config.save['path'], 'A3C_model.h5')
+            # print('Loading model from: {}'.format(model_path))
+            self.global_model.load_weights(model_path)
+
+            while True:
+
+                while not done:
+                    if args.num_workers == 1 and config.training['env_name'] == 'CartPole-v0':
+                        self.env.render()
+                    policy, value = self.global_model(tf.convert_to_tensor(state[None, :], dtype=tf.float32))
+                    policy = tf.nn.softmax(policy)
+                    self.action = np.argmax(policy)
+                    # print('Selected action', action)
+                    state, reward, done, _ = self.env.step(self.action)
+                    reward_sum += reward
+                    # print("{}. Reward: {}, action: {}".format(step_counter, reward_sum, action))
+                    print("{}. Reward: {}, action: {}, ID: {}, step: {}".format(self.step_counter, reward_sum, self.action, self.idx, self.step_counter))
+                    self.step_counter += 1
+
+                if done and config.training['env_name'] == 'CartPole-v0':
+                    print("Worker {} finished the job, with {} iterations".format(self.idx, self.step_counter))
+                    # Uncomment to infinite play mode
+                    # state = self.env.reset()
+                    # done = False
+                    # self.step_counter = 0
+                    # reward_sum = 0
+                    # input("Press Enter to continue playing...")
+                    break
+
+                if done and config.training['env_name'] == 'A3C.envs.media:Media-v0' or 'A3C.envs.media:Energy-v0':
+                    state = self.env.reset()
+                    done = False
+                    self.step_counter = 0
+                    reward_sum = 0
+
+        except KeyboardInterrupt:
+            print("Received Keyboard Interrupt. Shutting down.")
+        except OSError:
+            print("Unable to load model. Check correct directories. Shutting down.")
+        finally:
+            self.env.close()
+
+
 def main():
     if not os.path.exists(config.save['path']):
         os.makedirs(config.save['path'])
@@ -299,8 +321,16 @@ def main():
     print('TRAINING INFORMATION')
     print('Environment name: {}'.format(config.training['env_name']))
     print('Number of states: {}. Number of actions: {}'.format(state_size, action_size))
-    print('Training episodes: {}'.format(config.training['max_eps']))
+    print('Training episodes: {}'.format(args.max_eps))
     print('-------------------------------------')
+
+    # REST API server TODO: Create correct server
+    if config.api['enable']  == True:
+        api_server = threading.Thread(target=start_api_server, daemon=True)  # daemon=False, to loop the API server
+        print('API SERVER INFORMATION')
+        api_server.start()
+        time.sleep(1)
+        print('-------------------------------------')
 
     global_model = a3c.ActorCriticModel(state_size, action_size)  # Global Network
     global_model(tf.convert_to_tensor(np.random.random((1, state_size)), dtype=tf.float32))
@@ -310,7 +340,7 @@ def main():
         train(env, global_model)
         print("------------TRAINING DONE------------")
     else:
-        play(env, global_model)
+        play(global_model)
         print("------------PLAY MODE DONE-----------")
 
 

@@ -1,14 +1,16 @@
 training = dict(
-    # env_name='CartPole-v0',
-    env_name='A3C.envs.media:Media-v0',
+    env_name='CartPole-v0',
+    # env_name='A3C.envs.media:Media-v0',
     # env_name='A3C.envs.energy:Energy-v0',
-    max_eps=500,  # Maximum number of episodes of training
-    report=25,  # Steps to report to the global model
-    # render=True,  # Set to True to render the environment (e.g. Cartpole)
+    report=20,  # Steps to report to the global model
 )
 save = dict(
-    aux=0,
     path='./Training/',  # Save path for the model
+)
+api = dict(
+    enable=True,  # Save path for the model
+    address='192.168.1.44',  # IP Address of the REST API
+    port='5000',  # Port of the REST API
 )
 traffic_manager = dict(
     max_capacity=20000

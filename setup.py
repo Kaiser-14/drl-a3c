@@ -1,11 +1,6 @@
 from setuptools import setup
 
-setup(name='gym_gatv',
-      version='0.0.1',
-      install_requires=['gym']
+setup(name='lib_gatv',
+      version='1.0.0',
+      install_requires=['gym', 'tensorflow', 'requests', 'flask', 'flask_restful', 'matplotlib']
 )
-
-# setup(name='gym_energy',
-#       version='0.0.1',
-#       install_requires=['gym']
-# )
