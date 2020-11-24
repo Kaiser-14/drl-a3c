@@ -99,7 +99,6 @@ class EnergyEnv(gym.Env):
             self.ep_steps = 0
 
         # TODO: Execute action to Phoronix
-        # self.take_action(action)
         # requests.post()
         # time.sleep(6)  # Think about not having every sensor data in next steps
 
@@ -163,7 +162,6 @@ class EnergyEnv(gym.Env):
 
         # time.sleep(10)  # TODO: Think about sleep
 
-        # TODO: Enable Free resources from API
         requests.delete('http://' + config.api['address'] + ':' + config.api['port'] + '/api/probe')
 
         # self.metrics_logs.write(str(self.cpu_usage) + '\t' +

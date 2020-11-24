@@ -2,7 +2,7 @@ from gym.envs.registration import register
 
 register(
     id='Eve-v0',
-    entry_point='A3C.envs.eve:MediaEnv'
+    entry_point='A3C.envs.eve:EveEnv'
 )
 
 register(

@@ -127,7 +127,10 @@ class Worker(threading.Thread):
         self.opt = opt
         self.local_model = a3c.ActorCriticModel(self.state_size, self.action_size)
         self.worker_idx = idx
-        self.env = gym.make(config.training['env_name']).unwrapped
+        if config.training['env_name'] == 'A3C.envs.media:Eve-v0':
+            self.env = gym.make(config.training['env_name'], self.worker_idx).unwrapped
+        else:
+            self.env = gym.make(config.training['env_name']).unwrapped
         self.writer = writer
         self.ep_loss = 0.0
 
@@ -145,7 +148,6 @@ class Worker(threading.Thread):
             time_count = 0
             done = False
             while not done:
-            # while ep_steps < config.training['report']:  # TODO: Think it
                 # print('Current State', current_state[None, :])
                 logits, _ = self.local_model(
                     tf.convert_to_tensor(current_state[None, :],
@@ -254,9 +256,12 @@ class Worker(threading.Thread):
 class WorkerPlay(threading.Thread):
     def __init__(self, global_model, idx):
         super(WorkerPlay, self).__init__()
-        self.env = gym.make(config.training['env_name']).unwrapped
-        self.global_model = global_model
         self.idx = idx
+        if config.training['env_name'] == 'A3C.envs.media:Eve-v0':
+            self.env = gym.make(config.training['env_name'], self.idx).unwrapped
+        else:
+            self.env = gym.make(config.training['env_name']).unwrapped
+        self.global_model = global_model
         self.step_counter = 0
         self.action = None
 
@@ -295,7 +300,7 @@ class WorkerPlay(threading.Thread):
                     # input("Press Enter to continue playing...")
                     break
 
-                if done and config.training['env_name'] == 'A3C.envs.media:Media-v0' or 'A3C.envs.media:Energy-v0':
+                if done and config.training['env_name'] == 'A3C.envs.eve:Eve-v0' or 'A3C.envs.media:Energy-v0':
                     state = self.env.reset()
                     done = False
                     self.step_counter = 0
@@ -325,7 +330,6 @@ def main():
     print('Training episodes: {}'.format(args.max_eps))
     print('-------------------------------------')
 
-    # REST API server TODO: Create correct server
     if config.api['enable']  == True:
         api_server = threading.Thread(target=start_api_server, daemon=True)  # daemon=False, to loop the API server
         print('API SERVER INFORMATION')
@@ -342,8 +346,9 @@ def main():
         # time.sleep(2)
         print("------------TRAINING DONE------------")
     else:
+        time.sleep(1)
         play(global_model)
-        # time.sleep(1)
+        # time.sleep(2)
         print("------------PLAY MODE DONE-----------")
 
 
