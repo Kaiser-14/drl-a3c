@@ -1,40 +1,34 @@
-training = dict(
-    # env_name='CartPole-v0',
-    env_name='A3C.envs.eve:Eve-v0',
-    report=20,  # Steps to report to the global model
-)
-save = dict(
-    path='./Training/',  # Save path for the model
-)
-# EVE
-traffic_manager = dict(
-    max_capacity=20000
-)
-vce = dict(
-    address='172.17.0.2',  # IP Address of the virtual Compression Engine
-    port='3000',  # Port of the virtual Compression Engine
-)
-bg_tf = dict(
-    address='localhost',  # IP Address of the Background Traffic
-    port='3000',  # Port of the Background Traffic
-)
-# kafka = dict(
-    # address='192.168.0.55:9092',  # IP address + port of the Kafka server
-    # topic='eve.a3c',  # Topic associated of the Kafka Server
-# )
-kafka = [
-    ['app.uc1.server', 'app.uc1.italy'],
-    ['app.uc1.italy', 'app.uc1.client'],
-]
-transcoder = [
-    ['172.17.0.2', '3000'],
-    ['172.17.0.2', '3000']
-]
-streaming = [
-    30000, 20000, 10000
-]
-api = dict(
-    enable=False,  # Save path for the model
-    address='None',  # IP Address of the REST API
-    port='5000',  # Port of the REST API
-)
+training = {
+	'env_name': 'A3C.envs.eve:Eve-v0',  # 'CartPole-v0' to test / 'A3C.envs.eve:Eve-v0' to deploy
+	'save_path': './Training/',
+	'model_report': 20,
+}
+
+probe = {
+	'data_plane': 'rest',
+	'kafka': {
+		'address': ['192.168.1.88', '192.168.1.89'],
+		'topic': [
+			[
+				'metric.topic.Blockiness_es',
+				'metric.topic.SpatialActivity_es',
+				'metric.topic.BlockLoss_es',
+				'metric.topic.Blur_es',
+				'metric.topic.TemporalActivity_es'
+			],
+			[
+				'metric.topic.Blockiness_gr',
+				'metric.topic.SpatialActivity_gr',
+				'metric.topic.BlockLoss_gr',
+				'metric.topic.Blur_gr',
+				'metric.topic.TemporalActivity_gr'
+			],
+		]
+	},
+	'rest': {'address': ['http://localhost:5000/api/probe']},
+}
+
+transcoder = {
+	'address': ['192.168.1.88:9092', '192.168.1.88:9092'],
+	'profile': [25000, 15000, 1000],
+}

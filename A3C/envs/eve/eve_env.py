@@ -26,22 +26,24 @@ class EveEnv(gym.Env):
 
         self.idx = idx
         self.kafka = []
-        for topic in config.kafka[self.idx]:
-            # print(topic)
-            consumer = KafkaConsumer(
-                topic,
-                bootstrap_servers=[config.kafka['address']],
-                auto_offset_reset='latest',  # Collect at the end of the log. To collect every message: 'earliest'
-                enable_auto_commit=True,
-                value_deserializer=lambda x: loads(x.decode('utf-8')))
-            self.kafka.append(consumer)
+        if idx is not None:
+            for topic in config.probe['kafka']['topic'][0]:
+                # print(topic)
+                consumer = KafkaConsumer(
+                    topic,
+                    bootstrap_servers=[config.probe['kafka']['address'][idx]],
+                    auto_offset_reset='latest',  # Collect at the end of the log. To collect every message: 'earliest'
+                    enable_auto_commit=True,
+                    value_deserializer=lambda x: loads(x.decode('utf-8')))
+                self.kafka.append(consumer)
 
         # Included in reset
-        self.profiles = {
-            0: config.streaming[0],
-            1: config.streaming[1],
-            2: config.streaming[2]
-        }
+        # self.profiles = {
+        #     0: config.streaming[0],
+        #     1: config.streaming[1],
+        #     2: config.streaming[2]
+        # }
+        self.profiles = config.transcoder['profile']
         self.ep_steps = 0
 
         self.metrics_logs = open(config.save['path'] + 'metrics_training', 'w')
@@ -77,9 +79,9 @@ class EveEnv(gym.Env):
             # vce_req_post = requests.post('http://' + config.vce['address'] + ':' + config.vce['port'] +
             #                              '/bitrate/' + str(self.profiles[action]))
             vce_req_post = requests.post(
-                'http://' + config.transcoder[self.idx][0] + ':' + config.transcoder[self.idx][1] +
+                'http://' + config.vce[self.idx][0] + ':' + config.vce[self.idx][1] +
                 '/bitrate/' + str(self.profiles[action]))
-            # print('Successful bitrate change on vCE') if vce_req_post == 200 else print('Report to the vCE not found')
+
             if vce_req_post.status_code:  # if response:  # TODO: Maybe blocking statement. Test
                 # print('Successful bitrate change on vCE.')
                 break
@@ -97,14 +99,14 @@ class EveEnv(gym.Env):
         time.sleep(3)  # TODO: Control sleep time
 
         while True:
+            # TODO: Think correct behaviour fot both vCE
             # Get data from transcoders
             if self.idx == 0:  # Information from Server transcoder and Site Transcoder
-                # vce_req_get = requests.get('http://' + config.vce['address'] + ':' + config.vce['port']).json()
-                # vce2_req_get = requests.get('http://' + config.vce['address'] + ':' + config.vce['port']).json()
                 vce_req_get = requests.get(
-                    'http://' + config.transcoder[self.idx][0] + ':' + config.transcoder[self.idx][1]).json()
+                    'http://' + config.transcoder['address'][0]
+                ).json()
                 vce2_req_get = requests.get(
-                    'http://' + config.transcoder[self.idx+1][0] + ':' + config.transcoder[self.idx][1]).json()
+                    'http://' + config.vce[self.idx+1][0] + ':' + config.vce[self.idx][1]).json()
 
                 if vce_req_get['status'] and vce2_req_get['status']:  # if response:
                     # states['bitrate_in'] += vce_req_get['stats']['act_bitrate']['value']
@@ -119,7 +121,7 @@ class EveEnv(gym.Env):
             else:  # Information from Site Transcoder
                 # vce_req_get = requests.get('http://' + config.vce['address'] + ':' + config.vce['port']).json()
                 vce_req_get = requests.get(
-                    'http://' + config.transcoder[self.idx][0] + ':' + config.transcoder[self.idx][1]).json()
+                    'http://' + config.transcoder['address'][0]).json()
                 vce2_req_get = None
                 if vce_req_get['status']:  # if response:
                     break
@@ -130,27 +132,33 @@ class EveEnv(gym.Env):
         # time.sleep(2)  # Delay due to streaming buffer
 
         # Consume messages from Kafka server
-        # content = []
-        # for consumer in self.kafka:
-        #     for message in consumer:
-        #         message = message.value
-        #         break
-        #     content.append(message)
+        if config.probe['data_plane'] == 'kafka':
+            content = []
+            for consumer in self.kafka:
+                for message in consumer:
+                    message = message.value
+                    break
+                content.append(message)
 
-        content = []
         # Consume messages from API server
-        api_req_get = requests.get(
-            'http://' + config.api['address'] + ':' + config.api['port'] + '/api/probe/sensor' +
-            str(self.idx + 1)).json()
-        content.append(api_req_get)
+        elif config.probe['data_plane'] == 'rest':
+            content = []
+            # TODO: Differentiate between many probes. Now only one instance
+            api_req_get = requests.get(config.probe['rest']['address'][0].json())
+            content.append(api_req_get)
+
+        else:
+            print('Check data consumption in config file')
+            exit(0)
 
         time.sleep(3)  # Correlation time between probes
 
-        api_req_get = requests.get(
-            'http://' + config.api['address'] + ':' + config.api['port'] + '/api/probe/sensor' +
-            str(self.idx+2)).json()
+        # api_req_get = requests.get(
+        #     'http://' + config.api['address'] + ':' + config.api['port'] + '/api/probe/sensor' +
+        #     str(self.idx+2)).json()
         content.append(api_req_get)
 
+        # TODO: Change based on new states
         if self.idx == 0:
             self.state = [
                 float(vce_req_get['stats']['bitrate']['value']),
@@ -174,7 +182,27 @@ class EveEnv(gym.Env):
             ]
 
         # Reward functions
+        # Game_5
+        # Con Block Loss altos (errores), bajo SA (30), bajo Blockiness (0.058), bajo Blur (1.6)
+        # Con Block Loss bajos (no errores), alto SA (62), alto Blockiness (0.75), alto Blur (2.3)
+
+        # Game_10
+        # Con Block Loss altos (errores), bajo SA (44), bajo Blockiness (0.009), bajo Blur (2.08)
+        # Con Block Loss bajos (no errores), alto SA (60.97), alto Blockiness (0.79), alto Blur (2.78)
+
+        # Game_30
+        # Con Block Loss altos (errores) (14.26), bajo SA (20.83), bajo Blockiness (0.69), bajo Blur (3.16)
+        # Con Block Loss bajos (no errores), alto SA (62), alto Blockiness (0.85), alto Blur (3.34)
+
+        # Conclusiones, mantener formula de recompensa. Todos los de arriba pueden meterse como estados del modelo.
+        # El blur puede servir como multiplicador de perfil, que en este caso quitariamos esa recompensa de anterior
+        # algoritmo
+
         rewards = []
+
+        # TODO: New rewards
+        # FIXME: Possible to include blut to emphasize profiles
+        # rew_qi = 50*(1/(1 + np.exp(-(blocking/block_loss-3.0))))
 
         # Reward based on MOS [0, 84.75]
         rew_mos = math.exp(4.5 * math.tanh(content[1]['mos'] - 2.5))
@@ -190,7 +218,7 @@ class EveEnv(gym.Env):
 
         # info = {}
         done = False
-        if self.ep_steps == config.training['report']:
+        if self.ep_steps == config.training['model_report']:
             done = True
             self.ep_steps = 0
 
@@ -213,6 +241,7 @@ class EveEnv(gym.Env):
         # self.action = action
 
         # Change profiles if it is not central transcoder, limited by the maximum bitrate
+        # TODO: Adapt
         if self.idx != 0:
             self.profiles = {
                 0: float(vce_req_get['stats']['max_bitrate']['value']),
@@ -230,6 +259,7 @@ class EveEnv(gym.Env):
         """
 
         # self.state = np.zeros(self.observation_space.shape[0])
+        # TODO: Fix it
         self.state = [
             float(20000),
             float(20000),
@@ -238,14 +268,16 @@ class EveEnv(gym.Env):
             float(0),
             float(0)
         ]
-        self.profiles = {
-            0: config.streaming[0],
-            1: config.streaming[1],
-            2: config.streaming[2]
-        }
+        # self.profiles = {
+        #     0: config.streaming[0],
+        #     1: config.streaming[1],
+        #     2: config.streaming[2]
+        # }
+        self.profiles = config.transcoder['profile']
         # requests.post(
         #     'http://' + config.vce['address'] + ':' + config.vce['port'] + '/bitrate/' + config.streaming[1])
-        requests.post('http://' + config.transcoder[self.idx][0] + ':' + config.transcoder[self.idx][1])
+        # TODO: Think to refresh compressor
+        # requests.post('http://' + config.vce[self.idx][0] + ':' + config.vce[self.idx][1])
         self.ep_steps = 0
         return np.array(self.state)
 
