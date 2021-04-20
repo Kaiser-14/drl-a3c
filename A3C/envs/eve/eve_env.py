@@ -1,17 +1,16 @@
-from A3C import config
-
-from gym import spaces
-from scipy.spatial import distance
-from kafka import KafkaConsumer
-from json import loads
-from random import randint
-
+import datetime
 import math
 import time
+from json import loads
+
 import gym
 # gym.logger.set_level(40)
 import numpy as np
 import requests
+from gym import spaces
+from kafka import KafkaConsumer
+
+from A3C import config
 
 
 class EveEnv(gym.Env):
@@ -22,7 +21,9 @@ class EveEnv(gym.Env):
     metadata = {'render.modes': ['human']}
 
     # def __init__(self):
-    def __init__(self, idx=None):
+    def __init__(self, idx):
+
+        # TODO: Add assert of every config parameter. For example, same lenght of rest address and number of parallel agents
 
         self.idx = idx
         self.kafka = []
@@ -46,10 +47,10 @@ class EveEnv(gym.Env):
         self.profiles = config.transcoder['profile']
         self.ep_steps = 0
 
-        self.metrics_logs = open(config.save['path'] + 'metrics_training', 'w')
+        self.metrics_logs = open(config.training['save_path'] + 'metrics_training_' + self.idx, 'w')
 
         # Observation range for the set of states
-        high = np.array([np.inf] * 6)
+        high = np.array([np.inf] * 9)
         self.observation_space = spaces.Box(-high, high, dtype=np.float32)
 
         # Discrete actions relative to network profiles
@@ -73,63 +74,46 @@ class EveEnv(gym.Env):
         info = {}
         self.ep_steps += 1
 
-        # Execute action
-        # print(action)
+        # Post request to transcoder to change bitrate based on action
         while True:
-            # vce_req_post = requests.post('http://' + config.vce['address'] + ':' + config.vce['port'] +
-            #                              '/bitrate/' + str(self.profiles[action]))
-            vce_req_post = requests.post(
-                'http://' + config.vce[self.idx][0] + ':' + config.vce[self.idx][1] +
-                '/bitrate/' + str(self.profiles[action]))
+            # Change bitrate of site transcoder
+            vce_br = requests.post(
+                'http://' + config.transcoder['address'][self.idx] + '/bitrate/' + str(self.profiles[action])
+            )
 
-            if vce_req_post.status_code:  # if response:  # TODO: Maybe blocking statement. Test
+            # Break loop in case of received information
+            if vce_br.status_code == 200:
                 # print('Successful bitrate change on vCE.')
                 break
-            else:  # elif vce_req_post.status_code == 404:
+            else:
                 print('vCE not reachable. Not possible to change bitrate.')
                 time.sleep(2)
 
-        # Change randomly the traffic background
-        # if args.train:  # TODO: Include only in case of training
-        #     br_background = randint(1, config.traffic_manager['max_capacity'] / 1000 - 2)
-        #     print('Background bitrate: ', br_background)
-        #       requests.post('http://' + config.bg_tf['address'] + ':' + config.bg_tf['port'] +
-        #               '/bitrate/' + str(br_background * 1000))
-
         time.sleep(3)  # TODO: Control sleep time
 
+        # Get data from transcoders
         while True:
-            # TODO: Think correct behaviour fot both vCE
-            # Get data from transcoders
-            if self.idx == 0:  # Information from Server transcoder and Site Transcoder
-                vce_req_get = requests.get(
-                    'http://' + config.transcoder['address'][0]
-                ).json()
-                vce2_req_get = requests.get(
-                    'http://' + config.vce[self.idx+1][0] + ':' + config.vce[self.idx][1]).json()
+            # Information from server transcoder and site transcoder
+            vce_server = requests.get(
+                'http://' + config.transcoder['address'][0]
+            ).json()
+            # FIXME: Control index
+            vce_site = requests.get(
+                'http://' + config.transcoder['address'][self.idx]
+            ).json()
 
-                if vce_req_get['status'] and vce2_req_get['status']:  # if response:
-                    # states['bitrate_in'] += vce_req_get['stats']['act_bitrate']['value']
-                    # states['max_bitrate'] = vce_req_get['stats']['max_bitrate']['value']
-                    # states['ram_in'] += vce_req_get['stats']['pid_ram']['value']
-                    # states['encoding_quality'] += vce_req_get['stats']['enc_quality']['value']
-                    break
-                else:  # elif vce_req_get.status_code == 404:
-                    print('vCE not reachable. Not possible to get data.')
-                    time.sleep(2)
-
-            else:  # Information from Site Transcoder
-                # vce_req_get = requests.get('http://' + config.vce['address'] + ':' + config.vce['port']).json()
-                vce_req_get = requests.get(
-                    'http://' + config.transcoder['address'][0]).json()
-                vce2_req_get = None
-                if vce_req_get['status']:  # if response:
-                    break
-                else:  # elif vce_req_get.status_code == 404:
-                    print('vCE not reachable. Not possible to get data.')
-                    time.sleep(2)
+            # Break loop in case of received information
+            if vce_server['status'] and vce_site['status'] == 200:
+                break
+            else:
+                print('vCE not reachable. Not possible to get data.')
+                time.sleep(2)
 
         # time.sleep(2)  # Delay due to streaming buffer
+
+        # Probe metrics model
+        probe_metrics = {'blockiness': None, 'spatial_activity': None, 'block_loss': None, 'blur': None,
+                         'temporal_activity': None}
 
         # Consume messages from Kafka server
         if config.probe['data_plane'] == 'kafka':
@@ -140,46 +124,37 @@ class EveEnv(gym.Env):
                     break
                 content.append(message)
 
+            for key, value in zip(probe_metrics.keys(), content):
+                probe_metrics[key] = value
+
         # Consume messages from API server
         elif config.probe['data_plane'] == 'rest':
-            content = []
-            # TODO: Differentiate between many probes. Now only one instance
-            api_req_get = requests.get(config.probe['rest']['address'][0].json())
-            content.append(api_req_get)
+            api_req_get = requests.get(config.probe['rest']['address'][self.idx])
+            probe_metrics = api_req_get.json()[self.idx]['value']
 
         else:
             print('Check data consumption in config file')
             exit(0)
 
-        time.sleep(3)  # Correlation time between probes
+        time.sleep(3)  # FIXME: Correlation time between probes
 
-        # api_req_get = requests.get(
-        #     'http://' + config.api['address'] + ':' + config.api['port'] + '/api/probe/sensor' +
-        #     str(self.idx+2)).json()
-        content.append(api_req_get)
-
-        # TODO: Change based on new states
-        if self.idx == 0:
-            self.state = [
-                float(vce_req_get['stats']['bitrate']['value']),
-                float(vce2_req_get['stats']['bitrate']['value']),
-                float(vce_req_get['stats']['max_bitrate']['value']),
-                float(vce_req_get['stats']['enc_quality']['value']),
-                float(vce_req_get['stats']['pid_ram']['value']),
-                # float(content[0]['value']['mos'])
-                float(content[0]['mos'])
-            ]
-        else:
-            self.state = [
-                float(vce_req_get['stats']['bitrate']['value']),
-                # float(content[1]['value']['bitrate']),
-                float(content[1]['bitrate']),
-                float(vce_req_get['stats']['max_bitrate']['value']),
-                float(vce_req_get['stats']['enc_quality']['value']),
-                float(vce_req_get['stats']['pid_ram']['value']),
-                # float(content[0]['value']['mos'])
-                float(content[0]['mos'])
-            ]
+        # TODO: Add FPS from vCE
+        # TODO: Cast Ram from bytes to MB
+        self.state = [
+            float(vce_server['stats']['act_bitrate']['value']),
+            float(vce_server['stats']['max_bitrate']['value']),
+            float(vce_server['stats']['enc_quality']['value']),
+            float(vce_server['stats']['pid_ram']['value']),
+            float(vce_site['stats']['act_bitrate']['value']),
+            float(vce_site['stats']['max_bitrate']['value']),
+            float(vce_site['stats']['enc_quality']['value']),
+            float(vce_site['stats']['pid_ram']['value']),
+            float(probe_metrics['blockiness']),
+            float(probe_metrics['spatial_activity']),
+            float(probe_metrics['block_loss']),
+            float(probe_metrics['blur']),
+            float(probe_metrics['temporal_activity']),
+        ]
 
         # Reward functions
         # Game_5
@@ -223,31 +198,38 @@ class EveEnv(gym.Env):
             self.ep_steps = 0
 
         self.metrics_logs.write(
-            str(self.state[0]) + '\t' +  # Bitrate in
-            str(self.state[1]) + '\t' +  # Bitrate out
-            str(self.state[2]) + '\t' +  # Max bitrate in
-            str(self.state[3]) + '\t' +  # Encoding quality in
-            str(self.state[4]) + '\t' +  # RAM in
-            str(self.state[5]) + '\t' +  # MOS in
-            str(content[0]['mos']) + '\t' +  # MOS out
             # str(self.action) + '\t' +  # Previous action
+            str(datetime.datetime.now().timestamp()) + 't' +
             str(action) + '\t' +  # Predicted action
-            str(rewards[0]) + '\t' +  # Total Rewards
-            str(rewards[1]) + '\t' +  # MOS rewards
-            str(rewards[2]) + '\n'  # Profile rewards
-                                )
+            str(format(self.state[0], '.2f')) + '\t' +  # Actual bitrate site transcoder
+            str(format(self.state[1], '.0f')) + '\t' +  # Maximum bitrate site transcoder
+            str(format(self.state[2], '.40f')) + '\t' +  # Encoding quality site transcoder
+            str(format(self.state[3], '.0f')) + '\t' +  # RAM usage site transcoder
+            str(format(self.state[4], '.2f')) + '\t' +  # Actual bitrate server transcoder
+            str(format(self.state[5], '.0f')) + '\t' +  # Maximum bitrate server transcoder
+            str(format(self.state[6], '.0f')) + '\t' +  # Encoding quality server transcoder
+            str(format(self.state[7], '.0f')) + '\t' +  # RAM usage server transcoder
+            str(format(self.state[8], '.4f')) + '\t' +  # Blockiness
+            str(format(self.state[9], '.4f')) + '\t' +  # Spatial activity
+            str(format(self.state[10], '.4f')) + '\t' +  # Block loss
+            str(format(self.state[11], '.4f')) + '\t' +  # Blur
+            str(format(self.state[12], '.4f')) + '\t' +  # Temporal Activity
+            str(format(rewards[0], '.2f')) + '\t' +  # Total Rewards
+            str(format(rewards[1], '.2f')) + '\t' +  # MOS rewards
+            str(format(rewards[2], '.2f')) + '\n'  # Profile rewards
+        )
         self.metrics_logs.flush()
 
         # self.action = action
 
         # Change profiles if it is not central transcoder, limited by the maximum bitrate
         # TODO: Adapt
-        if self.idx != 0:
-            self.profiles = {
-                0: float(vce_req_get['stats']['max_bitrate']['value']),
-                1: float(vce_req_get['stats']['max_bitrate']['value']) / 2,
-                2: float(vce_req_get['stats']['max_bitrate']['value']) / 5
-            }
+        # if self.idx != 0:
+        #     self.profiles = {
+        #         0: float(vce_req_get['stats']['max_bitrate']['value']),
+        #         1: float(vce_req_get['stats']['max_bitrate']['value']) / 2,
+        #         2: float(vce_req_get['stats']['max_bitrate']['value']) / 5
+        #     }
 
         return self.state, rewards[0], done, info
 
@@ -257,27 +239,15 @@ class EveEnv(gym.Env):
 
         :return: self.state: Default state of the environment
         """
+        # Random uniform values, except for bitrate (actual and maximum)
+        self.state = np.random.uniform(low=-0.01, high=0.01, size=(1, 13))[0]
+        self.state[[0, 1, 4, 5]] = 25000
 
-        # self.state = np.zeros(self.observation_space.shape[0])
-        # TODO: Fix it
-        self.state = [
-            float(20000),
-            float(20000),
-            float(20000),
-            float(0),
-            float(0),
-            float(0)
-        ]
-        # self.profiles = {
-        #     0: config.streaming[0],
-        #     1: config.streaming[1],
-        #     2: config.streaming[2]
-        # }
-        self.profiles = config.transcoder['profile']
-        # requests.post(
-        #     'http://' + config.vce['address'] + ':' + config.vce['port'] + '/bitrate/' + config.streaming[1])
-        # TODO: Think to refresh compressor
-        # requests.post('http://' + config.vce[self.idx][0] + ':' + config.vce[self.idx][1])
+        # Reset site transcoder to maximum bitrate
+        requests.post(
+            'http://' + config.transcoder['address'][self.idx] + '/bitrate/' + str(self.profiles[0])
+        )
+
         self.ep_steps = 0
         return np.array(self.state)
 
@@ -289,8 +259,4 @@ class EveEnv(gym.Env):
         :param close:
         :return: None
         """
-        # if not self.ep_steps == 0:  # TODO: Think to include it
-        #     print('MOS: '.format(self.mos))
-        #     print('Bitrate from vCE: '.format(self.bitrate_in))
-        #     print('Bitrate from probe: '.format(self.bitrate_out))
         pass

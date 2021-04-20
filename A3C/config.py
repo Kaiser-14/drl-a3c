@@ -1,5 +1,5 @@
 training = {
-	'env_name': 'A3C.envs.eve:Eve-v0',  # 'CartPole-v0' to test / 'A3C.envs.eve:Eve-v0' to deploy
+	'env_name': 'CartPole-v0',  # 'CartPole-v0' to test / 'A3C.envs.eve:Eve-v0' / 'A3C.envs.energy:Energy-v0' to deploy
 	'save_path': './Training/',
 	'model_report': 20,
 }
