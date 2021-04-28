@@ -82,6 +82,7 @@ def train(env, global_model):
 	average_rewards = []  # record episode reward to plot
 	while True:
 		reward = res_queue.get()
+		# print(reward)
 		if reward is not None:
 			average_rewards.append(reward)
 		else:
@@ -143,8 +144,8 @@ class Worker(threading.Thread):
 		self.opt = opt
 		self.local_model = a3c.ActorCriticModel(self.state_size, self.action_size)
 		self.worker_idx = idx
-		if config.training['env_name'] == 'A3C.envs.media:Eve-v0':
-			self.env = gym.make(config.training['env_name'], self.worker_idx).unwrapped
+		if config.training['env_name'] == 'A3C.envs.eve:Eve-v0':
+			self.env = gym.make(config.training['env_name']).unwrapped
 		else:
 			self.env = gym.make(config.training['env_name']).unwrapped
 		self.writer = writer
@@ -164,7 +165,7 @@ class Worker(threading.Thread):
 			time_count = 0
 			done = False
 			while not done:
-				# print('Current State', current_state[None, :])
+				print('Current State', current_state[None, :])
 				logits, _ = self.local_model(
 					tf.convert_to_tensor(current_state[None, :], dtype=tf.float32)
 				)
@@ -175,7 +176,10 @@ class Worker(threading.Thread):
 				action = np.random.choice(self.action_size, p=probs.numpy()[0])
 				# print('Selected action', action)
 				new_state, reward, done, info = self.env.step(action)
+				# print(new_state[None, :])
 				# print('Reward', reward)
+				# print(done)
+				# print(info)
 				ep_reward += reward
 				mem.store(current_state, action, reward)
 
@@ -339,7 +343,11 @@ def main():
 		os.makedirs(config.training['save_path'])
 
 	# Starting environment only for information running purposes
-	env = gym.make(config.training['env_name'])
+	if config.training['env_name'] == 'A3C.envs.eve:Eve-v0':
+		assert args.num_workers == len(config.transcoder['address']), 'One parallel worker per transcoder'
+		env = gym.make(config.training['env_name'])
+	else:
+		env = gym.make(config.training['env_name'])
 	state_size = env.observation_space.shape[0]
 	action_size = env.action_space.n
 	# env.close()
