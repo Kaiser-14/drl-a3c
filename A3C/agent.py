@@ -171,13 +171,13 @@ class Worker(threading.Thread):
 				)
 				probs = tf.nn.softmax(logits)
 
-				# print('Logits', logits)
-				# print('Probs', probs)
+				print('Logits', logits)
+				print('Probs', probs)
 				action = np.random.choice(self.action_size, p=probs.numpy()[0])
-				# print('Selected action', action)
+				print('Selected action', action)
 				new_state, reward, done, info = self.env.step(action)
 				# print(new_state[None, :])
-				# print('Reward', reward)
+				print('Reward', reward)
 				# print(done)
 				# print(info)
 				ep_reward += reward
@@ -311,7 +311,11 @@ class WorkerPlay(threading.Thread):
 					state, reward, done, _ = self.env.step(self.action)
 					reward_sum += reward
 					# print('{}. Reward: {}, action: {}'.format(step_counter, reward_sum, action))
-					print('{}. Reward: {}, action: {}, ID: {}, step: {}'.format(self.step_counter, reward_sum, self.action, self.idx, self.step_counter))
+					print(
+						"{}. Reward: {}, action: {}, ID: {}, step: {}".format(
+							self.step_counter, reward_sum, self.action, self.idx, self.step_counter
+						)
+					)
 					self.step_counter += 1
 
 				if done and config.training['env_name'] == 'CartPole-v0':
@@ -324,7 +328,7 @@ class WorkerPlay(threading.Thread):
 					# input('Press Enter to continue playing...')
 					break
 
-				if done and config.training['env_name'] == 'A3C.envs.eve:Eve-v0' or 'A3C.envs.media:Energy-v0':
+				if done and config.training['env_name'] == 'A3C.envs.eve:Eve-v0' or 'A3C.envs.energy:Energy-v0':
 					state = self.env.reset()
 					done = False
 					self.step_counter = 0

@@ -27,7 +27,8 @@ class EveEnv(gym.Env):
 
 		self.idx = idx
 		self.kafka = []
-		if idx is not None:
+		# if idx is not None:
+		if config.probe['data_plane'] == 'kafka':
 			for topic in config.probe['kafka']['topic'][0]:
 				# print(topic)
 				consumer = KafkaConsumer(
@@ -44,7 +45,7 @@ class EveEnv(gym.Env):
 		self.metrics_logs = open(config.training['save_path'] + 'metrics_training_' + str(self.idx), 'w')
 
 		# Observation range for the set of states
-		self.n_states = 11
+		self.n_states = 10
 		high = np.array([np.inf] * self.n_states)
 		self.observation_space = spaces.Box(-high, high, dtype=np.float32)
 
@@ -84,7 +85,7 @@ class EveEnv(gym.Env):
 				print('vCE not reachable. Not possible to change bitrate.')
 				time.sleep(2)
 
-		time.sleep(3)  # TODO: Control sleep time
+		time.sleep(10)  # TODO: Control sleep time
 
 		# Get data from transcoders
 		while True:
@@ -102,8 +103,13 @@ class EveEnv(gym.Env):
 		vce_metrics = vce_server.json()
 
 		# Probe metrics model
-		probe_metrics = {'blockiness': None, 'spatial_activity': None, 'block_loss': None, 'blur': None,
-		                 'temporal_activity': None}
+		probe_metrics = {
+			'blockiness': None,
+			'spatial_activity': None,
+			'block_loss': None,
+			'blur': None,
+			'temporal_activity': None,
+		}
 
 		# Consume messages from Kafka server
 		if config.probe['data_plane'] == 'kafka':
@@ -126,32 +132,33 @@ class EveEnv(gym.Env):
 			print('Check data consumption in config file')
 			exit(0)
 
-		time.sleep(3)  # FIXME: Correlation time between probes
-
 		# Quantize states
 		self.state = [
-			int(round(vce_metrics['stats']['act_bitrate']['value'], -3)),
-			int(vce_metrics['stats']['max_bitrate']['value']),
-			int(vce_metrics['stats']['enc_quality']['value']),
-			int(vce_metrics['stats']['pid_cpu']['value']),
-			float(round(vce_metrics['stats']['pid_ram']['value'] / 1e+6, 2)),
-			int(vce_metrics['stats']['num_fps']['value']),
+			float(round(vce_metrics['stats']['act_bitrate']['value'], -3) / 1e+5),
+			float(vce_metrics['stats']['max_bitrate']['value'] / 1e+5),
+			float(vce_metrics['stats']['enc_quality']['value'] / 1e+2),
+			float(round(vce_metrics['stats']['pid_cpu']['value'], 0) / 1e+2),
+			float(round(vce_metrics['stats']['pid_ram']['value'], -6) / 1e+9),
+			# float(vce_metrics['stats']['num_fps']['value'] / 100),
 			# float(vce_site['stats']['act_bitrate']['value']),
 			# float(vce_site['stats']['max_bitrate']['value']),
 			# float(vce_site['stats']['enc_quality']['value']),
 			# float(vce_site['stats']['pid_ram']['value']),
 			# float(vce_site['stats']['num_fps']['value']),
 			float(round(probe_metrics['blockiness'], 2)),
-			int(probe_metrics['spatial_activity']),
-			float(round(probe_metrics['block_loss'], 2)),
-			float(round(probe_metrics['blur'], 2)),
-			float(round(probe_metrics['temporal_activity'], 2)),
+			float(round(probe_metrics['spatial_activity'], 0) / 1e+3),
+			float(round(probe_metrics['block_loss'], 0) / 1e+3),
+			float(round(probe_metrics['blur'], 2) / 1e+1),
+			float(round(probe_metrics['temporal_activity'], 0) / 1e+2),
 		]
+		print(self.state)
 
 		assert self.n_states == len(self.state), 'State should be equal number to defined number of states'
 
 		# rewards = []
 
+		print(float(probe_metrics['blockiness']))
+		print(float(probe_metrics['block_loss']))
 		rewards = 50*(
 				1/(1 + np.exp(-(float(probe_metrics['blockiness'])/float(probe_metrics['block_loss'])-2.5))))
 		# print(rewards)
@@ -171,17 +178,16 @@ class EveEnv(gym.Env):
 		self.metrics_logs.write(
 			str(format(datetime.datetime.now().timestamp(), '.0f')) + '\t' +
 			str(action) + '\t' +  # Predicted action
-			str(format(self.state[0], '.0f')).zfill(5) + '\t' +  # Actual bitrate site transcoder
-			str(format(self.state[1], '.0f')).zfill(5) + '\t' +  # Maximum bitrate site transcoder
-			str(format(self.state[2], '.0f')) + '\t' +  # Encoding quality site transcoder
-			str(format(self.state[3], '.0f')) + '\t' +  # CPU usage site transcoder
-			str(format(self.state[4], '.2f')) + '\t' +  # RAM usage site transcoder
-			str(format(self.state[5], '.0f')) + '\t' +  # Frames per second
-			str(format(self.state[6], '.2f')) + '\t' +  # Blockiness
-			str(format(self.state[7], '.2f')).zfill(2) + '\t' +  # Spatial activity
-			str(format(self.state[8], '.2f')).zfill(7) + '\t' +  # Block loss
-			str(format(self.state[9], '.2f')) + '\t' +  # Blur
-			str(format(self.state[10], '.2f')) + '\t' +  # Temporal Activity
+			str(format(self.state[0] * 1e+2, '.0f')) + '\t' +  # Actual bitrate site transcoder
+			str(format(self.state[1] * 1e+2, '.0f')) + '\t' +  # Maximum bitrate site transcoder
+			str(format(self.state[2] * 1e+2, '.0f')) + '\t' +  # Encoding quality site transcoder
+			str(format(self.state[3], '.2f')) + '\t' +  # CPU usage site transcoder
+			str(format(self.state[4] * 1e+3, '.0f')) + '\t' +  # RAM usage site transcoder
+			str(format(self.state[5], '.2f')) + '\t' +  # Blockiness
+			str(format(self.state[6] * 1e+3, '.0f')) + '\t' +  # Spatial activity
+			str(format(self.state[7] * 1e+3, '.0f')) + '\t' +  # Block loss
+			str(format(self.state[8] * 1e+1, '.2f')) + '\t' +  # Blur
+			str(format(self.state[9], '.0f')) + '\t' +  # Temporal Activity
 			str(format(rewards, '.2f')) + '\n'  # Total Rewards
 		)
 		self.metrics_logs.flush()
