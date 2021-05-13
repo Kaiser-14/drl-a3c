@@ -85,7 +85,7 @@ class EveEnv(gym.Env):
 				print('vCE not reachable. Not possible to change bitrate.')
 				time.sleep(2)
 
-		time.sleep(10)  # TODO: Control sleep time
+		time.sleep(16)  # TODO: Control sleep time
 
 		# Get data from transcoders
 		while True:
@@ -137,7 +137,7 @@ class EveEnv(gym.Env):
 			float(round(vce_metrics['stats']['act_bitrate']['value'], -3) / 1e+5),
 			float(vce_metrics['stats']['max_bitrate']['value'] / 1e+5),
 			float(vce_metrics['stats']['enc_quality']['value'] / 1e+2),
-			float(round(vce_metrics['stats']['pid_cpu']['value'], 0) / 1e+2),
+			float(round(vce_metrics['stats']['pid_cpu']['value'], 0) / 1e+3),
 			float(round(vce_metrics['stats']['pid_ram']['value'], -6) / 1e+9),
 			# float(vce_metrics['stats']['num_fps']['value'] / 100),
 			# float(vce_site['stats']['act_bitrate']['value']),
@@ -149,24 +149,25 @@ class EveEnv(gym.Env):
 			float(round(probe_metrics['spatial_activity'], 0) / 1e+3),
 			float(round(probe_metrics['block_loss'], 0) / 1e+3),
 			float(round(probe_metrics['blur'], 2) / 1e+1),
-			float(round(probe_metrics['temporal_activity'], 0) / 1e+2),
+			float(round(probe_metrics['temporal_activity'], 0) / 1e+3),
 		]
 		print(self.state)
 
 		assert self.n_states == len(self.state), 'State should be equal number to defined number of states'
 
-		# rewards = []
+		rewards = []
 
-		print(float(probe_metrics['blockiness']))
-		print(float(probe_metrics['block_loss']))
-		rewards = 50*(
+		# print(float(probe_metrics['blockiness']))
+		# print(float(probe_metrics['block_loss']))
+		reward_quality = 50*(
 				1/(1 + np.exp(-(float(probe_metrics['blockiness'])/float(probe_metrics['block_loss'])-2.5))))
-		# print(rewards)
+
+		reward_profile = 6.0 * action
 
 		# Enable in case of including several rewards
 		# Total reward
-		# reward = rew_1 + rew_2
-		# rewards.extend((reward, rew_1, rew_2))
+		reward = reward_quality + reward_profile
+		rewards.extend((reward, reward_quality, reward_profile))
 		# print(rewards)
 
 		# info = {}
@@ -181,14 +182,14 @@ class EveEnv(gym.Env):
 			str(format(self.state[0] * 1e+2, '.0f')) + '\t' +  # Actual bitrate site transcoder
 			str(format(self.state[1] * 1e+2, '.0f')) + '\t' +  # Maximum bitrate site transcoder
 			str(format(self.state[2] * 1e+2, '.0f')) + '\t' +  # Encoding quality site transcoder
-			str(format(self.state[3], '.2f')) + '\t' +  # CPU usage site transcoder
+			str(format(self.state[3] * 1e+3, '.3f')) + '\t' +  # CPU usage site transcoder
 			str(format(self.state[4] * 1e+3, '.0f')) + '\t' +  # RAM usage site transcoder
 			str(format(self.state[5], '.2f')) + '\t' +  # Blockiness
 			str(format(self.state[6] * 1e+3, '.0f')) + '\t' +  # Spatial activity
 			str(format(self.state[7] * 1e+3, '.0f')) + '\t' +  # Block loss
 			str(format(self.state[8] * 1e+1, '.2f')) + '\t' +  # Blur
-			str(format(self.state[9], '.0f')) + '\t' +  # Temporal Activity
-			str(format(rewards, '.2f')) + '\n'  # Total Rewards
+			str(format(self.state[9] * 1e+3, '.0f')) + '\t' +  # Temporal Activity
+			str(format(rewards[0], '.2f')) + '\n'  # Total Rewards
 		)
 		self.metrics_logs.flush()
 
@@ -203,7 +204,7 @@ class EveEnv(gym.Env):
 		#         2: float(vce_req_get['stats']['max_bitrate']['value']) / 5
 		#     }
 
-		return np.array(self.state), rewards, done, info
+		return np.array(self.state), reward, done, info
 
 	def reset(self):
 		"""
