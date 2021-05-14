@@ -226,7 +226,17 @@ class Worker(threading.Thread):
 								self.global_model.save_weights(
 									os.path.join(config.training['save_path'], 'A3C_model.h5')
 								)
+								# TODO: Print best score at the end of the training
 								Worker.best_score = ep_reward
+						else:
+							with Worker.save_lock:
+								print(
+									'Saving actual model to {}, '
+									'episode score: {}'.format(config.training['save_path'], ep_reward)
+								)
+								self.global_model.save_weights(
+									os.path.join(config.training['save_path'], 'A3C_model_partial.h5')
+								)
 						Worker.global_episode += 1
 				ep_steps += 1
 
