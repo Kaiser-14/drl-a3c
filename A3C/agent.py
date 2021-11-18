@@ -13,7 +13,7 @@ import tensorflow as tf
 import a3c
 import config
 
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  # or any {'0', '1', '2'}
+# os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  # or any {'0', '1', '2'}
 
 # Check GPU
 # print('Num GPUs Available: ', len(tf.config.list_physical_devices('GPU')))
@@ -50,7 +50,7 @@ parser.add_argument(
 parser.add_argument(
 	'-m',
 	'--max-eps',
-	default=400,
+	default=500,
 	type=int,
 	help='Global maximum number of episodes to run.'
 )
@@ -165,19 +165,19 @@ class Worker(threading.Thread):
 			time_count = 0
 			done = False
 			while not done:
-				print('Current State', current_state[None, :])
+				# print('Current State', current_state[None, :])
 				logits, _ = self.local_model(
 					tf.convert_to_tensor(current_state[None, :], dtype=tf.float32)
 				)
 				probs = tf.nn.softmax(logits)
 
-				print('Logits', logits)
-				print('Probs', probs)
+				# print('Logits', logits)
+				# print('Probs', probs)
 				action = np.random.choice(self.action_size, p=probs.numpy()[0])
-				print('Selected action', action)
+				# print('Selected action', action)
 				new_state, reward, done, info = self.env.step(action)
 				# print(new_state[None, :])
-				print('Reward', reward)
+				# print('Reward', reward)
 				# print(done)
 				# print(info)
 				ep_reward += reward
