@@ -38,7 +38,7 @@ parser.add_argument(
 	'--lr', default=0.001, help='Learning rate for the shared optimizer.'
 )
 parser.add_argument(
-	'-u', '--update-freq', default=20, type=int,help='How often to update the global model.'
+	'-u', '--update-freq', default=20, type=int, help='How often to update the global model.'
 )
 parser.add_argument(
 	'-n',
@@ -172,9 +172,9 @@ class Worker(threading.Thread):
 				probs = tf.nn.softmax(logits)
 
 				# print('Logits', logits)
-				# print('Probs', probs)
+				print('Probs', probs)
 				action = np.random.choice(self.action_size, p=probs.numpy()[0])
-				# print('Selected action', action)
+				print('Selected action', action)
 				new_state, reward, done, info = self.env.step(action)
 				# print(new_state[None, :])
 				# print('Reward', reward)

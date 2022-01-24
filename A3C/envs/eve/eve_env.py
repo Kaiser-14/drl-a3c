@@ -85,7 +85,8 @@ class EveEnv(gym.Env):
 				print('vCE not reachable. Not possible to change bitrate.')
 				time.sleep(2)
 
-		time.sleep(16)  # TODO: Control sleep time
+		# Time to stabilize bitrate in vCE
+		time.sleep(5)  # TODO: Control sleep time
 
 		# Get data from transcoders
 		while True:
@@ -101,6 +102,9 @@ class EveEnv(gym.Env):
 				time.sleep(2)
 
 		vce_metrics = vce_server.json()
+
+		# Time to analyze streaming content from probe
+		time.sleep(15)
 
 		# Probe metrics model
 		probe_metrics = {
@@ -215,9 +219,17 @@ class EveEnv(gym.Env):
 		# Random uniform values, except for bitrate (actual and maximum)
 		self.state = np.random.uniform(low=-0.01, high=0.01, size=(1, self.n_states))[0]
 
+		# Refresh vCE
+		requests.get(
+			'http://' + config.transcoder['address'][self.idx] + '/refresh/'
+		)
+
+		# Time to restart ffmpeg in vCE
+		time.sleep(7)
+
 		# Reset site transcoder to maximum bitrate
 		requests.post(
-			'http://' + config.transcoder['address'][self.idx] + '/bitrate/' + str(self.profiles[0])
+			'http://' + config.transcoder['address'][self.idx] + '/bitrate/' + str(self.profiles[1])
 		)
 
 		self.ep_steps = 0

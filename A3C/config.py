@@ -1,7 +1,7 @@
 training = {
 	'env_name': 'A3C.envs.eve:Eve-v0',  # 'CartPole-v0' to test / 'A3C.envs.eve:Eve-v0' / 'A3C.envs.energy:Energy-v0' to deploy
 	'save_path': './Training/',
-	'model_report': 600,  # Default was 20, but 600 corresponds to the whole EVE video
+	'model_report': 5,  # Default was 20, but 600 corresponds to the whole EVE video
 }
 
 probe = {
@@ -32,6 +32,6 @@ probe = {
 }
 
 transcoder = {
-	'address': ['192.168.1.88:3000'],
-	'profile': [4000, 8000, 15000],
+	'address': ['192.168.1.120:3000'],
+	'profile': [7500, 15000, 30000],
 }
