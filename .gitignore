@@ -2,7 +2,4 @@
 A3C/__pycache__/
 A3C/envs/__pycache__/
 A3C/venv/
-Training/
 gym_media.egg-info/
-A3C/Training/A3C_model.h5
-A3C/Training/Reward Average.png
