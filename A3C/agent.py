@@ -50,7 +50,7 @@ parser.add_argument(
 parser.add_argument(
 	'-m',
 	'--max-eps',
-	default=500,
+	default=200,
 	type=int,
 	help='Global maximum number of episodes to run.'
 )
@@ -65,8 +65,8 @@ def train(env, global_model):
 
 	opt = tf.compat.v1.train.AdamOptimizer(args.lr, use_locking=True)
 
-	if os.path.isdir(config.training['save_path']):
-		os.system('rm ' + config.training['save_path'] + 'events.*')
+	# if os.path.isdir(config.training['save_path']):
+	# 	os.system('rm ' + config.training['save_path'] + 'events.*')
 
 	writer = tf.summary.create_file_writer(config.training['save_path'])
 
@@ -201,15 +201,18 @@ class Worker(threading.Thread):
 					time_count = 0
 
 					if done:  # done and print information
-						Worker.global_average_reward = a3c.record(
-							Worker.global_episode,
-							ep_reward,
-							self.worker_idx,
-							Worker.global_average_reward,
-							self.result_queue,
-							self.ep_loss,
-							ep_steps,
-						)
+						try:
+							Worker.global_average_reward = a3c.record(
+								Worker.global_episode,
+								ep_reward,
+								self.worker_idx,
+								Worker.global_average_reward,
+								self.result_queue,
+								self.ep_loss,
+								ep_steps,
+							)
+						except:
+							print('Error in Worker global episode {}'.format(Worker.global_episode))
 
 						with self.writer.as_default():
 							tf.summary.scalar('Total_Reward', ep_reward, step=Worker.global_episode)
@@ -373,13 +376,6 @@ def main():
 	print('Number of states: {}. Number of actions: {}'.format(state_size, action_size))
 	print('Training episodes: {}'.format(args.max_eps))
 	print('-------------------------------------')
-
-	# if config.api['enable']  == True:
-	#     api_server = threading.Thread(target=start_api_server, daemon=True)  # daemon=False, to loop the API server
-	#     print('API SERVER INFORMATION')
-	#     api_server.start()
-	#     time.sleep(1)
-	#     print('-------------------------------------')
 
 	global_model = a3c.ActorCriticModel(state_size, action_size)  # Global Network
 	global_model(tf.convert_to_tensor(np.random.random((1, state_size)), dtype=tf.float32))

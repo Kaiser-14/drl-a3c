@@ -9,6 +9,8 @@ import numpy as np
 import requests
 from gym import spaces
 from kafka import KafkaConsumer
+# from random import randint
+import random
 
 from A3C import config
 
@@ -41,11 +43,12 @@ class EveEnv(gym.Env):
 
 		self.profiles = config.transcoder['profile']
 		self.ep_steps = 0
+		self.br_background = 15
 
 		self.metrics_logs = open(config.training['save_path'] + 'metrics_training_' + str(self.idx), 'w')
 
 		# Observation range for the set of states
-		self.n_states = 10
+		self.n_states = 11
 		high = np.array([np.inf] * self.n_states)
 		self.observation_space = spaces.Box(-high, high, dtype=np.float32)
 
@@ -129,8 +132,15 @@ class EveEnv(gym.Env):
 
 		# Consume messages from API server
 		elif config.probe['data_plane'] == 'rest':
-			api_req_get = requests.get(config.probe['rest']['address'][self.idx])
-			probe_metrics = api_req_get.json()[self.idx]['value']
+			api_req_get = None
+			while not api_req_get:
+				api_req_get = requests.get(config.probe['rest']['address'][self.idx])
+				probe_metrics = api_req_get.json()[self.idx]['value']
+				if probe_metrics['blockiness'] is None:
+					api_req_get = None
+					time.sleep(5)
+
+				print(probe_metrics)
 
 		else:
 			print('Check data consumption in config file')
@@ -143,6 +153,7 @@ class EveEnv(gym.Env):
 			float(vce_metrics['stats']['enc_quality']['value'] / 1e+2),
 			float(round(vce_metrics['stats']['pid_cpu']['value'], 0) / 1e+3),
 			float(round(vce_metrics['stats']['pid_ram']['value'], -6) / 1e+9),
+			float(self.br_background/10),
 			# float(vce_metrics['stats']['num_fps']['value'] / 100),
 			# float(vce_site['stats']['act_bitrate']['value']),
 			# float(vce_site['stats']['max_bitrate']['value']),
@@ -163,10 +174,13 @@ class EveEnv(gym.Env):
 
 		# print(float(probe_metrics['blockiness']))
 		# print(float(probe_metrics['block_loss']))
-		reward_quality = 50*(
-				1/(1 + np.exp(-(float(probe_metrics['blockiness'])/float(probe_metrics['block_loss'])-2.5))))
+		reward_blockiness = 110*math.tanh(probe_metrics['blockiness']-0.55)
+		reward_blockloss = -min(max(0, probe_metrics['block_loss']-4), 20)
+		reward_quality = reward_blockiness + reward_blockloss
+		# reward_quality = 50*(
+		# 		1/(1 + np.exp(-(float(probe_metrics['blockiness'])/float(probe_metrics['block_loss']+0.0001)-2.5))))
 
-		reward_profile = 6.0 * action
+		reward_profile = 6.0 * action  # 6.0 * action
 
 		# Enable in case of including several rewards
 		# Total reward
@@ -174,28 +188,34 @@ class EveEnv(gym.Env):
 		rewards.extend((reward, reward_quality, reward_profile))
 		# print(rewards)
 
-		# info = {}
-		done = False
-		if self.ep_steps == config.training['model_report']:
-			done = True
-			self.ep_steps = 0
-
 		self.metrics_logs.write(
 			str(format(datetime.datetime.now().timestamp(), '.0f')) + '\t' +
 			str(action) + '\t' +  # Predicted action
 			str(format(self.state[0] * 1e+2, '.0f')) + '\t' +  # Actual bitrate site transcoder
 			str(format(self.state[1] * 1e+2, '.0f')) + '\t' +  # Maximum bitrate site transcoder
 			str(format(self.state[2] * 1e+2, '.0f')) + '\t' +  # Encoding quality site transcoder
-			str(format(self.state[3] * 1e+3, '.3f')) + '\t' +  # CPU usage site transcoder
+			str(format(self.state[3] * 1e+3, '.0f')) + '\t' +  # CPU usage site transcoder
 			str(format(self.state[4] * 1e+3, '.0f')) + '\t' +  # RAM usage site transcoder
-			str(format(self.state[5], '.2f')) + '\t' +  # Blockiness
-			str(format(self.state[6] * 1e+3, '.0f')) + '\t' +  # Spatial activity
-			str(format(self.state[7] * 1e+3, '.0f')) + '\t' +  # Block loss
-			str(format(self.state[8] * 1e+1, '.2f')) + '\t' +  # Blur
-			str(format(self.state[9] * 1e+3, '.0f')) + '\t' +  # Temporal Activity
+			str(format(self.state[5] * 10, '.0f')) + '\t' +  # Bitrate of traffic background
+			str(format(self.state[6], '.2f')) + '\t' +  # Blockiness
+			str(format(self.state[7] * 1e+3, '.0f')) + '\t' +  # Spatial activity
+			str(format(self.state[8] * 1e+3, '.0f')) + '\t' +  # Block loss
+			str(format(self.state[9] * 1e+1, '.2f')) + '\t' +  # Blur
+			str(format(self.state[10] * 1e+3, '.0f')) + '\t' +  # Temporal Activity
 			str(format(rewards[0], '.2f')) + '\n'  # Total Rewards
 		)
 		self.metrics_logs.flush()
+
+		# info = {}
+		done = False
+		if self.ep_steps == config.training['model_report']:
+			done = True
+			self.ep_steps = 0
+			self.br_background = random.choice([0.5, 1, 2, 5, 7, 15])  # randint(1, 15)
+			requests.post(
+				'http://' + config.transcoder['background'][0] + '/bitrate/' + str(self.br_background * 1000)
+			)
+			print('Background bitrate changed to {} Mbps'.format(self.br_background))
 
 		# self.action = action
 
@@ -207,6 +227,8 @@ class EveEnv(gym.Env):
 		#         1: float(vce_req_get['stats']['max_bitrate']['value']) / 2,
 		#         2: float(vce_req_get['stats']['max_bitrate']['value']) / 5
 		#     }
+
+		print('-------')
 
 		return np.array(self.state), reward, done, info
 
@@ -229,7 +251,7 @@ class EveEnv(gym.Env):
 
 		# Reset site transcoder to maximum bitrate
 		requests.post(
-			'http://' + config.transcoder['address'][self.idx] + '/bitrate/' + str(self.profiles[1])
+			'http://' + config.transcoder['address'][self.idx] + '/bitrate/' + str(self.profiles[2])
 		)
 
 		self.ep_steps = 0

@@ -1,5 +1,6 @@
 training = {
-	'env_name': 'A3C.envs.eve:Eve-v0',  # 'CartPole-v0' to test / 'A3C.envs.eve:Eve-v0' / 'A3C.envs.energy:Energy-v0' to deploy
+	'env_name': 'A3C.envs.eve:Eve-v0',
+	# 'CartPole-v0' to test / 'A3C.envs.eve:Eve-v0' / 'A3C.envs.energy:Energy-v0' to deploy
 	'save_path': './Training/',
 	'model_report': 5,  # Default was 20, but 600 corresponds to the whole EVE video
 }
@@ -9,7 +10,7 @@ probe = {
 	'kafka': {
 		'address': [
 			'192.168.1.88',
-			],
+		],
 		'topic': [
 			# [
 			# 	'metric.topic.Blockiness_es',
@@ -23,15 +24,16 @@ probe = {
 				'metric.topic.BlockLoss_gr',
 				'metric.topic.Blur_gr',
 				'metric.topic.TemporalActivity_gr']
-			]
+		]
 	},
 	'rest': {
 		'address': [
 			'http://localhost:5000/api/probe'
-			]}
+		]}
 }
 
 transcoder = {
 	'address': ['192.168.1.120:3000'],
-	'profile': [7500, 15000, 30000],
+	'profile': [7500, 15000, 25000],
+	'background': ['192.168.1.99:3000']
 }
