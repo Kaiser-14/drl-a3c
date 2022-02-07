@@ -1,0 +1,2610 @@
+/home/kaiser/Git/drl-a3c/venv/bin/python /home/kaiser/Git/drl-a3c/A3C/agent.py --train --num-workers 1
+2022-01-27 18:04:57.005919: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+Namespace(gamma=0.99, lr=0.001, max_eps=150, num_workers=1, train=True, update_freq=20)
+/home/kaiser/Git/drl-a3c/venv/lib/python3.8/site-packages/gym/logger.py:30: UserWarning: WARN: Box bound precision lowered by casting to float32
+  warnings.warn(colorize('%s: %s'%('WARN', msg % args), 'yellow'))
+-------------------------------------
+TRAINING INFORMATION
+Environment name: A3C.envs.eve:Eve-v0
+Number of states: 11. Number of actions: 3
+Training episodes: 150
+-------------------------------------
+2022-01-27 18:05:05.166889: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2022-01-27 18:05:05.172415: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcuda.so.1
+2022-01-27 18:05:05.224324: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-01-27 18:05:05.225031: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:01:00.0 name: GeForce RTX 2080 Ti computeCapability: 7.5
+coreClock: 1.545GHz coreCount: 68 deviceMemorySize: 10.76GiB deviceMemoryBandwidth: 573.69GiB/s
+2022-01-27 18:05:05.225103: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2022-01-27 18:05:05.235303: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.11
+2022-01-27 18:05:05.235504: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.11
+2022-01-27 18:05:05.237680: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2022-01-27 18:05:05.239432: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2022-01-27 18:05:05.244011: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2022-01-27 18:05:05.246227: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.11
+2022-01-27 18:05:05.246564: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.8
+2022-01-27 18:05:05.246884: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-01-27 18:05:05.247436: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-01-27 18:05:05.247931: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2022-01-27 18:05:05.248789: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2022-01-27 18:05:05.250671: I tensorflow/compiler/jit/xla_gpu_device.cc:99] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2022-01-27 18:05:05.251048: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-01-27 18:05:05.251600: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1720] Found device 0 with properties: 
+pciBusID: 0000:01:00.0 name: GeForce RTX 2080 Ti computeCapability: 7.5
+coreClock: 1.545GHz coreCount: 68 deviceMemorySize: 10.76GiB deviceMemoryBandwidth: 573.69GiB/s
+2022-01-27 18:05:05.251674: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2022-01-27 18:05:05.251722: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.11
+2022-01-27 18:05:05.251734: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.11
+2022-01-27 18:05:05.251746: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcufft.so.10
+2022-01-27 18:05:05.251757: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcurand.so.10
+2022-01-27 18:05:05.251767: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusolver.so.10
+2022-01-27 18:05:05.251778: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcusparse.so.11
+2022-01-27 18:05:05.251787: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudnn.so.8
+2022-01-27 18:05:05.251889: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-01-27 18:05:05.252281: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-01-27 18:05:05.252604: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1862] Adding visible gpu devices: 0
+2022-01-27 18:05:05.252653: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcudart.so.11.0
+2022-01-27 18:05:06.146200: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1261] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-01-27 18:05:06.146291: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1267]      0 
+2022-01-27 18:05:06.146305: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1280] 0:   N 
+2022-01-27 18:05:06.146752: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-01-27 18:05:06.147654: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-01-27 18:05:06.148221: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:941] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2022-01-27 18:05:06.148743: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1406] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 9999 MB memory) -> physical GPU (device: 0, name: GeForce RTX 2080 Ti, pci bus id: 0000:01:00.0, compute capability: 7.5)
+2022-01-27 18:05:06.345280: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublas.so.11
+2022-01-27 18:05:07.300195: I tensorflow/stream_executor/platform/default/dso_loader.cc:49] Successfully opened dynamic library libcublasLt.so.11
+Starting worker 0
+Probs tf.Tensor([[0.33285204 0.33338523 0.33376274]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.21, 0.3, 0.27, 0.254, 0.13, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.32592812 0.2978309  0.37624103]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.51, 0.15, 0.2, 0.0, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.33334267 0.29077283 0.37588456]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.3, 0.3, 0.12, 0.268, 0.132, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.3297508  0.29735583 0.37289333]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.08, 0.15, 0.24, 0.191, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.3294829  0.294833   0.37568405]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.11, 0.3, 0.25, 0.21, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 0 | Average Reward: 67 | Episode Reward: 67 | Loss: 250.789 | Steps: 4 | Worker: 0
+Saving best model to ./Training/, episode score: 67.41875337791373
+Probs tf.Tensor([[0.332678   0.33420122 0.33312085]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.06, 0.15, 0.24, 0.238, 0.131, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.35751608 0.3311596  0.3113243 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.12, 0.3, 0.24, 0.206, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.35358962 0.3394318  0.30697864]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.07, 0.15, 0.24, 0.182, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.3571291  0.32998237 0.31288853]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.08, 0.15, 0.23, 0.136, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.356995   0.32883358 0.3141714 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.13, 0.15, 0.25, 0.218, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 1 | Average Reward: 67 | Episode Reward: 55 | Loss: 166.598 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 55.41875337791373
+Probs tf.Tensor([[0.3318954  0.33506784 0.33303675]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.29, 0.3, 0.2, 0.25, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.3540743  0.3481394  0.29778633]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.11, 0.15, 0.22, 0.153, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.35197166 0.33647597 0.31155235]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.32, 0.188, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.3545264  0.33190662 0.31356695]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.07, 0.075, 0.32, 0.173, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.35396525 0.3315025  0.31453225]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.04, 0.075, 0.31, 0.129, 0.13, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 2 | Average Reward: 66 | Episode Reward: 37 | Loss: 54.833 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 37.41875337791373
+Probs tf.Tensor([[0.33068892 0.33693483 0.33237624]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.14, 0.15, 0.31, 0.202, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.3535145  0.3421531  0.30433244]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.14, 0.15, 0.35, 0.202, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.35420352 0.34190995 0.30388653]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.33, 0.162, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.35408497 0.34086633 0.3050487 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.27, 0.208, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.35332415 0.3425575  0.30411834]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.09, 0.3, 0.29, 0.2, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 3 | Average Reward: 66 | Episode Reward: 55 | Loss: 186.441 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 55.41875337791373
+Probs tf.Tensor([[0.32982314 0.33857846 0.33159843]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.1, 0.075, 0.33, 0.18, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.34994146 0.34400693 0.30605164]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.2, 0.3, 0.25, 0.242, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.3444024  0.36129493 0.29430264]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.15, 0.3, 0.26, 0.241, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.3422351  0.36129257 0.29647228]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.11, 0.3, 0.26, 0.249, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.3404134  0.36162913 0.29795745]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.29, 0.3, 0.29, 0.244, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 4 | Average Reward: 66 | Episode Reward: 67 | Loss: 305.677 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 67.41875337791373
+Probs tf.Tensor([[0.32865927 0.33773366 0.33360708]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.05, 0.075, 0.39, 0.21, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.34193188 0.34688511 0.311183  ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.07, 0.15, 0.37, 0.192, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.34026593 0.35114437 0.30858967]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.1, 0.3, 0.32, 0.171, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.33521536 0.36040395 0.30438069]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.08, 0.15, 0.34, 0.148, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.3402454  0.34986857 0.30988607]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.06, 0.15, 0.32, 0.142, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 5 | Average Reward: 66 | Episode Reward: 49 | Loss: 159.951 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 49.41875337791373
+Probs tf.Tensor([[0.32864922 0.33895707 0.33239374]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.18, 0.15, 0.3, 0.233, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.33688924 0.3569561  0.30615464]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.09, 0.075, 0.3, 0.179, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.33595243 0.34965798 0.3143896 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.11, 0.075, 0.25, 0.129, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.33622903 0.34829733 0.31547365]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.16, 0.15, 0.26, 0.227, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.33591717 0.35657626 0.3075066 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.12, 0.15, 0.24, 0.204, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 6 | Average Reward: 66 | Episode Reward: 37 | Loss: 83.101 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 37.41875337791373
+Probs tf.Tensor([[0.32755288 0.33897266 0.33347446]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.09, 0.075, 0.34, 0.151, 0.121, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.33094263 0.3521087  0.31694868]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.31, 0.185, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.3303517  0.35328436 0.31636393]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.11, 0.15, 0.29, 0.196, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.32880902 0.3588579  0.31233305]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.05, 0.15, 0.29, 0.18, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.32644737 0.3580152  0.3155374 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.06, 0.3, 0.31, 0.21, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 7 | Average Reward: 66 | Episode Reward: 43 | Loss: 143.559 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 43.41875337791373
+Probs tf.Tensor([[0.32680812 0.34007004 0.33312187]], shape=(1, 3), dtype=float32)
+Selected action 0
+[1.18, 0.075, 0.2, 0.0, 0.099, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.35565916 0.36446247 0.27987838]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.23, 0.15, 0.31, 0.204, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.32842112 0.36374792 0.3078309 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.1, 0.15, 0.25, 0.246, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.3232878  0.3641     0.31261215]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.11, 0.15, 0.21, 0.212, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.32371265 0.3630774  0.31320992]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.24, 0.15, 0.28, 0.247, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 8 | Average Reward: 66 | Episode Reward: 49 | Loss: 169.705 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 49.41875337791373
+Probs tf.Tensor([[0.32713544 0.34071296 0.3321516 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.22, 0.3, 0.29, 0.256, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.3153945 0.3801895 0.304416 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.27, 0.202, 0.121, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.31961766 0.367797   0.31258526]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.14, 0.15, 0.32, 0.235, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.3193152  0.36904547 0.31163928]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.33, 0.196, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.3200244 0.3620477 0.3179279]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.33, 0.3, 0.28, 0.2, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 9 | Average Reward: 65 | Episode Reward: 55 | Loss: 156.373 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 55.41875337791373
+Probs tf.Tensor([[0.3265454  0.34093773 0.33251688]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.2, 0.15, 0.32, 0.244, 0.121, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.3160755  0.37499675 0.30892774]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.1, 0.075, 0.37, 0.166, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.3157372  0.36591133 0.3183515 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.36, 0.194, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.314764   0.36676142 0.31847456]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.4, 0.19, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.3150242  0.36685887 0.31811702]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.06, 0.15, 0.36, 0.237, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 10 | Average Reward: 65 | Episode Reward: 31 | Loss: 53.925 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 31.41875337791373
+Probs tf.Tensor([[0.32674348 0.34112316 0.33213332]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.23, 0.3, 0.26, 0.231, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.3065162  0.3882623  0.30522153]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.33, 0.183, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.31164086 0.36978906 0.31857008]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.12, 0.15, 0.24, 0.217, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.30975804 0.3764118  0.31383014]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.18, 0.3, 0.27, 0.222, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.30503407 0.38738698 0.30757898]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.15, 0.3, 0.26, 0.23, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 11 | Average Reward: 65 | Episode Reward: 61 | Loss: 222.772 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 61.41875337791373
+Probs tf.Tensor([[0.32584798 0.34061086 0.33354113]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.19, 0.15, 0.25, 0.208, 0.121, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.30847046 0.37995738 0.31157222]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.22, 0.3, 0.26, 0.25, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.30247325 0.39178732 0.30573943]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.06, 0.075, 0.25, 0.206, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.30805415 0.372614   0.31933182]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.07, 0.075, 0.26, 0.155, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.30873725 0.37064767 0.32061505]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.14, 0.3, 0.26, 0.214, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 12 | Average Reward: 65 | Episode Reward: 49 | Loss: 132.989 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 49.41875337791373
+Probs tf.Tensor([[0.32637414 0.3407311  0.33289474]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.13, 0.15, 0.24, 0.22, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.30426306 0.38050556 0.31523138]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.06, 0.075, 0.28, 0.162, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.3060874  0.37197477 0.3219378 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.27, 0.3, 0.2, 0.28, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.30162516 0.39431757 0.30405724]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.1, 0.15, 0.25, 0.186, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.3041945  0.3784937  0.31731176]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.1, 0.075, 0.33, 0.137, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 13 | Average Reward: 65 | Episode Reward: 43 | Loss: 104.971 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 43.41875337791373
+Probs tf.Tensor([[0.32525668 0.3424081  0.3323352 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.06, 0.075, 0.32, 0.194, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.30403587 0.37432045 0.32164368]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.05, 0.15, 0.32, 0.212, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.30088195 0.37961674 0.31950134]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.1, 0.3, 0.39, 0.202, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.29644662 0.39005664 0.31349674]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.09, 0.15, 0.38, 0.198, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.30243143 0.38033012 0.31723845]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.04, 0.15, 0.33, 0.174, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 14 | Average Reward: 64 | Episode Reward: 49 | Loss: 158.341 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 49.41875337791373
+Probs tf.Tensor([[0.32417712 0.34297317 0.33284965]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.05, 0.075, 0.32, 0.181, 0.121, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.3015972  0.37549725 0.32290554]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.03, 0.15, 0.32, 0.184, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2983946  0.37997246 0.3216329 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.07, 0.15, 0.36, 0.175, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.29982    0.38069436 0.31948557]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.08, 0.15, 0.36, 0.198, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.29966074 0.38190413 0.3184352 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.07, 0.075, 0.4, 0.133, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 15 | Average Reward: 64 | Episode Reward: 37 | Loss: 84.331 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 37.41875337791373
+Probs tf.Tensor([[0.32566947 0.3423128  0.3320177 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.2, 0.3, 0.26, 0.231, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.293997   0.3970494  0.30895358]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.23, 0.3, 0.28, 0.25, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2946499  0.39858696 0.30676314]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.03, 0.15, 0.33, 0.228, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.29559517 0.38443667 0.31996813]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.15, 0.3, 0.25, 0.26, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2921701  0.39751357 0.31031635]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.12, 0.15, 0.32, 0.2, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 16 | Average Reward: 64 | Episode Reward: 67 | Loss: 231.54 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 67.41875337791373
+Probs tf.Tensor([[0.3245728  0.34436756 0.33105966]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.12, 0.3, 0.18, 0.26, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2881198 0.3993211 0.3125591]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.07, 0.075, 0.33, 0.154, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2972303  0.38013488 0.3226348 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.09, 0.15, 0.3, 0.177, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.29502413 0.3859403  0.31903553]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.05, 0.15, 0.26, 0.165, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.29425505 0.38426197 0.32148302]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.06, 0.3, 0.27, 0.196, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 17 | Average Reward: 64 | Episode Reward: 55 | Loss: 171.644 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 55.41875337791373
+Probs tf.Tensor([[0.32313713 0.34439972 0.33246312]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.16, 0.15, 0.24, 0.265, 0.13, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.29245257 0.39406306 0.31348434]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.06, 0.075, 0.31, 0.192, 0.131, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.29338208 0.384343   0.32227492]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.19, 0.3, 0.25, 0.234, 0.132, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.28702697 0.4029393  0.3100337 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.12, 0.15, 0.25, 0.164, 0.133, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2928297  0.38832113 0.31884915]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.15, 0.3, 0.24, 0.206, 0.133, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 18 | Average Reward: 64 | Episode Reward: 55 | Loss: 195.529 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 55.41875337791373
+Probs tf.Tensor([[0.3234167  0.34395137 0.3326319 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.13, 0.075, 0.29, 0.179, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.29205334 0.38714018 0.3208064 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.16, 0.3, 0.25, 0.247, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2828765  0.4054228  0.31170073]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.17, 0.15, 0.31, 0.21, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.28996012 0.3948612  0.31517866]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.16, 0.15, 0.24, 0.146, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2906386 0.3903964 0.318965 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.07, 0.075, 0.34, 0.144, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 19 | Average Reward: 64 | Episode Reward: 43 | Loss: 107.1 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 43.41875337791373
+Probs tf.Tensor([[0.32210454 0.3443516  0.33354393]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.36, 0.185, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.28754672 0.38972324 0.32273003]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.39, 0.3, 0.28, 0.246, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.28642786 0.41286185 0.3007102 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.23, 0.3, 0.26, 0.274, 0.131, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.28139335 0.41083458 0.307772  ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.2, 0.3, 0.26, 0.208, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.28167257 0.40683764 0.31148985]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.06, 0.075, 0.31, 0.187, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 20 | Average Reward: 64 | Episode Reward: 55 | Loss: 186.919 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 55.41875337791373
+Probs tf.Tensor([[0.32256874 0.3435783  0.33385292]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.11, 0.15, 0.25, 0.2, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.28338522 0.3945754  0.3220394 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.03, 0.075, 0.31, 0.181, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.28414685 0.38787514 0.327978  ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.2, 0.3, 0.25, 0.27, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.27808312 0.41033837 0.31157854]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.2, 0.075, 0.29, 0.225, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.28842267 0.39426598 0.3173113 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.42, 0.3, 0.29, 0.259, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 21 | Average Reward: 64 | Episode Reward: 49 | Loss: 149.504 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 49.41875337791373
+Probs tf.Tensor([[0.32132155 0.34463525 0.33404317]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.11, 0.15, 0.25, 0.192, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2820253  0.39318198 0.32479277]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.3, 0.185, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.28352162 0.38801277 0.32846567]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.1, 0.15, 0.2, 0.2, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.28212687 0.3927351  0.3251381 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.29, 0.129, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.28435582 0.38527018 0.33037394]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.1, 0.075, 0.31, 0.187, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 22 | Average Reward: 63 | Episode Reward: 31 | Loss: 47.955 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 31.41875337791373
+Probs tf.Tensor([[0.32275954 0.3431491  0.3340913 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.08, 0.15, 0.22, 0.117, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2824705  0.38732848 0.33020106]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.16, 0.3, 0.25, 0.248, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.27586234 0.40604183 0.31809583]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.11, 0.15, 0.3, 0.218, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2810283 0.3939901 0.3249816]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.28, 0.148, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.28358147 0.38487077 0.3315478 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.24, 0.3, 0.26, 0.235, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 23 | Average Reward: 63 | Episode Reward: 55 | Loss: 167.248 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 55.41875337791373
+Probs tf.Tensor([[0.3214713  0.34461185 0.33391684]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.07, 0.075, 0.33, 0.146, 0.13, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.28229284 0.38385755 0.3338496 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.12, 0.15, 0.24, 0.217, 0.132, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.28097507 0.39195132 0.32707357]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.1, 0.3, 0.26, 0.226, 0.132, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.27439448 0.40236193 0.32324362]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.11, 0.15, 0.24, 0.2, 0.132, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2809797 0.3908738 0.3281465]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.18, 0.15, 0.25, 0.248, 0.133, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 24 | Average Reward: 63 | Episode Reward: 49 | Loss: 156.785 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 49.41875337791373
+Probs tf.Tensor([[0.3212714  0.3449593  0.33376926]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.13, 0.15, 0.26, 0.208, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.27974257 0.3920494  0.32820806]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.21, 0.3, 0.26, 0.239, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2753128  0.40534914 0.319338  ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.2, 0.3, 0.27, 0.249, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.27481204 0.40580434 0.31938362]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.22, 0.15, 0.29, 0.251, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.28141993 0.3971841  0.32139593]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.35, 0.171, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 25 | Average Reward: 63 | Episode Reward: 55 | Loss: 156.77 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 55.41875337791373
+Probs tf.Tensor([[0.32114276 0.34488538 0.3339719 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.19, 0.15, 0.31, 0.206, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2792249  0.39387608 0.32689896]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.19, 0.15, 0.28, 0.224, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.27933753 0.39441332 0.32624912]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.32, 0.3, 0.28, 0.265, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2763389  0.4087334  0.31492773]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.27, 0.15, 0.35, 0.208, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2809479 0.3965666 0.3224855]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.1, 0.075, 0.42, 0.189, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 26 | Average Reward: 63 | Episode Reward: 49 | Loss: 128.01 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 49.41875337791373
+Probs tf.Tensor([[0.32111913 0.3456271  0.33325377]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.24, 0.3, 0.27, 0.236, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.273162  0.4057096 0.3211284]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.13, 0.15, 0.26, 0.215, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2767396  0.39193395 0.33132648]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.11, 0.15, 0.32, 0.215, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.27580893 0.39223626 0.3319548 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.05, 0.3, 0.24, 0.154, 0.13, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.27090505 0.39701328 0.3320817 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.22, 0.3, 0.26, 0.24, 0.13, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 27 | Average Reward: 63 | Episode Reward: 67 | Loss: 252.451 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 67.41875337791373
+Probs tf.Tensor([[0.3207274  0.34567    0.33360258]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.06, 0.3, 0.26, 0.224, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.26664752 0.4014229  0.33192956]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.19, 0.3, 0.27, 0.238, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.26907402 0.40538472 0.32554123]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.24, 0.3, 0.27, 0.218, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.27058658 0.40549037 0.32392305]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.25, 0.192, 0.13, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.27459013 0.39161968 0.33379018]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.16, 0.15, 0.25, 0.167, 0.13, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 28 | Average Reward: 63 | Episode Reward: 67 | Loss: 222.895 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 67.41875337791373
+Probs tf.Tensor([[0.31919554 0.34482002 0.3359844 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.05, 0.075, 0.33, 0.188, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.27038127 0.3856622  0.3439565 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.06, 0.15, 0.28, 0.164, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.26943314 0.38891977 0.34164712]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.03, 0.3, 0.28, 0.179, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.26338762 0.3993291  0.33728325]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.08, 0.15, 0.31, 0.137, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.26979306 0.38835737 0.3418496 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.06, 0.15, 0.28, 0.174, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 29 | Average Reward: 63 | Episode Reward: 49 | Loss: 156.057 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 49.41875337791373
+Probs tf.Tensor([[0.31874385 0.3453951  0.33586103]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.09, 0.075, 0.31, 0.214, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.26754373 0.38953    0.3429263 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.09, 0.15, 0.3, 0.188, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.26538134 0.39285883 0.34175983]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.09, 0.15, 0.33, 0.125, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.26599243 0.39003742 0.3439701 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.07, 0.3, 0.35, 0.133, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.26064527 0.4004951  0.3388596 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.07, 0.15, 0.35, 0.186, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 30 | Average Reward: 63 | Episode Reward: 49 | Loss: 162.341 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 49.41875337791373
+Probs tf.Tensor([[0.31735146 0.34692422 0.33572435]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.05, 0.075, 0.38, 0.142, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2622826  0.38860413 0.3491132 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.05, 0.3, 0.37, 0.172, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.254684   0.40510687 0.34020916]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.07, 0.15, 0.35, 0.186, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.25987247 0.39578786 0.34433967]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.09, 0.15, 0.36, 0.2, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.25991905 0.39734402 0.3427369 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.05, 0.15, 0.35, 0.123, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 31 | Average Reward: 63 | Episode Reward: 49 | Loss: 146.07 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 49.41875337791373
+Probs tf.Tensor([[0.3170148  0.34700486 0.3359804 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.14, 0.15, 0.34, 0.229, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.25635722 0.40416482 0.33947802]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.23, 0.3, 0.27, 0.228, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2529383  0.4159812  0.33108047]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.21, 0.15, 0.28, 0.223, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.25844538 0.4050805  0.33647418]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.37, 0.194, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2575524  0.39576936 0.3466783 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.14, 0.15, 0.31, 0.248, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 32 | Average Reward: 62 | Episode Reward: 49 | Loss: 121.277 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 49.41875337791373
+Probs tf.Tensor([[0.31719056 0.34719753 0.33561188]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.17, 0.3, 0.24, 0.266, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.24724323 0.41977996 0.3329768 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.04, 0.075, 0.3, 0.186, 0.131, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2536934  0.39640912 0.3498975 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.07, 0.075, 0.32, 0.181, 0.132, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2539412 0.3973956 0.3486632]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.26, 0.173, 0.132, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.25531846 0.39624828 0.34843332]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.2, 0.15, 0.26, 0.093, 0.133, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 33 | Average Reward: 62 | Episode Reward: 37 | Loss: 62.987 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 37.41875337791373
+Probs tf.Tensor([[0.3157152  0.34898168 0.33530316]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.24, 0.216, 0.121, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2508338  0.40892747 0.3402387 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.24, 0.22, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.25076604 0.40918422 0.3400497 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.2, 0.15, 0.19, 0.188, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.25280318 0.40803695 0.3391599 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.11, 0.15, 0.26, 0.248, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2495344  0.40988633 0.34057933]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.31, 0.141, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 34 | Average Reward: 62 | Episode Reward: 43 | Loss: 94.443 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 43.41875337791373
+Probs tf.Tensor([[0.31474194 0.35020316 0.3350549 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.1, 0.15, 0.26, 0.245, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.24691842 0.41321516 0.33986637]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.04, 0.15, 0.29, 0.218, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.24575604 0.40999672 0.34424722]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.15, 0.3, 0.24, 0.216, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.24252778 0.4236514  0.33382073]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.32, 0.171, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.24919395 0.40383267 0.34697336]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.04, 0.075, 0.24, 0.172, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 35 | Average Reward: 62 | Episode Reward: 43 | Loss: 92.075 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 43.41875337791373
+Probs tf.Tensor([[0.31517622 0.34983218 0.3349916 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.36, 0.2, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.24652374 0.40959865 0.34387758]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.31, 0.218, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.24553785 0.4176168  0.33684537]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.13, 0.3, 0.25, 0.165, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2417515  0.42332387 0.3349247 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.41, 0.3, 0.3, 0.267, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.243696   0.43925965 0.3170443 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.45, 0.3, 0.29, 0.252, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 36 | Average Reward: 62 | Episode Reward: 61 | Loss: 261.027 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 61.41875337791373
+Probs tf.Tensor([[0.31480384 0.3506136  0.33458254]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.16, 0.3, 0.28, 0.234, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.23741497 0.43085065 0.33173433]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.13, 0.15, 0.35, 0.222, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.24204081 0.41976893 0.3381903 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.21, 0.15, 0.3, 0.168, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.24471332 0.4181911  0.33709562]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.12, 0.15, 0.35, 0.226, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.24182399 0.4196558  0.33852023]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.07, 0.15, 0.29, 0.21, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 37 | Average Reward: 62 | Episode Reward: 55 | Loss: 147.66 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 55.41875337791373
+Probs tf.Tensor([[0.31411958 0.35154414 0.33433628]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.29, 0.3, 0.28, 0.265, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.23576887 0.44044513 0.32378596]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.26, 0.15, 0.28, 0.238, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.24233496 0.4275443  0.33012074]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.31, 0.213, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2399298  0.4227754  0.33729473]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.31, 0.3, 0.29, 0.242, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.23627432 0.44003364 0.323692  ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.32, 0.221, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 38 | Average Reward: 62 | Episode Reward: 55 | Loss: 146.864 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 55.41875337791373
+Probs tf.Tensor([[0.31314144 0.3522092  0.33464938]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.26, 0.3, 0.27, 0.248, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.23280932 0.44200966 0.32518098]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.19, 0.15, 0.27, 0.247, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.23809043 0.42911264 0.33279696]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.09, 0.075, 0.34, 0.229, 0.131, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.23837417 0.42036146 0.34126434]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.19, 0.3, 0.26, 0.239, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.23199128 0.43909362 0.32891512]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.05, 0.3, 0.2, 0.24, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 39 | Average Reward: 62 | Episode Reward: 61 | Loss: 206.322 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 61.41875337791373
+Probs tf.Tensor([[0.3134094  0.351667   0.33492365]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.26, 0.15, 0.28, 0.244, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2367007  0.43393144 0.3293679 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.13, 0.15, 0.3, 0.212, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.23436776 0.4275116  0.3381207 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.11, 0.3, 0.19, 0.256, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.22981393 0.43753326 0.3326529 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.15, 0.3, 0.24, 0.235, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.22956489 0.4390664  0.3313687 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.28, 0.252, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 40 | Average Reward: 62 | Episode Reward: 67 | Loss: 254.401 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 67.41875337791373
+Probs tf.Tensor([[0.31095228 0.35280275 0.33624494]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.28, 0.15, 0.27, 0.203, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.23444001 0.4327948  0.3327652 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.07, 0.075, 0.31, 0.198, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2335259  0.41995472 0.34651935]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.07, 0.15, 0.23, 0.238, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.23135164 0.426376   0.3422723 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.35, 0.237, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.23217277 0.42406017 0.34376702]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.05, 0.15, 0.32, 0.133, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 41 | Average Reward: 61 | Episode Reward: 37 | Loss: 74.986 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 37.41875337791373
+Probs tf.Tensor([[0.31081906 0.35339978 0.33578116]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.32, 0.3, 0.26, 0.262, 0.121, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.22560093 0.44920358 0.3251955 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.3, 0.3, 0.29, 0.233, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.22514796 0.4478341  0.32701793]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.21, 0.3, 0.31, 0.236, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.22315452 0.44577396 0.3310716 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.2, 0.3, 0.27, 0.231, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2239621  0.44403365 0.33200422]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.18, 0.3, 0.23, 0.241, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 42 | Average Reward: 61 | Episode Reward: 73 | Loss: 274.862 | Steps: 4 | Worker: 0
+Saving best model to ./Training/, episode score: 73.41875337791373
+Probs tf.Tensor([[0.31078506 0.35274023 0.33647472]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.23, 0.15, 0.27, 0.237, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.22745748 0.43489853 0.33764395]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.16, 0.15, 0.28, 0.229, 0.121, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.22621204 0.4319873  0.34180063]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.12, 0.3, 0.29, 0.245, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.21920405 0.44229317 0.3385028 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.22, 0.3, 0.27, 0.238, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.22094336 0.44520646 0.3338502 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.07, 0.075, 0.35, 0.208, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 43 | Average Reward: 61 | Episode Reward: 49 | Loss: 125.85 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 49.41875337791373
+Probs tf.Tensor([[0.30872092 0.35304952 0.33822954]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.06, 0.075, 0.27, 0.149, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.22740796 0.41720852 0.3553835 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.08, 0.15, 0.29, 0.24, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.22202715 0.43021098 0.34776193]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.27, 0.21, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2237531 0.4304687 0.3457782]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.22, 0.3, 0.27, 0.245, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.21804273 0.44591987 0.3360374 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.08, 0.15, 0.26, 0.165, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 44 | Average Reward: 61 | Episode Reward: 49 | Loss: 159.786 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 49.41875337791373
+Probs tf.Tensor([[0.30897343 0.35305077 0.33797577]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.07, 0.15, 0.2, 0.186, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.22208136 0.42566568 0.35225293]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.1, 0.3, 0.23, 0.188, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.21637009 0.43817547 0.34545442]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.05, 0.075, 0.29, 0.134, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.22412649 0.4178258  0.35804775]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.09, 0.15, 0.25, 0.202, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.22055838 0.42852893 0.35091272]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.3, 0.241, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 45 | Average Reward: 61 | Episode Reward: 49 | Loss: 124.627 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 49.41875337791373
+Probs tf.Tensor([[0.30679366 0.35422677 0.33897957]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.17, 0.3, 0.23, 0.245, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.21249627 0.4462227  0.3412811 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.25, 0.3, 0.19, 0.239, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.21471009 0.4471352  0.3381547 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.11, 0.15, 0.27, 0.233, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.21689725 0.43365803 0.34944478]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.09, 0.075, 0.33, 0.185, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.21968658 0.42556888 0.3547445 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.29, 0.3, 0.27, 0.25, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 46 | Average Reward: 61 | Episode Reward: 61 | Loss: 181.107 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 61.41875337791373
+Probs tf.Tensor([[0.3067563  0.3539199  0.33932388]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.09, 0.3, 0.23, 0.171, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.21195476 0.43879983 0.34924543]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.35, 0.196, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.21647613 0.42709866 0.3564252 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.13, 0.3, 0.26, 0.263, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.20856062 0.44717044 0.34426892]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.16, 0.15, 0.28, 0.213, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.21511692 0.4351765  0.34970656]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.07, 0.075, 0.37, 0.202, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 47 | Average Reward: 61 | Episode Reward: 49 | Loss: 115.689 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 49.41875337791373
+Probs tf.Tensor([[0.30633453 0.35433108 0.3393344 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.16, 0.15, 0.32, 0.194, 0.121, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.21313202 0.43482646 0.3520415 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.13, 0.3, 0.33, 0.226, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.20655794 0.44652486 0.3469172 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.06, 0.15, 0.35, 0.239, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.21085356 0.43467772 0.35446867]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.16, 0.15, 0.27, 0.24, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.21353708 0.43661714 0.3498458 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.34, 0.231, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 48 | Average Reward: 61 | Episode Reward: 55 | Loss: 158.452 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 55.41875337791373
+Probs tf.Tensor([[0.30528563 0.35493904 0.33977535]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.17, 0.15, 0.27, 0.184, 0.121, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2125348  0.43444836 0.35301685]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.14, 0.15, 0.31, 0.208, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.21079595 0.43601403 0.35319   ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.09, 0.3, 0.29, 0.22, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.20544818 0.44487447 0.3496774 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.04, 0.15, 0.31, 0.206, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.21038675 0.43173155 0.35788167]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.11, 0.15, 0.27, 0.204, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 49 | Average Reward: 61 | Episode Reward: 55 | Loss: 167.731 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 55.41875337791373
+Probs tf.Tensor([[0.3024541  0.35721442 0.34033147]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.25, 0.3, 0.23, 0.243, 0.121, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.20512445 0.4527829  0.34209266]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.18, 0.3, 0.28, 0.264, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.20233423 0.4535225  0.34414324]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.07, 0.15, 0.28, 0.198, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.20864291 0.4341872  0.35716993]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.2, 0.3, 0.17, 0.235, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2064054  0.44923195 0.34436262]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.27, 0.18, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 50 | Average Reward: 61 | Episode Reward: 61 | Loss: 175.376 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 61.41875337791373
+Probs tf.Tensor([[0.3027961  0.35632014 0.34088376]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.07, 0.15, 0.21, 0.174, 0.121, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.20899414 0.43227395 0.35873196]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.27, 0.158, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.21101974 0.42721906 0.36176118]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.3, 0.171, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.20989074 0.42892903 0.36118028]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.14, 0.15, 0.25, 0.227, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.20694545 0.4395956  0.3534589 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.36, 0.3, 0.21, 0.276, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 51 | Average Reward: 61 | Episode Reward: 43 | Loss: 117.944 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 43.41875337791373
+Probs tf.Tensor([[0.30203494 0.35692963 0.34103543]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.16, 0.15, 0.22, 0.223, 0.121, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.20679413 0.44002986 0.35317597]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.09, 0.15, 0.28, 0.248, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.20407882 0.4406769  0.3552443 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.23, 0.15, 0.27, 0.214, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.20661396 0.44314128 0.3502448 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.16, 0.3, 0.25, 0.214, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.20092067 0.45089343 0.34818593]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.19, 0.3, 0.28, 0.202, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 52 | Average Reward: 61 | Episode Reward: 61 | Loss: 227.77 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 61.41875337791373
+Probs tf.Tensor([[0.30243257 0.35695118 0.34061623]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.16, 0.15, 0.27, 0.226, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.20329313 0.44265583 0.35405105]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.14, 0.15, 0.29, 0.222, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.20263588 0.4421942  0.3551699 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.31, 0.3, 0.28, 0.264, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.19847049 0.46022448 0.34130505]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.16, 0.15, 0.3, 0.202, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.20297812 0.44183898 0.35518292]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.14, 0.3, 0.34, 0.233, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 53 | Average Reward: 61 | Episode Reward: 61 | Loss: 219.211 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 61.41875337791373
+Probs tf.Tensor([[0.30002883 0.3585677  0.34140348]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.18, 0.15, 0.32, 0.237, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.19905946 0.44704238 0.35389817]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.11, 0.15, 0.22, 0.224, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.20160127 0.44055334 0.35784537]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.09, 0.075, 0.33, 0.133, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.20428716 0.43048862 0.36522427]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.16, 0.15, 0.27, 0.18, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.2015848  0.44068435 0.3577308 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.19, 0.15, 0.32, 0.238, 0.13, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 54 | Average Reward: 61 | Episode Reward: 43 | Loss: 98.486 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 43.41875337791373
+Probs tf.Tensor([[0.29955763 0.3597019  0.34074044]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.17, 0.15, 0.34, 0.188, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.197166   0.44606817 0.35676587]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.36, 0.198, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.19941533 0.4379713  0.36261338]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.13, 0.15, 0.31, 0.241, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.19641921 0.4474901  0.3560907 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.23, 0.3, 0.23, 0.242, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.19417489 0.45885393 0.3469712 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.31, 0.23, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 55 | Average Reward: 60 | Episode Reward: 49 | Loss: 146.279 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 49.41875337791373
+Probs tf.Tensor([[0.29566246 0.3638864  0.34045118]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.11, 0.15, 0.25, 0.218, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.19655809 0.44566572 0.3577762 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.12, 0.3, 0.25, 0.251, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.1905488  0.45916748 0.35028365]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.1, 0.15, 0.24, 0.164, 0.13, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.19824553 0.44112483 0.36062968]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.11, 0.15, 0.25, 0.232, 0.13, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.19615349 0.446708   0.35713857]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.17, 0.3, 0.26, 0.191, 0.131, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 56 | Average Reward: 60 | Episode Reward: 61 | Loss: 207.67 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 61.41875337791373
+Probs tf.Tensor([[0.29564586 0.36367622 0.34067792]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.32, 0.3, 0.22, 0.236, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.19106002 0.46544906 0.3434909 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.04, 0.075, 0.27, 0.181, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.19761741 0.43759137 0.36479118]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.26, 0.3, 0.22, 0.25, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18993792 0.46507806 0.34498408]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.29, 0.3, 0.19, 0.202, 0.121, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.19270472 0.46125752 0.34603778]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.13, 0.15, 0.24, 0.253, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 57 | Average Reward: 60 | Episode Reward: 61 | Loss: 202.696 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 61.41875337791373
+Probs tf.Tensor([[0.29341117 0.36524343 0.3413454 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.29, 0.186, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.19463396 0.44133982 0.3640262 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.14, 0.3, 0.26, 0.231, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18622553 0.46266344 0.35111102]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.35, 0.19, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.19296351 0.44340074 0.36363575]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.22, 0.3, 0.27, 0.192, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18748473 0.46253556 0.34997967]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.07, 0.075, 0.32, 0.189, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 58 | Average Reward: 60 | Episode Reward: 43 | Loss: 108.777 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 43.41875337791373
+Probs tf.Tensor([[0.29256597 0.36598644 0.34144756]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.18, 0.15, 0.34, 0.229, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18834312 0.45523316 0.35642368]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.35, 0.217, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18819329 0.45354986 0.35825682]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.16, 0.15, 0.3, 0.2, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.1901712  0.45096678 0.35886204]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.32, 0.3, 0.25, 0.245, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18685696 0.46794185 0.34520113]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.22, 0.15, 0.27, 0.215, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 59 | Average Reward: 60 | Episode Reward: 55 | Loss: 171.823 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 55.41875337791373
+Probs tf.Tensor([[0.29196015 0.36730877 0.34073105]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.37, 0.196, 0.133, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18950981 0.4449753  0.36551487]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.04, 0.075, 0.32, 0.189, 0.134, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.19109511 0.44127363 0.36763132]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.19, 0.15, 0.33, 0.227, 0.135, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18693106 0.45630872 0.3567603 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.19, 0.15, 0.32, 0.241, 0.135, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18686606 0.45705265 0.35608134]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.13, 0.3, 0.24, 0.198, 0.135, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 60 | Average Reward: 60 | Episode Reward: 43 | Loss: 135.4 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 43.41875337791373
+Probs tf.Tensor([[0.291718   0.36680067 0.3414813 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.06, 0.075, 0.37, 0.126, 0.121, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.1908958  0.43962276 0.36948147]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.07, 0.075, 0.29, 0.161, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.19178817 0.44045568 0.3677562 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.04, 0.3, 0.34, 0.194, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18253021 0.4599888  0.3574809 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.07, 0.15, 0.32, 0.175, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18766253 0.44778815 0.3645493 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.04, 0.15, 0.26, 0.098, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 61 | Average Reward: 60 | Episode Reward: 43 | Loss: 125.576 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 43.41875337791373
+Probs tf.Tensor([[0.29218477 0.3675286  0.3402866 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.32, 0.163, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.1901349  0.4429929  0.36687225]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.12, 0.3, 0.25, 0.226, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18278113 0.46447876 0.35274008]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.17, 0.15, 0.26, 0.156, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18936725 0.44988328 0.36074954]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.19, 0.3, 0.27, 0.233, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18196797 0.46798605 0.35004592]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.2, 0.3, 0.27, 0.239, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 62 | Average Reward: 60 | Episode Reward: 61 | Loss: 241.912 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 61.41875337791373
+Probs tf.Tensor([[0.28979486 0.37061772 0.33958742]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.05, 0.075, 0.29, 0.15, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.19031762 0.4395242  0.37015826]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.04, 0.075, 0.25, 0.18, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.19049196 0.4404548  0.3690533 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.11, 0.3, 0.23, 0.222, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18249653 0.46293557 0.35456792]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.07, 0.075, 0.31, 0.156, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18946746 0.4413644  0.36916813]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.05, 0.3, 0.22, 0.184, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 63 | Average Reward: 60 | Episode Reward: 43 | Loss: 130.363 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 43.41875337791373
+Probs tf.Tensor([[0.2935893 0.3660905 0.3403202]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.14, 0.15, 0.33, 0.198, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18459417 0.4518243  0.36358154]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.1, 0.3, 0.25, 0.24, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18130614 0.46259123 0.35610268]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.06, 0.075, 0.23, 0.14, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.19241573 0.43574685 0.37183747]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.32, 0.3, 0.28, 0.233, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18160856 0.4698609  0.3485305 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.11, 0.15, 0.35, 0.242, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 64 | Average Reward: 60 | Episode Reward: 55 | Loss: 163.563 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 55.41875337791373
+Probs tf.Tensor([[0.2920644  0.36687455 0.34106106]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.09, 0.075, 0.33, 0.148, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18935236 0.4374441  0.3732035 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.06, 0.3, 0.37, 0.165, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18096453 0.45610705 0.3629284 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.09, 0.15, 0.35, 0.194, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18437643 0.44729972 0.36832386]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.09, 0.15, 0.35, 0.202, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18411234 0.44793224 0.3679554 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.06, 0.15, 0.32, 0.129, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 65 | Average Reward: 60 | Episode Reward: 49 | Loss: 140.258 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 49.41875337791373
+Probs tf.Tensor([[0.29184425 0.36808616 0.34006962]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.14, 0.15, 0.32, 0.208, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18433134 0.4485914  0.36707723]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.37, 0.18, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.1867854  0.43949428 0.37372035]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.14, 0.15, 0.29, 0.204, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18533061 0.4474006  0.3672688 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.3, 0.3, 0.27, 0.241, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18140063 0.4663175  0.35228196]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.13, 0.15, 0.25, 0.233, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 66 | Average Reward: 59 | Episode Reward: 49 | Loss: 144.254 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 49.41875337791373
+Probs tf.Tensor([[0.29237112 0.36808294 0.33954594]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.32, 0.3, 0.24, 0.223, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18320964 0.46416485 0.35262555]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.2, 0.15, 0.24, 0.224, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18680131 0.4492037  0.363995  ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.16, 0.15, 0.26, 0.208, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18629397 0.4469767  0.3667294 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.14, 0.15, 0.28, 0.245, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.1844067  0.44963065 0.36596265]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.28, 0.3, 0.12, 0.253, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 67 | Average Reward: 59 | Episode Reward: 61 | Loss: 190.807 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 61.41875337791373
+Probs tf.Tensor([[0.29066357 0.36922818 0.34010828]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.16, 0.15, 0.27, 0.185, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.185758   0.446261   0.36798102]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.06, 0.075, 0.29, 0.164, 0.13, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18844414 0.43518794 0.37636796]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.08, 0.3, 0.24, 0.147, 0.13, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18456885 0.4514724  0.3639588 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.08, 0.15, 0.22, 0.192, 0.13, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18720865 0.44255716 0.37023416]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.11, 0.15, 0.23, 0.202, 0.131, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 68 | Average Reward: 59 | Episode Reward: 49 | Loss: 137.783 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 49.41875337791373
+Probs tf.Tensor([[0.29290864 0.36680284 0.3402885 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.26, 0.3, 0.21, 0.264, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18115737 0.4669189  0.35192373]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.2, 0.15, 0.22, 0.241, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18567045 0.4519073  0.36242223]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.22, 0.3, 0.1, 0.26, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18534805 0.46204218 0.35260975]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.23, 0.3, 0.23, 0.264, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18016104 0.46673974 0.35309917]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.24, 0.3, 0.23, 0.262, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 69 | Average Reward: 59 | Episode Reward: 73 | Loss: 292.178 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 73.41875337791373
+Probs tf.Tensor([[0.29200676 0.3686395  0.3393537 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.26, 0.3, 0.28, 0.24, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17779666 0.46689638 0.35530698]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.37, 0.194, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.1832439  0.44067296 0.37608317]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.17, 0.3, 0.26, 0.269, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17717056 0.46555033 0.35727903]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.1, 0.15, 0.26, 0.228, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18277861 0.44722402 0.3699973 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.14, 0.3, 0.26, 0.25, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 70 | Average Reward: 59 | Episode Reward: 61 | Loss: 202.986 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 61.41875337791373
+Probs tf.Tensor([[0.29268393 0.36647585 0.3408402 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.03, 0.15, 0.31, 0.212, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.1808624  0.4424847  0.37665296]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.32, 0.179, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18402477 0.43625164 0.37972355]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.16, 0.15, 0.32, 0.241, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17931779 0.45070133 0.36998087]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.04, 0.075, 0.36, 0.164, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.1835985  0.4344959  0.38190562]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.25, 0.3, 0.28, 0.249, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 71 | Average Reward: 59 | Episode Reward: 43 | Loss: 108.351 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 43.41875337791373
+Probs tf.Tensor([[0.29186058 0.36742538 0.34071407]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.37, 0.3, 0.31, 0.256, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17610312 0.46928057 0.35461625]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.31, 0.3, 0.28, 0.214, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17788644 0.4632125  0.3589011 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.16, 0.15, 0.27, 0.223, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18157741 0.44588125 0.3725413 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.09, 0.15, 0.27, 0.206, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18191792 0.44164506 0.376437  ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.2, 0.15, 0.27, 0.226, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 72 | Average Reward: 59 | Episode Reward: 61 | Loss: 171.086 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 61.41875337791373
+Probs tf.Tensor([[0.29026824 0.36827087 0.3414609 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.32, 0.3, 0.25, 0.212, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17838942 0.46192735 0.35968325]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.29, 0.3, 0.2, 0.25, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17870975 0.4620858  0.35920447]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.1, 0.15, 0.24, 0.131, 0.131, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.1848439  0.43537357 0.37978253]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.08, 0.3, 0.24, 0.172, 0.132, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17981523 0.4501555  0.37002927]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.19, 0.3, 0.26, 0.224, 0.132, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 73 | Average Reward: 59 | Episode Reward: 73 | Loss: 278.019 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 73.41875337791373
+Probs tf.Tensor([[0.2907501  0.36687323 0.34237662]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.27, 0.3, 0.24, 0.233, 0.121, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17622826 0.45948762 0.36428416]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.17, 0.15, 0.28, 0.236, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17861412 0.4448111  0.37657475]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.12, 0.15, 0.25, 0.249, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17916834 0.44296125 0.3778704 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.16, 0.15, 0.2, 0.2, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18255907 0.43968722 0.3777537 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.07, 0.075, 0.27, 0.177, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 74 | Average Reward: 59 | Episode Reward: 49 | Loss: 103.297 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 49.41875337791373
+Probs tf.Tensor([[0.28782845 0.36793628 0.34423527]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.26, 0.3, 0.28, 0.263, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17251553 0.46173462 0.3657499 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.22, 0.3, 0.24, 0.246, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17417836 0.4579595  0.3678621 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.09, 0.075, 0.28, 0.157, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18241563 0.42834687 0.3892374 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.28, 0.3, 0.26, 0.26, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17334692 0.46165365 0.36499938]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.23, 0.15, 0.3, 0.21, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 75 | Average Reward: 59 | Episode Reward: 61 | Loss: 178.398 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 61.41875337791373
+Probs tf.Tensor([[0.2881741  0.36745387 0.34437197]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.05, 0.075, 0.33, 0.174, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17962788 0.42731556 0.3930566 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.32, 0.17, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17986897 0.42804882 0.39208215]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.21, 0.3, 0.28, 0.254, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17155002 0.45761088 0.37083915]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.17, 0.15, 0.26, 0.23, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17735487 0.4412316  0.3814135 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.07, 0.075, 0.35, 0.186, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 76 | Average Reward: 59 | Episode Reward: 37 | Loss: 86.216 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 37.41875337791373
+Probs tf.Tensor([[0.28778842 0.3663224  0.34588915]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.19, 0.15, 0.31, 0.2, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17663239 0.43885905 0.38450858]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.17, 0.15, 0.31, 0.226, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17575459 0.4400406  0.3842048 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.13, 0.15, 0.32, 0.176, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17694953 0.4347221  0.38832834]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.17, 0.15, 0.32, 0.218, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17563136 0.4396722  0.38469636]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.36, 0.3, 0.29, 0.264, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 77 | Average Reward: 59 | Episode Reward: 55 | Loss: 171.289 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 55.41875337791373
+Probs tf.Tensor([[0.29007807 0.36460677 0.34531513]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.06, 0.075, 0.33, 0.186, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17839698 0.42614093 0.39546207]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.22, 0.15, 0.27, 0.227, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17651108 0.4409876  0.38250136]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.31, 0.187, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17879084 0.4266776  0.39453158]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.17, 0.15, 0.29, 0.19, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17677991 0.43656287 0.38665724]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.19, 0.15, 0.26, 0.196, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 78 | Average Reward: 59 | Episode Reward: 37 | Loss: 83.439 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 37.41875337791373
+Probs tf.Tensor([[0.28553876 0.368396   0.34606525]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.26, 0.178, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17786019 0.4348779  0.3872619 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.09, 0.075, 0.32, 0.17, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17872699 0.4267264  0.39454663]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.11, 0.3, 0.25, 0.196, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17376274 0.44719785 0.37903938]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.24, 0.3, 0.25, 0.183, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17388934 0.45108342 0.37502724]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.14, 0.3, 0.25, 0.222, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 79 | Average Reward: 59 | Episode Reward: 61 | Loss: 235.515 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 61.41875337791373
+Probs tf.Tensor([[0.2866521  0.367308   0.34603992]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.27, 0.154, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18083978 0.42257223 0.39658797]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.1, 0.075, 0.33, 0.179, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17809819 0.4264991  0.3954028 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.2, 0.3, 0.26, 0.24, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17150135 0.4526055  0.37589315]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.09, 0.075, 0.29, 0.14, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18067528 0.42229602 0.39702874]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.29, 0.3, 0.28, 0.231, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 80 | Average Reward: 59 | Episode Reward: 43 | Loss: 126.852 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 43.41875337791373
+Probs tf.Tensor([[0.28741074 0.36658368 0.3460056 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.17, 0.15, 0.3, 0.206, 0.121, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.1766658  0.43419746 0.38913676]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.29, 0.3, 0.29, 0.264, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17141125 0.45542985 0.37315896]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.19, 0.3, 0.27, 0.25, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17179379 0.4502229  0.37798333]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.21, 0.15, 0.37, 0.18, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17512012 0.43541583 0.38946408]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.25, 0.3, 0.26, 0.259, 0.13, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 81 | Average Reward: 59 | Episode Reward: 67 | Loss: 246.754 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 67.41875337791373
+Probs tf.Tensor([[0.28723606 0.36584994 0.346914  ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.07, 0.075, 0.31, 0.186, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17949165 0.41889834 0.40161   ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.22, 0.3, 0.27, 0.254, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17206259 0.447701   0.3802364 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.21, 0.15, 0.3, 0.242, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17577396 0.43474227 0.38948375]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.12, 0.15, 0.28, 0.226, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17663403 0.42949113 0.3938748 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.33, 0.136, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 82 | Average Reward: 59 | Episode Reward: 43 | Loss: 99.189 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 43.41875337791373
+Probs tf.Tensor([[0.28757125 0.3633545  0.34907427]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.3, 0.25, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17557533 0.42979282 0.39463186]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.06, 0.075, 0.33, 0.184, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17919137 0.41567394 0.4051347 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.2, 0.3, 0.26, 0.192, 0.13, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17442101 0.4389514  0.38662758]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.12, 0.15, 0.29, 0.224, 0.13, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17655268 0.42647165 0.39697567]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.08, 0.15, 0.26, 0.216, 0.13, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 83 | Average Reward: 59 | Episode Reward: 49 | Loss: 134.736 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 49.41875337791373
+Probs tf.Tensor([[0.28808054 0.3634402  0.34847927]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.26, 0.3, 0.26, 0.255, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17356418 0.44345564 0.3829802 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.33, 0.174, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17997813 0.41339898 0.4066228 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.12, 0.15, 0.24, 0.194, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17986333 0.42103374 0.39910293]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.18, 0.15, 0.2, 0.209, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.1809941  0.42375755 0.39524835]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.21, 0.2, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 84 | Average Reward: 58 | Episode Reward: 49 | Loss: 115.2 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 49.41875337791373
+Probs tf.Tensor([[0.28706273 0.3654241  0.3475132 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.24, 0.3, 0.24, 0.233, 0.121, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17550175 0.43968323 0.38481498]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.31, 0.3, 0.22, 0.229, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17678046 0.44144174 0.38177785]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.25, 0.216, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17963028 0.42297408 0.3973956 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.15, 0.3, 0.25, 0.183, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17647095 0.433024   0.39050505]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.09, 0.3, 0.23, 0.208, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 85 | Average Reward: 59 | Episode Reward: 73 | Loss: 274.135 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 73.41875337791373
+Probs tf.Tensor([[0.2879233  0.36363813 0.34843862]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.07, 0.075, 0.31, 0.175, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18088344 0.40970755 0.40940905]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.32, 0.3, 0.28, 0.255, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17379355 0.44276443 0.38344195]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.12, 0.15, 0.29, 0.217, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17779098 0.42038223 0.40182677]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.23, 0.3, 0.27, 0.167, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17604691 0.43294567 0.3910074 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.31, 0.3, 0.27, 0.269, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 86 | Average Reward: 59 | Episode Reward: 61 | Loss: 234.717 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 61.41875337791373
+Probs tf.Tensor([[0.28682268 0.36415336 0.34902403]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.04, 0.075, 0.35, 0.137, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18033905 0.403592   0.41606897]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.09, 0.3, 0.38, 0.174, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17197959 0.42713055 0.40088984]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.11, 0.15, 0.36, 0.218, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17467032 0.41797185 0.40735784]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.04, 0.15, 0.31, 0.167, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17818144 0.41087666 0.4109419 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.09, 0.15, 0.36, 0.142, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 87 | Average Reward: 59 | Episode Reward: 49 | Loss: 136.066 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 49.41875337791373
+Probs tf.Tensor([[0.28734067 0.36270526 0.3499541 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.32, 0.185, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17814201 0.40631387 0.41554415]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.17, 0.15, 0.29, 0.222, 0.13, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17572725 0.41804492 0.40622777]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.33, 0.178, 0.13, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17563204 0.4146825  0.40968546]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.3, 0.3, 0.28, 0.252, 0.13, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17162743 0.43717754 0.391195  ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.14, 0.15, 0.32, 0.237, 0.131, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 88 | Average Reward: 58 | Episode Reward: 49 | Loss: 150.841 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 49.41875337791373
+Probs tf.Tensor([[0.2879681  0.36172006 0.35031188]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.21, 0.3, 0.21, 0.258, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17210752 0.43291768 0.3949748 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.17, 0.15, 0.27, 0.235, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17478266 0.41841778 0.40679953]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.13, 0.15, 0.25, 0.171, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.177327   0.4120553  0.41061768]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.05, 0.15, 0.0, 0.146, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.18880962 0.40491325 0.4062771 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.18, 0.15, 0.29, 0.208, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 89 | Average Reward: 58 | Episode Reward: 55 | Loss: 138.845 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 55.41875337791373
+Probs tf.Tensor([[0.28725544 0.36288705 0.34985757]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.3, 0.15, 0.24, 0.233, 0.121, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17481296 0.42472705 0.40046   ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.07, 0.075, 0.3, 0.18, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17594396 0.4067595  0.4172965 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.14, 0.15, 0.27, 0.202, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17394152 0.41665292 0.40940556]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.27, 0.3, 0.21, 0.274, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17013012 0.43839878 0.39147112]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.16, 0.15, 0.29, 0.212, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 90 | Average Reward: 58 | Episode Reward: 49 | Loss: 139.377 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 49.41875337791373
+Probs tf.Tensor([[0.2855834  0.36363965 0.35077697]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.21, 0.3, 0.25, 0.231, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.16813965 0.43600923 0.39585117]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.16, 0.3, 0.23, 0.214, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.16922547 0.43245268 0.3983219 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.07, 0.075, 0.33, 0.175, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17371024 0.408722   0.4175677 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.12, 0.3, 0.24, 0.171, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17063664 0.42787698 0.4014864 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.18, 0.15, 0.31, 0.227, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 91 | Average Reward: 58 | Episode Reward: 61 | Loss: 174.706 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 61.41875337791373
+Probs tf.Tensor([[0.28719354 0.36229748 0.35050896]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.16, 0.3, 0.26, 0.217, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.16705763 0.434436   0.39850637]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.08, 0.3, 0.23, 0.211, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.16873744 0.43059772 0.40066487]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.1, 0.15, 0.31, 0.178, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17074138 0.4169999  0.41225868]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.1, 0.075, 0.37, 0.173, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17141722 0.41126263 0.41732013]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.19, 0.15, 0.32, 0.222, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 92 | Average Reward: 58 | Episode Reward: 55 | Loss: 127.855 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 55.41875337791373
+Probs tf.Tensor([[0.28734776 0.36187395 0.35077834]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.2, 0.15, 0.31, 0.188, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.16974354 0.42327055 0.40698594]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.38, 0.188, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.16987704 0.4128904  0.41723257]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.1, 0.075, 0.36, 0.141, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17213061 0.40994263 0.4179268 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.31, 0.186, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.16969605 0.42100656 0.40929738]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.32, 0.236, 0.13, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 93 | Average Reward: 58 | Episode Reward: 37 | Loss: 73.093 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 37.41875337791373
+Probs tf.Tensor([[0.2886406  0.3621117  0.34924775]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.28, 0.3, 0.28, 0.244, 0.13, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.16508685 0.4447912  0.39012197]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.16, 0.15, 0.28, 0.254, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.16880615 0.42766458 0.40352923]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.1, 0.15, 0.32, 0.198, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.16902153 0.42151064 0.40946782]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.09, 0.075, 0.3, 0.188, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17240123 0.41379243 0.4138063 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.32, 0.185, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 94 | Average Reward: 58 | Episode Reward: 43 | Loss: 70.838 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 43.41875337791373
+Probs tf.Tensor([[0.28713784 0.3629373  0.34992486]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.11, 0.075, 0.36, 0.179, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17139892 0.41635936 0.41224173]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.15, 0.3, 0.26, 0.238, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.16613649 0.4405463  0.39331728]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.06, 0.15, 0.25, 0.251, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17064558 0.42448896 0.40486547]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.15, 0.3, 0.22, 0.209, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.16854565 0.43749985 0.39395455]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.16, 0.15, 0.26, 0.231, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 95 | Average Reward: 58 | Episode Reward: 55 | Loss: 178.13 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 55.41875337791373
+Probs tf.Tensor([[0.28591684 0.36407796 0.3500052 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.07, 0.075, 0.32, 0.165, 0.121, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17343298 0.41471067 0.41185638]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.08, 0.15, 0.23, 0.214, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17250302 0.42408714 0.40340987]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.06, 0.075, 0.26, 0.194, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17446111 0.41581276 0.40972617]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.08, 0.15, 0.26, 0.165, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17289053 0.4208342  0.4062752 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.14, 0.3, 0.23, 0.196, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 96 | Average Reward: 58 | Episode Reward: 43 | Loss: 119.227 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 43.41875337791373
+Probs tf.Tensor([[0.286841   0.36338803 0.34977093]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.34, 0.3, 0.27, 0.241, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.1669088 0.4528325 0.3802587]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.17, 0.15, 0.27, 0.219, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.1713668  0.43070886 0.39792433]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.27, 0.3, 0.24, 0.269, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.166762 0.451615 0.381623]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.26, 0.3, 0.25, 0.285, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.16586077 0.4527307  0.3814085 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.3, 0.223, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 97 | Average Reward: 58 | Episode Reward: 67 | Loss: 223.318 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 67.41875337791373
+Probs tf.Tensor([[0.2867836  0.36259824 0.35061812]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.06, 0.075, 0.36, 0.124, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17375119 0.41504198 0.41120678]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.08, 0.3, 0.39, 0.226, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.16284868 0.4444474  0.39270386]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.37, 0.177, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17142361 0.42015463 0.40842173]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.08, 0.15, 0.36, 0.174, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.16929714 0.42647508 0.40422773]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.05, 0.075, 0.35, 0.164, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 98 | Average Reward: 58 | Episode Reward: 37 | Loss: 69.88 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 37.41875337791373
+Probs tf.Tensor([[0.28885835 0.36257136 0.34857032]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.16, 0.3, 0.27, 0.254, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.165577   0.4496374  0.38478562]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.13, 0.3, 0.26, 0.239, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.16653825 0.4469292  0.38653255]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.28, 0.3, 0.27, 0.256, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.16600542 0.45522714 0.37876746]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.21, 0.3, 0.27, 0.222, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.16665587 0.44938323 0.38396087]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.11, 0.15, 0.28, 0.225, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 99 | Average Reward: 58 | Episode Reward: 73 | Loss: 259.263 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 73.41875337791373
+Probs tf.Tensor([[0.28760102 0.36185494 0.3505441 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.27, 0.3, 0.22, 0.258, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.16705458 0.45355898 0.37938645]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.17, 0.3, 0.26, 0.239, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.16593741 0.44846055 0.38560203]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.12, 0.3, 0.24, 0.235, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.16689818 0.44557613 0.3875257 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.06, 0.15, 0.23, 0.183, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17350706 0.4253071  0.4011859 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.1, 0.3, 0.22, 0.25, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 100 | Average Reward: 58 | Episode Reward: 73 | Loss: 261.713 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 73.41875337791373
+Probs tf.Tensor([[0.28884032 0.3612866  0.3498731 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.2, 0.3, 0.21, 0.249, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.1664569  0.44797057 0.38557255]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.07, 0.15, 0.2, 0.166, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.17436023 0.4224209  0.4032189 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.17, 0.3, 0.26, 0.178, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.16695988 0.44198462 0.3910555 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.16, 0.15, 0.29, 0.206, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.16959421 0.43074912 0.39965668]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.18, 0.3, 0.25, 0.202, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 101 | Average Reward: 58 | Episode Reward: 67 | Loss: 225.611 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 67.41875337791373
+Probs tf.Tensor([[0.28684804 0.36151493 0.35163707]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.17, 0.15, 0.29, 0.234, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.16708142 0.43207085 0.40084776]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.13, 0.15, 0.27, 0.212, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.16846558 0.42815486 0.40337956]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.19, 0.3, 0.26, 0.192, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.16473918 0.4428131  0.3924477 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.04, 0.15, 0.3, 0.209, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.1677718  0.42430556 0.40792263]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.15, 0.3, 0.26, 0.132, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 102 | Average Reward: 58 | Episode Reward: 61 | Loss: 206.298 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 61.41875337791373
+Probs tf.Tensor([[0.28683776 0.3604523  0.35270992]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.16, 0.15, 0.27, 0.211, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.16632992 0.42864034 0.40502974]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.08, 0.15, 0.32, 0.214, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.1646256  0.4259082  0.40946615]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.15, 0.3, 0.24, 0.187, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.16354848 0.43963483 0.3968167 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.31, 0.3, 0.29, 0.259, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.1595984  0.45351437 0.3868872 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.35, 0.3, 0.27, 0.275, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 103 | Average Reward: 58 | Episode Reward: 67 | Loss: 260.132 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 67.41875337791373
+Probs tf.Tensor([[0.28751928 0.35963935 0.3528414 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.33, 0.224, 0.121, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.16120708 0.42824295 0.41055   ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.22, 0.15, 0.33, 0.248, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.16032666 0.43333787 0.4063355 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.17, 0.15, 0.27, 0.179, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.16469905 0.4247653  0.41053566]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.15, 0.3, 0.34, 0.26, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.15530282 0.4448948  0.3998024 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.09, 0.3, 0.3, 0.17, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 104 | Average Reward: 58 | Episode Reward: 61 | Loss: 213.01 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 61.41875337791373
+Probs tf.Tensor([[0.28447357 0.36018783 0.3553386 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.17, 0.15, 0.33, 0.221, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.1581021  0.42756045 0.41433746]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.18, 0.15, 0.29, 0.225, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.15933743 0.4277492  0.4129133 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.28, 0.3, 0.27, 0.21, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.15576203 0.44471058 0.39952734]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.06, 0.075, 0.38, 0.188, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.16072418 0.41397434 0.42530152]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.16, 0.15, 0.26, 0.238, 0.13, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 105 | Average Reward: 58 | Episode Reward: 49 | Loss: 116.81 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 49.41875337791373
+Probs tf.Tensor([[0.28526905 0.36040244 0.35432854]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.14, 0.15, 0.3, 0.233, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.15637578 0.4257412  0.417883  ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.13, 0.15, 0.26, 0.221, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.1581914  0.42378968 0.41801897]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.21, 0.3, 0.26, 0.196, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.15418974 0.43932644 0.4064838 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.19, 0.3, 0.25, 0.212, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.15402132 0.4394408  0.40653795]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.23, 0.3, 0.19, 0.178, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 106 | Average Reward: 58 | Episode Reward: 67 | Loss: 258.854 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 67.41875337791373
+Probs tf.Tensor([[0.2836323  0.36120588 0.35516176]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.17, 0.15, 0.25, 0.202, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.15634286 0.4221821  0.42147505]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.06, 0.3, 0.25, 0.188, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.15329184 0.42994094 0.4167672 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.11, 0.15, 0.24, 0.228, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.15596251 0.42144296 0.42259455]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.16, 0.15, 0.22, 0.224, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.1567344  0.42299455 0.420271  ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.28, 0.217, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 107 | Average Reward: 58 | Episode Reward: 55 | Loss: 146.443 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 55.41875337791373
+Probs tf.Tensor([[0.27884397 0.36228845 0.3588676 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.4, 0.3, 0.25, 0.272, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.14639483 0.45095602 0.40264916]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.25, 0.3, 0.22, 0.251, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.14792816 0.44225538 0.40981653]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.26, 0.212, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.15257393 0.42176834 0.42565772]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.1, 0.075, 0.33, 0.177, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.15421943 0.41152832 0.4342522 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.09, 0.075, 0.32, 0.17, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 108 | Average Reward: 58 | Episode Reward: 49 | Loss: 90.853 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 49.41875337791373
+Probs tf.Tensor([[0.27941298 0.36268935 0.3578977 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.17, 0.3, 0.22, 0.244, 0.121, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.1461875  0.43711713 0.41669545]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.33, 0.3, 0.27, 0.242, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.14418398 0.44523144 0.41058457]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.12, 0.15, 0.3, 0.215, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.14909174 0.42026916 0.43063915]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.32, 0.3, 0.29, 0.247, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.14329003 0.44539303 0.41131696]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.13, 0.15, 0.31, 0.214, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 109 | Average Reward: 58 | Episode Reward: 67 | Loss: 208.856 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 67.41875337791373
+Probs tf.Tensor([[0.2792866 0.3617066 0.3590068]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.05, 0.075, 0.32, 0.202, 0.121, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.14982201 0.40991294 0.44026506]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.05, 0.15, 0.36, 0.162, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.14725755 0.4132698  0.43947265]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.07, 0.075, 0.35, 0.166, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.1499419  0.40861318 0.441445  ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.08, 0.15, 0.35, 0.158, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.14733    0.41419783 0.43847215]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.06, 0.15, 0.37, 0.157, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 110 | Average Reward: 58 | Episode Reward: 37 | Loss: 78.02 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 37.41875337791373
+Probs tf.Tensor([[0.2775998  0.36336285 0.3590374 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.1, 0.075, 0.26, 0.2, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.14952761 0.41192448 0.43854794]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.35, 0.3, 0.29, 0.231, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.139231   0.44570795 0.41506103]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.22, 0.3, 0.27, 0.19, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.14174174 0.4359939  0.4222644 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.21, 0.3, 0.27, 0.251, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.13965215 0.4401355  0.42021227]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.11, 0.15, 0.29, 0.242, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 111 | Average Reward: 58 | Episode Reward: 61 | Loss: 215.85 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 61.41875337791373
+Probs tf.Tensor([[0.27894777 0.3622251  0.3588271 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.08, 0.3, 0.21, 0.169, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.1438482  0.4272749  0.42887688]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.19, 0.15, 0.26, 0.202, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.1441343  0.42137146 0.43449423]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.17, 0.3, 0.23, 0.202, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.1407716  0.4332307  0.42599767]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.05, 0.3, 0.24, 0.19, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.14224437 0.4276437  0.4301119 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.16, 0.3, 0.27, 0.227, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 112 | Average Reward: 58 | Episode Reward: 73 | Loss: 276.84 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 73.41875337791373
+Probs tf.Tensor([[0.27714285 0.36324152 0.3596156 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.21, 0.15, 0.28, 0.182, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.14164184 0.41888154 0.4394767 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.14, 0.3, 0.27, 0.254, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.13546796 0.43390146 0.43063056]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.17, 0.15, 0.29, 0.159, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.14235963 0.41548774 0.4421527 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.14, 0.3, 0.27, 0.219, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.13666607 0.4312771  0.4320568 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.22, 0.15, 0.29, 0.251, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 113 | Average Reward: 58 | Episode Reward: 61 | Loss: 189.005 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 61.41875337791373
+Probs tf.Tensor([[0.27556905 0.36235693 0.36207405]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.08, 0.3, 0.24, 0.232, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.13523172 0.42801154 0.4367568 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.13, 0.3, 0.25, 0.239, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.13401893 0.43058583 0.4353952 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.04, 0.075, 0.37, 0.242, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.13824643 0.40912774 0.4526259 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.22, 0.3, 0.26, 0.251, 0.13, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.1325153  0.43576604 0.43171868]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.29, 0.3, 0.27, 0.261, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 114 | Average Reward: 58 | Episode Reward: 67 | Loss: 219.504 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 67.41875337791373
+Probs tf.Tensor([[0.2726004  0.36424336 0.36315626]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.2, 0.15, 0.33, 0.253, 0.121, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.13269524 0.4184721  0.44883263]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.26, 0.15, 0.3, 0.258, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.13309121 0.42124012 0.4456687 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.14, 0.15, 0.34, 0.183, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.13539603 0.41117507 0.45342886]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.18, 0.3, 0.26, 0.235, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.13146557 0.4287429  0.43979156]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.24, 0.3, 0.3, 0.246, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 115 | Average Reward: 58 | Episode Reward: 61 | Loss: 208.322 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 61.41875337791373
+Probs tf.Tensor([[0.2720662  0.36365518 0.36427855]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.13, 0.15, 0.28, 0.246, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.13279212 0.4117698  0.4554381 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.12, 0.3, 0.29, 0.248, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.12820083 0.42403212 0.44776708]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.19, 0.15, 0.26, 0.252, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.13282652 0.41440174 0.45277175]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.15, 0.15, 0.27, 0.242, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.13306195 0.41223314 0.4547049 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.24, 0.3, 0.28, 0.243, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 116 | Average Reward: 58 | Episode Reward: 67 | Loss: 241.771 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 67.41875337791373
+Probs tf.Tensor([[0.2710518  0.36333847 0.36560977]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.07, 0.075, 0.32, 0.235, 0.121, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.13269901 0.3998368  0.46746418]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.13, 0.15, 0.3, 0.252, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.12926942 0.40858778 0.46214274]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.06, 0.15, 0.25, 0.242, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.13218194 0.40495893 0.46285912]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.1, 0.15, 0.24, 0.26, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.13131002 0.40774158 0.46094838]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.17, 0.15, 0.27, 0.2, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 117 | Average Reward: 58 | Episode Reward: 43 | Loss: 103.772 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 43.41875337791373
+Probs tf.Tensor([[0.26952103 0.36377934 0.3666997 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.24, 0.3, 0.17, 0.24, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.12667903 0.42308998 0.45023108]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.91, 0.15, 0.2, 0.0, 0.093, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.13673228 0.42994574 0.433322  ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.32, 0.225, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.13025966 0.3984977  0.47124258]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.11, 0.3, 0.26, 0.231, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.12470675 0.41731936 0.45797396]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.1, 0.15, 0.24, 0.23, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 118 | Average Reward: 58 | Episode Reward: 55 | Loss: 138.022 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 55.41875337791373
+Probs tf.Tensor([[0.27008995 0.36274853 0.36716148]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.12, 0.075, 0.29, 0.217, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.12913291 0.39869303 0.47217408]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.19, 0.3, 0.25, 0.246, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.12194735 0.42085963 0.45719305]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.29, 0.3, 0.28, 0.15, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.12358458 0.4190213  0.45739412]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.11, 0.075, 0.33, 0.184, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.12916197 0.3963688  0.4744692 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.17, 0.15, 0.31, 0.248, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 119 | Average Reward: 58 | Episode Reward: 43 | Loss: 93.332 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 43.41875337791373
+Probs tf.Tensor([[0.2706962  0.36250624 0.3667976 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.17, 0.3, 0.25, 0.194, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.12270074 0.41615805 0.46114123]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.09, 0.3, 0.22, 0.229, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.12325119 0.41550896 0.46123984]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.19, 0.3, 0.27, 0.225, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.12067629 0.4191629  0.4601608 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.3, 0.244, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.12357325 0.40656924 0.46985748]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.26, 0.3, 0.27, 0.254, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 120 | Average Reward: 58 | Episode Reward: 73 | Loss: 252.998 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 73.41875337791373
+Probs tf.Tensor([[0.26754946 0.36373267 0.3687179 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.26, 0.3, 0.29, 0.264, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.11622156 0.42350078 0.46027765]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.21, 0.075, 0.26, 0.238, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.12568948 0.40127325 0.4730373 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.28, 0.3, 0.26, 0.186, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.12006641 0.41912216 0.46081147]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.19, 0.3, 0.27, 0.23, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.11878668 0.41793832 0.463275  ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.29, 0.15, 0.27, 0.258, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 121 | Average Reward: 58 | Episode Reward: 61 | Loss: 184.534 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 61.41875337791373
+Probs tf.Tensor([[0.26769474 0.3638391  0.36846623]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.31, 0.3, 0.28, 0.245, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.11601579 0.42231187 0.46167237]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.11, 0.3, 0.27, 0.257, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.11734691 0.41439554 0.46825755]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.32, 0.3, 0.27, 0.248, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.1160678  0.42293665 0.46099555]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.17, 0.3, 0.26, 0.245, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.11750646 0.41587415 0.46661937]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.26, 0.3, 0.27, 0.256, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 122 | Average Reward: 58 | Episode Reward: 79 | Loss: 308.869 | Steps: 4 | Worker: 0
+Saving best model to ./Training/, episode score: 79.41875337791373
+Probs tf.Tensor([[0.2636718  0.36251935 0.37380883]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.09, 0.3, 0.23, 0.238, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.11796452 0.40736878 0.47466668]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.12, 0.15, 0.24, 0.19, 0.121, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.12339116 0.39359835 0.48301047]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.27, 0.3, 0.18, 0.24, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.11838523 0.41448984 0.46712494]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.11, 0.3, 0.25, 0.153, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.12041505 0.40271112 0.47687387]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.12, 0.3, 0.24, 0.223, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 123 | Average Reward: 59 | Episode Reward: 73 | Loss: 270.735 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 73.41875337791373
+Probs tf.Tensor([[0.2650718  0.3618936  0.37303457]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.32, 0.3, 0.23, 0.228, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.11492142 0.4099708  0.47510776]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.24, 0.3, 0.22, 0.2, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.11656437 0.4047273  0.47870827]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.14, 0.15, 0.27, 0.226, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.118706   0.3907332  0.49056083]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.1, 0.15, 0.23, 0.152, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.12340029 0.38524613 0.4913536 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.19, 0.3, 0.26, 0.245, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 124 | Average Reward: 59 | Episode Reward: 67 | Loss: 205.542 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 67.41875337791373
+Probs tf.Tensor([[0.2653274  0.36030304 0.37436956]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.13, 0.3, 0.24, 0.214, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.11389653 0.39629146 0.489812  ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.06, 0.075, 0.29, 0.18, 0.13, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.12069839 0.376131   0.5031706 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.28, 0.3, 0.27, 0.229, 0.131, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.11116724 0.402866   0.48596677]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.25, 0.3, 0.26, 0.224, 0.131, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.11185323 0.4012156  0.48693115]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.08, 0.3, 0.23, 0.239, 0.132, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 125 | Average Reward: 59 | Episode Reward: 67 | Loss: 236.592 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 67.41875337791373
+Probs tf.Tensor([[0.26336604 0.3590972  0.37753677]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.19, 0.3, 0.27, 0.249, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.10954001 0.39331585 0.49714407]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.24, 0.3, 0.28, 0.241, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.10917839 0.39472866 0.49609292]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.22, 0.15, 0.32, 0.225, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.1125457  0.38150704 0.50594723]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.11, 0.15, 0.34, 0.25, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.11179119 0.3793162  0.5088926 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.17, 0.3, 0.25, 0.226, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 126 | Average Reward: 59 | Episode Reward: 67 | Loss: 204.19 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 67.41875337791373
+Probs tf.Tensor([[0.26253927 0.35831013 0.37915057]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.09, 0.075, 0.38, 0.18, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.11380921 0.36484972 0.521341  ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.06, 0.3, 0.34, 0.21, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.10804845 0.38080952 0.5111421 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.06, 0.3, 0.35, 0.204, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.10792155 0.38041693 0.5116615 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.09, 0.15, 0.37, 0.2, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.11086386 0.3704163  0.51871985]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.03, 0.15, 0.32, 0.115, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 127 | Average Reward: 59 | Episode Reward: 55 | Loss: 161.656 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 55.41875337791373
+Probs tf.Tensor([[0.2613732  0.35648188 0.38214493]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.14, 0.15, 0.33, 0.202, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.10991723 0.36744902 0.5226338 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.13, 0.3, 0.25, 0.231, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.10775404 0.37989825 0.51234776]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.29, 0.231, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.11007271 0.36942798 0.5204993 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.17, 0.3, 0.27, 0.192, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.10821565 0.37883016 0.5129542 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.1, 0.3, 0.2, 0.188, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 128 | Average Reward: 59 | Episode Reward: 67 | Loss: 235.4 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 67.41875337791373
+Probs tf.Tensor([[0.2572314  0.3564712  0.38629743]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.1, 0.15, 0.25, 0.229, 0.121, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.10991012 0.363802   0.5262879 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.13, 0.15, 0.25, 0.217, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.11001853 0.3637675  0.526214  ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.16, 0.3, 0.24, 0.162, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.10849527 0.3724933  0.5190115 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.11, 0.3, 0.25, 0.233, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.1057675  0.37438193 0.5198506 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.18, 0.3, 0.26, 0.226, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 129 | Average Reward: 59 | Episode Reward: 67 | Loss: 247.228 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 67.41875337791373
+Probs tf.Tensor([[0.25871825 0.35614935 0.38513237]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.27, 0.183, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.11106311 0.35181108 0.53712577]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.06, 0.3, 0.23, 0.189, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.10632096 0.3663846  0.52729446]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.13, 0.15, 0.24, 0.153, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.11032719 0.3560677  0.53360516]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.08, 0.3, 0.23, 0.194, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.10583208 0.3668687  0.5272992 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.1, 0.075, 0.24, 0.19, 0.13, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 130 | Average Reward: 59 | Episode Reward: 49 | Loss: 125.358 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 49.41875337791373
+Probs tf.Tensor([[0.25866413 0.35505465 0.38628122]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.27, 0.3, 0.27, 0.265, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09890559 0.36959577 0.5314987 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.13, 0.15, 0.25, 0.247, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.10466093 0.35499257 0.5403465 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.15, 0.3, 0.23, 0.153, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.10519157 0.36174884 0.5330596 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.31, 0.3, 0.28, 0.235, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09932005 0.36953613 0.5311438 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.18, 0.15, 0.33, 0.2, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 131 | Average Reward: 59 | Episode Reward: 67 | Loss: 209.852 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 67.41875337791373
+Probs tf.Tensor([[0.25755584 0.35541183 0.3870323 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.18, 0.3, 0.22, 0.25, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09997756 0.36262873 0.53739375]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.19, 0.15, 0.31, 0.224, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.10123777 0.35042688 0.5483354 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.33, 0.3, 0.28, 0.227, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09790272 0.36575836 0.5363389 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.25, 0.3, 0.29, 0.234, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.0975065  0.36299673 0.5394968 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.16, 0.15, 0.3, 0.218, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 132 | Average Reward: 59 | Episode Reward: 67 | Loss: 209.205 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 67.41875337791373
+Probs tf.Tensor([[0.25524253 0.35256094 0.3921965 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.16, 0.3, 0.28, 0.252, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09603328 0.357866   0.5461007 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.03, 0.075, 0.32, 0.174, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.10465745 0.33872175 0.55662084]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.32, 0.237, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09873621 0.34664005 0.5546238 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.1, 0.15, 0.32, 0.25, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.0987175  0.34662348 0.554659  ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.2, 0.3, 0.26, 0.196, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 133 | Average Reward: 59 | Episode Reward: 55 | Loss: 144.656 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 55.41875337791373
+Probs tf.Tensor([[0.2534084  0.35430968 0.39228195]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.22, 0.3, 0.23, 0.208, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09761151 0.35638288 0.54600567]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.28, 0.3, 0.19, 0.238, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09783073 0.36014807 0.5420212 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.21, 0.3, 0.19, 0.254, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09748805 0.3587246  0.5437873 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.21, 0.15, 0.26, 0.233, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09907587 0.34670195 0.5542222 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.1, 0.15, 0.24, 0.21, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 134 | Average Reward: 59 | Episode Reward: 67 | Loss: 193.125 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 67.41875337791373
+Probs tf.Tensor([[0.25316656 0.3535364  0.39329708]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.07, 0.075, 0.32, 0.194, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.10032839 0.33638218 0.56328946]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.12, 0.15, 0.24, 0.193, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.1004715  0.34233686 0.5571916 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.11, 0.3, 0.24, 0.2, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09688634 0.35186595 0.5512477 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.18, 0.3, 0.26, 0.16, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09714853 0.35143086 0.55142057]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.21, 0.15, 0.26, 0.2, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 135 | Average Reward: 59 | Episode Reward: 55 | Loss: 174.383 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 55.41875337791373
+Probs tf.Tensor([[0.2516137  0.3531991  0.39518717]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.29, 0.3, 0.23, 0.243, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09324987 0.3577194  0.54903066]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.16, 0.3, 0.26, 0.196, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09458466 0.35150394 0.5539114 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.12, 0.3, 0.24, 0.194, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09563848 0.35104966 0.5533119 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.09, 0.075, 0.31, 0.131, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.1013726  0.33369845 0.56492895]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.18, 0.3, 0.26, 0.229, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 136 | Average Reward: 59 | Episode Reward: 67 | Loss: 195.866 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 67.41875337791373
+Probs tf.Tensor([[0.25027132 0.35468182 0.39504683]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.07, 0.075, 0.36, 0.143, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09851646 0.33086812 0.5706155 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.05, 0.075, 0.34, 0.194, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09745653 0.33296233 0.56958115]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.14, 0.15, 0.31, 0.221, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09441493 0.33945045 0.56613463]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.22, 0.3, 0.26, 0.269, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09059714 0.3534934  0.55590945]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.31, 0.3, 0.28, 0.239, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 137 | Average Reward: 59 | Episode Reward: 49 | Loss: 156.583 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 49.41875337791373
+Probs tf.Tensor([[0.2525026  0.350535   0.39696234]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.14, 0.15, 0.29, 0.226, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09442369 0.33771002 0.5678663 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.15, 0.3, 0.24, 0.257, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09168722 0.34915408 0.5591587 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.16, 0.15, 0.31, 0.183, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09504134 0.33599195 0.5689667 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.11, 0.075, 0.39, 0.186, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09477673 0.3299828  0.5752405 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.18, 0.15, 0.32, 0.212, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 138 | Average Reward: 59 | Episode Reward: 49 | Loss: 101.486 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 49.41875337791373
+Probs tf.Tensor([[0.25134677 0.35056666 0.39808658]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.11, 0.075, 0.35, 0.175, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09653062 0.32923287 0.5742365 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.28, 0.236, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09416055 0.337206   0.56863344]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.18, 0.3, 0.27, 0.232, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09121255 0.34705108 0.56173635]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.22, 0.15, 0.3, 0.165, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09545533 0.3356311  0.5689136 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.1, 0.15, 0.23, 0.204, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 139 | Average Reward: 59 | Episode Reward: 49 | Loss: 129.619 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 49.41875337791373
+Probs tf.Tensor([[0.25251162 0.3509314  0.39655694]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.07, 0.075, 0.33, 0.164, 0.121, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09827291 0.32964176 0.5720853 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.1, 0.3, 0.31, 0.206, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09170347 0.34439617 0.56390035]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.06, 0.075, 0.27, 0.188, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09949932 0.3317377  0.568763  ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.08, 0.3, 0.28, 0.165, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09451829 0.34338328 0.5620984 ]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.09, 0.075, 0.33, 0.134, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 140 | Average Reward: 59 | Episode Reward: 43 | Loss: 92.078 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 43.41875337791373
+Probs tf.Tensor([[0.25297907 0.34968954 0.39733142]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.27, 0.215, 0.121, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09611938 0.33709633 0.56678426]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.16, 0.15, 0.26, 0.24, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09538226 0.33832413 0.5662936 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.26, 0.3, 0.26, 0.206, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09270812 0.34883052 0.55846137]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.08, 0.3, 0.23, 0.222, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09465672 0.34648252 0.5588608 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.1, 0.3, 0.25, 0.208, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 141 | Average Reward: 59 | Episode Reward: 67 | Loss: 240.229 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 67.41875337791373
+Probs tf.Tensor([[0.2531112  0.3502201  0.39666867]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.27, 0.3, 0.28, 0.244, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09090964 0.34958214 0.55950826]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.32, 0.3, 0.29, 0.272, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.08941419 0.35214445 0.55844134]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.11, 0.15, 0.25, 0.149, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09994978 0.33416846 0.5658817 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.28, 0.3, 0.27, 0.262, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.0905004  0.35067636 0.5588233 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.25, 0.3, 0.27, 0.247, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 142 | Average Reward: 59 | Episode Reward: 73 | Loss: 246.736 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 73.41875337791373
+Probs tf.Tensor([[0.25072342 0.3503206  0.39895594]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.19, 0.15, 0.31, 0.226, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09386343 0.33523118 0.5709053 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.13, 0.3, 0.27, 0.262, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09132814 0.34522006 0.5634518 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.25, 0.15, 0.27, 0.252, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09381767 0.3379806  0.5682018 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.2, 0.3, 0.24, 0.236, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09261333 0.3462182  0.56116843]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.22, 0.3, 0.27, 0.22, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 143 | Average Reward: 59 | Episode Reward: 67 | Loss: 226.691 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 67.41875337791373
+Probs tf.Tensor([[0.25330374 0.34856284 0.39813337]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.28, 0.216, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09518196 0.33290157 0.57191646]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.1, 0.15, 0.3, 0.235, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.0943177 0.3328397 0.5728426]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.04, 0.075, 0.31, 0.146, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.10018826 0.32538876 0.57442296]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.18, 0.15, 0.33, 0.227, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09272895 0.33287078 0.5744003 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.13, 0.15, 0.31, 0.212, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 144 | Average Reward: 59 | Episode Reward: 43 | Loss: 81.292 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 43.41875337791373
+Probs tf.Tensor([[0.2515157  0.3500379  0.39844638]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.12, 0.15, 0.28, 0.25, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09414514 0.33388957 0.57196534]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.22, 0.3, 0.26, 0.228, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.0915282  0.34387964 0.5645921 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.1, 0.3, 0.24, 0.2, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09441853 0.34125572 0.56432575]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.23, 0.3, 0.28, 0.233, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09056661 0.3438733  0.5655601 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.19, 0.3, 0.25, 0.237, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 145 | Average Reward: 59 | Episode Reward: 73 | Loss: 272.827 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 73.41875337791373
+Probs tf.Tensor([[0.25035006 0.34856737 0.40108255]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.16, 0.15, 0.26, 0.192, 0.121, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09593838 0.33028427 0.5737773 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.33, 0.3, 0.27, 0.24, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.08949623 0.34483844 0.5656653 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.11, 0.15, 0.24, 0.153, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09871294 0.32916033 0.57212675]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.3, 0.226, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09335237 0.33059087 0.5760567 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.19, 0.3, 0.22, 0.242, 0.124, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 146 | Average Reward: 59 | Episode Reward: 61 | Loss: 177.172 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 61.41875337791373
+Probs tf.Tensor([[0.25234458 0.3489814  0.398674  ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.1, 0.15, 0.24, 0.215, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09557105 0.32994747 0.5744814 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.22, 0.3, 0.27, 0.245, 0.127, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.08908797 0.3403408  0.57057124]], shape=(1, 3), dtype=float32)
+Selected action 0
+[0.08, 0.075, 0.32, 0.13, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09829723 0.3216072  0.5800956 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.22, 0.15, 0.25, 0.236, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09301766 0.3313691  0.57561326]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.16, 0.3, 0.26, 0.254, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 147 | Average Reward: 59 | Episode Reward: 55 | Loss: 141.744 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 55.41875337791373
+Probs tf.Tensor([[0.2507694  0.34967712 0.39955345]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.15, 0.15, 0.26, 0.206, 0.123, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09432471 0.32833457 0.5773407 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.13, 0.15, 0.29, 0.225, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09276189 0.32815483 0.57908326]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.18, 0.15, 0.32, 0.246, 0.125, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09043992 0.328894   0.5806661 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.18, 0.3, 0.26, 0.242, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.08955795 0.3383148  0.5721273 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.2, 0.3, 0.23, 0.255, 0.122, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 148 | Average Reward: 59 | Episode Reward: 61 | Loss: 192.94 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 61.41875337791373
+Probs tf.Tensor([[0.24989069 0.34956107 0.4005483 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.24, 0.3, 0.28, 0.223, 0.126, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.08853577 0.33832136 0.57314295]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.19, 0.15, 0.3, 0.245, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09040444 0.32907268 0.5805229 ]], shape=(1, 3), dtype=float32)
+Selected action 1
+[0.2, 0.15, 0.3, 0.236, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.09063175 0.32889065 0.5804776 ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.26, 0.3, 0.27, 0.2, 0.128, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Probs tf.Tensor([[0.08947733 0.3382007  0.572322  ]], shape=(1, 3), dtype=float32)
+Selected action 2
+[0.16, 0.3, 0.26, 0.265, 0.129, 0.2, 0.83, 0.025, 0.032, 0.275, 0.008]
+Episode: 149 | Average Reward: 59 | Episode Reward: 67 | Loss: 209.59 | Steps: 4 | Worker: 0
+Saving actual model to ./Training/, episode score: 67.41875337791373
+------------TRAINING DONE------------
+
+Process finished with exit code 0

@@ -1,0 +1,13 @@
+		reward_quality = 50*(
+				1/(1 + np.exp(-(float(probe_metrics['blockiness'])/float(probe_metrics['block_loss']+0.0001)-2.5))))
+
+		reward_profile = 6.0 * action
+
+		# Enable in case of including several rewards
+		# Total reward
+		reward = reward_quality + reward_profile
+		rewards.extend((reward, reward_quality, reward_profile))
+
+
+
+		reward = reward*(2*Worker.global_episode/1000+1)

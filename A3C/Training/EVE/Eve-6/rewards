@@ -1,0 +1,7 @@
+reward_blockiness = 100*math.tanh(probe_metrics['blockiness']-0.6)
+		reward_blockloss = -min(max(0, probe_metrics['block_loss']-4), 20)
+		reward_quality = reward_blockiness + reward_blockloss
+		reward_quality = 50*(
+				1/(1 + np.exp(-(float(probe_metrics['blockiness'])/float(probe_metrics['block_loss']+0.0001)-2.5))))
+
+		reward_profile = 4.0 * action  # 6.0 * action

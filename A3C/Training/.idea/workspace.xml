@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6256c3a5-1fd8-4c61-a8f8-373d342f4965" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/A3C_model.h5" beforeDir="false" afterPath="$PROJECT_DIR$/A3C_model.h5" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cartpole-1000/Pic Moving Average.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cartpole-1000/events.out.tfevents.1594365636.xiaomiair13.12410.104.v2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cartpole-1000/events.out.tfevents.1594365636.xiaomiair13.12410.97.v2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cartpole-1000/model_CartPole-v0.h5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cartpole-500/Pic Moving Average.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cartpole-500/events.out.tfevents.1594367856.xiaomiair13.16969.96.v2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cartpole-500/model_CartPole-v0.h5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reward Average.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../agent.py" beforeDir="false" afterPath="$PROJECT_DIR$/../agent.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../config.py" beforeDir="false" afterPath="$PROJECT_DIR$/../config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../envs/eve/eve_env.py" beforeDir="false" afterPath="$PROJECT_DIR$/../envs/eve/eve_env.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="24aj6nXYSsK95zcPAPs8g489UXL" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6256c3a5-1fd8-4c61-a8f8-373d342f4965" name="Changes" comment="" />
+      <created>1643875420049</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1643875420049</updated>
+      <workItem from="1643875421368" duration="2744000" />
+      <workItem from="1643900074766" duration="34000" />
+      <workItem from="1643900115716" duration="5000" />
+      <workItem from="1643903601209" duration="623000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
